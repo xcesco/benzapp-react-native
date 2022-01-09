@@ -10,6 +10,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
 import NoteStore from '../stores/note-store';
+import AccountStore from '../stores/account-store';
 // import NoteListPage from '../../stores/NoteListPage';
 // import AccountStore from '../../stores/AccountStore';
 // import {NavigationInjectedProps} from 'react-navigation';
@@ -27,12 +28,16 @@ type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 //   password: string | null;
 // }
 
-export const LoginScreen = inject('noteStore')(observer((props: { componentId: string; noteStore: NoteStore }) => {
+export const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; accountStore: AccountStore, noteStore: NoteStore }) => {
   const navigation = useNavigation<ScreenProps>();
 
-  console.log('fatto', props.noteStore.counter);
+  console.log('fatto', props.accountStore);
   const [username, setUsername] = useState('pippo');
   const [password, setPassword] = useState('password');
+
+  props.accountStore.accountRepository.refreshRemoteConfig().then(value => {
+    console.log('remote', value);
+  });
 
   const _handleUsernameChange = (text: string): void => {
     setUsername(_ => text);
