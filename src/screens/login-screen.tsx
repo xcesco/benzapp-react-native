@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {ImageBackground, StyleSheet, View} from 'react-native';
+import {ImageBackground, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Colors, Text, TextInput} from 'react-native-paper';
 import assets from '../../assets';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
 import NoteStore from '../stores/note-store';
 import AccountStore from '../stores/account-store';
+import * as Progress from 'react-native-progress';
 // import NoteListPage from '../../stores/NoteListPage';
 // import AccountStore from '../../stores/AccountStore';
 // import {NavigationInjectedProps} from 'react-navigation';
@@ -21,24 +20,18 @@ import AccountStore from '../stores/account-store';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 
-// type Props = NavigationInjectedProps<LoginScreenProperties>;
-//
-// interface State {
-//   username: string | null;
-//   password: string | null;
-// }
-
-const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; accountStore: AccountStore, noteStore: NoteStore, back: any }) => {
+const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; noteStore: NoteStore, accountStore: AccountStore, back: any }) => {
   const navigation = useNavigation<ScreenProps>();
 
-  console.log('fatto', props.accountStore);
-  const [username, setUsername] = useState('pippo');
-  const [password, setPassword] = useState('password');
+  console.log('LoginScreen LOAD', props.accountStore);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  props.accountStore.accountRepository.refreshRemoteConfig().then(value => {
-    console.log('remote', value);
-
-  });
+  // props.accountStore.accountRepository.refreshRemoteConfig().then(value => {
+  //   console.log('remote', value);
+  //
+  // });
 
   const _handleUsernameChange = (text: string): void => {
     setUsername(_ => text);
@@ -57,60 +50,70 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
   };
 
   return (
-          <View style={style.container}>
-            {/*<NoteListPage />*/}
-            <ImageBackground
-                    resizeMode={'cover'}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                    }}
-                    source={assets.image.image_background}>
-              <View
+          <SafeAreaView style={style.container}>
+            <View>
+              {/*<NoteListPage />*/}
+              <ImageBackground
+                      resizeMode={'cover'}
                       style={{
-                        flex: 1,
-                        alignItems: 'center',
-                        paddingVertical: 24,
-                        flexDirection: 'column',
-                      }}>
-                <Icon name="lock-outline" size={128} color={Colors.white}/>
-                <Text
-                        style={{width: '80%', marginTop: 24}}
+                        width: '100%',
+                        height: '110%',
+                      }}
+                      source={assets.image.image_background}>
+                <View
+                        style={{
+                          flex: 1,
+                          alignItems: 'center',
+                          paddingVertical: 24,
+                          flexDirection: 'column',
+                        }}>
+                  <Icon name="lock-outline" size={128} color={Colors.white}/>
+                  <Text style={{fontSize: 48, color: Colors.white}}>Login</Text>
 
-                >{props.accountStore.counter}</Text>
-                <Text style={{fontSize: 48, color: Colors.white}}>Login</Text>
-                <TextInput
-                        style={{width: '80%', marginTop: 24}}
-                        label="Username"
-                        mode={'flat'}
-                        value={username}
-                        onChangeText={_handleUsernameChange}
-                />
+                  <View style={{
+                    marginTop: 24,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    alignItems: 'center'
+                  }}>
+                    <Text style={{
+                      color: Colors.white,
+                    }}>{props.accountStore.remoteUrlRead}</Text>
+                    <Button icon="sync" mode="contained" onPress={() => {
+                      setLoading(true)
+                      setTimeout(() => {
+                        props.accountStore.updateRemote();
+                        setLoading(false);
+                      }, 5000);
 
-                <TextInput
-                        style={{width: '80%', marginTop: 24}}
-                        label="Password"
-                        mode={'flat'}
-                        value={password}
-                        onChangeText={_handlePasswordChange}
-                />
+                    }}><Text>ss</Text></Button>
+                  </View>
 
-                <Button style={{width: '80%', marginTop: 48}} mode="contained" onPress={_navigateToLock}>
-                  <Text style={{color: Colors.white}}>Login</Text>
-                </Button>
+                  <TextInput style={{width: '80%', marginTop: 24}} label="Username" mode={'flat'} value={username}
+                             onChangeText={_handleUsernameChange}/>
 
-                <Progress.CircleSnail size={50} indeterminate={true} color={assets.colors.accentColor}/>
-              </View>
-            </ImageBackground>
-          </View>
+                  <TextInput
+                          style={{width: '80%', marginTop: 24}} label="Password" mode={'flat'} value={password}
+                          onChangeText={_handlePasswordChange}/>
+
+
+                  {loading ?
+                          <Progress.CircleSnail size={50} style={{marginTop: 128}} indeterminate={true} color={assets.colors.accentColor}/> :
+                          <Button style={{width: '80%', marginTop: 128}} mode="contained" onPress={_navigateToLock}>
+                            <Text style={{color: Colors.white}}>Login</Text>
+                          </Button>}
+
+                </View>
+              </ImageBackground>
+            </View>
+          </SafeAreaView>
   );
 }));
 
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

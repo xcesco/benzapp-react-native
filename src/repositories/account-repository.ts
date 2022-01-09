@@ -37,6 +37,7 @@ export default class AccountRepository {
       console.error(e);
     }
 
+    AppDebugLog(`baseUrl: ${this._backendBaseUrl}`);
     return this._backendBaseUrl;
   }
 }

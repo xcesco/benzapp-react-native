@@ -17,6 +17,7 @@ import {RootStore} from './src/stores/root-store';
 import {AppDebugLog} from './src/utils/AppDebug';
 import AccountRepository from './src/repositories/account-repository';
 import SplashScreen from './src/screens/splash-screen';
+import {configure} from 'mobx';
 
 const theme = {
   ...DefaultTheme,
@@ -26,6 +27,11 @@ const theme = {
     accent: assets.colors.accentColor,
   },
 };
+
+configure({
+  //enforceActions: 'never',
+  enforceActions: 'observed',
+})
 
 function HomeScreen() {
   return (
@@ -58,18 +64,17 @@ function App() {
                       accountStore={rootStore.accountStore}>
               <NavigationContainer>
                 <Stack.Navigator
-                        initialRouteName="Splash"
+                        initialRouteName="Login"
                         screenOptions={{
-                          header: props =>  <AppHeader {...props} />,
+                          header: props => <AppHeader {...props} />,
                         }}>
                   <Stack.Screen name="Splash" component={SplashScreen} options={{
                     title: 'Home',
                     headerShown: false,
-                  }}>
-                  </Stack.Screen>
+                  }}/>
                   <Stack.Screen name="Login" component={LoginScreen} options={{
                     title: 'Login',
-                    headerShown: true,
+                    headerShown: false,
                   }}/>
                   <Stack.Screen name="Lock" component={LockScreen} options={{
                     title: 'Home',

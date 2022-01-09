@@ -23,10 +23,14 @@ const SplashScreen = inject('rootStore')
                     });
                   };
 
+                  props.rootStore.accountStore.updateRemote().then(_ => {
+                    AppDebugLog('remote config caricato');
+                  });
+
                   setTimeout(() => {
                     AppDebugLog('caricamento dati', props.back);
                     navigateToLogin();
-                  }, 5000);
+                  }, 4000);
 
                   return (
                           <View style={style.container}>

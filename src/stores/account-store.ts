@@ -1,17 +1,41 @@
-import {action, makeObservable, observable} from 'mobx';
+import {action, computed, makeObservable, observable} from 'mobx';
 import Note from './Note';
 import AccountRepository from '../repositories/account-repository';
 
 export default class AccountStore {
   constructor(accountRepository: AccountRepository) {
-    makeObservable(this);
+
     this.accountRepository = accountRepository;
+    this.remoteUrl = '10.0.0.2';
+    console.log('>>>>>>>>>>>>>>>>');
+
+    makeObservable(this, {
+      remoteUrl: observable,
+      remoteUrlRead: computed,
+      updateRemote: action
+    });
+
+    //makeAutoObservable(this);
   }
+
+
+  updateRemote() {
+    this.accountRepository.refreshRemoteConfig().then(action(value => {
+      console.log('CAZZO', value);
+      this.remoteUrl = value
+    }));
+  }
+
+  remoteUrl = '';
 
   accountRepository: AccountRepository;
 
-  @observable notes: Note[] = [];
-  @observable counter = 0;
+  get remoteUrlRead(): string {
+    return this.remoteUrl;
+  }
+
+  notes: Note[] = [];
+  counter = 0;
 
   saveNote(note: Note) {
     const idx = this.notes.findIndex((n) => note.noteId === n.noteId);
@@ -40,7 +64,6 @@ export default class AccountStore {
     }
   }
 
-  @action
   addNote(): void {
     console.log('avvio');
     const note = {
