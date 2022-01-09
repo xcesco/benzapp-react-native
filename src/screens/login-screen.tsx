@@ -8,6 +8,8 @@ import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
+import {inject, observer} from 'mobx-react';
+import NoteStore from '../stores/note-store';
 // import NoteListPage from '../../stores/NoteListPage';
 // import AccountStore from '../../stores/AccountStore';
 // import {NavigationInjectedProps} from 'react-navigation';
@@ -25,10 +27,10 @@ type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 //   password: string | null;
 // }
 
-const LoginScreen = () => {
+export const LoginScreen = inject('noteStore')(observer((props: { componentId: string; noteStore: NoteStore }) => {
   const navigation = useNavigation<ScreenProps>();
 
-  console.log('fatto');
+  console.log('fatto', props.noteStore.counter);
   const [username, setUsername] = useState('pippo');
   const [password, setPassword] = useState('password');
 
@@ -49,50 +51,50 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={style.container}>
-      {/*<NoteListPage />*/}
-      <ImageBackground
-        resizeMode={'cover'}
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
-        source={assets.image.image_background}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            paddingVertical: 24,
-            flexDirection: 'column',
-          }}>
-          <Icon name="lock-outline" size={128} color={Colors.white} />
-          <Text style={{fontSize: 48, color: Colors.white}}>Login</Text>
-          <TextInput
-            style={{width: '80%', marginTop: 24}}
-            label="Username"
-            mode={'flat'}
-            value={username}
-            onChangeText={_handleUsernameChange}
-          />
+          <View style={style.container}>
+            {/*<NoteListPage />*/}
+            <ImageBackground
+                    resizeMode={'cover'}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                    source={assets.image.image_background}>
+              <View
+                      style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        paddingVertical: 24,
+                        flexDirection: 'column',
+                      }}>
+                <Icon name="lock-outline" size={128} color={Colors.white}/>
+                <Text style={{fontSize: 48, color: Colors.white}}>Login</Text>
+                <TextInput
+                        style={{width: '80%', marginTop: 24}}
+                        label="Username"
+                        mode={'flat'}
+                        value={username}
+                        onChangeText={_handleUsernameChange}
+                />
 
-          <TextInput
-            style={{width: '80%', marginTop: 24}}
-            label="Password"
-            mode={'flat'}
-            value={password}
-            onChangeText={_handlePasswordChange}
-          />
+                <TextInput
+                        style={{width: '80%', marginTop: 24}}
+                        label="Password"
+                        mode={'flat'}
+                        value={password}
+                        onChangeText={_handlePasswordChange}
+                />
 
-          <Button style={{width: '80%', marginTop: 48}} mode="contained" onPress={_navigateToLock}>
-            <Text style={{color: Colors.white}}>Login</Text>
-          </Button>
+                <Button style={{width: '80%', marginTop: 48}} mode="contained" onPress={_navigateToLock}>
+                  <Text style={{color: Colors.white}}>Login</Text>
+                </Button>
 
-          <Progress.CircleSnail size={50} indeterminate={true} color={assets.colors.accentColor} />
-        </View>
-      </ImageBackground>
-    </View>
+                <Progress.CircleSnail size={50} indeterminate={true} color={assets.colors.accentColor}/>
+              </View>
+            </ImageBackground>
+          </View>
   );
-};
+}));
 
 const style = StyleSheet.create({
   container: {

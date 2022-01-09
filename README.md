@@ -12,3 +12,5 @@ command + D su ios
 
 Avviare debugger
 
+# Navigation + State management
+- https://www.digitalocean.com/community/tutorials/react-mobx-react-native-simplified
