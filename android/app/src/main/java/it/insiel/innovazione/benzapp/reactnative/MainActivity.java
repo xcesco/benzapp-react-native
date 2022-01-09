@@ -1,4 +1,4 @@
-package com.reactnativebenzapp;
+package it.insiel.innovazione.benzapp.reactnative;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
