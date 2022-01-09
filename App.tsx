@@ -12,6 +12,7 @@ import {MainScreen} from './src/screens/main-screen';
 import {VehicleDetailScreen} from './src/screens/VehicleDetailScreen';
 import {VehicleQRCodeDetailScreen} from './src/screens/VehicleQRCodeDetailScreen';
 import AppHeader from './src/components/app-header';
+import LoginScreen from './src/screens/login-screen';
 
 const theme = {
   ...DefaultTheme,
@@ -38,12 +39,12 @@ function App() {
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Lock"
+          initialRouteName="Login"
           screenOptions={{
             header: props => <AppHeader {...props} />,
           }}>
           <Stack.Screen name="Splash" component={SplashScreen} />
-          <Stack.Screen name="Login" component={LockScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Lock" component={LockScreen} />
           <Stack.Screen name="Main" component={MainScreen} options={{title: 'Main'}} />
           <Stack.Screen name="VehicleList" component={VehicleDetailScreen} />

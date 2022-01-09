@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {Appbar, Colors, Menu} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import {StyleSheet} from 'react-native';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // @ts-ignore
 export default function AppHeader({navigation, back}) {
   const [visible, setVisible] = React.useState(false);
