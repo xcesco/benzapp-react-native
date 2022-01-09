@@ -5,6 +5,9 @@ import assets from '../../assets';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import * as Progress from 'react-native-progress';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../navigation/root-stack-param-list';
 // import NoteListPage from '../../stores/NoteListPage';
 // import AccountStore from '../../stores/AccountStore';
 // import {NavigationInjectedProps} from 'react-navigation';
@@ -13,7 +16,7 @@ import * as Progress from 'react-native-progress';
 //   accountStore?: AccountStore;
 // }
 
-// type NavigationProps = StackNavigationProp<RootStackParamList, 'Login'>;
+type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 
 // type Props = NavigationInjectedProps<LoginScreenProperties>;
 //
@@ -23,6 +26,8 @@ import * as Progress from 'react-native-progress';
 // }
 
 const LoginScreen = () => {
+  const navigation = useNavigation<ScreenProps>();
+
   console.log('fatto');
   const [username, setUsername] = useState('pippo');
   const [password, setPassword] = useState('password');
@@ -37,7 +42,10 @@ const LoginScreen = () => {
 
   const _navigateToLock = (): void => {
     console.log(`${username} ${password}`);
-    //Navigation.push('Lock');
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Lock'}],
+    });
   };
 
   return (
@@ -63,7 +71,7 @@ const LoginScreen = () => {
             style={{width: '80%', marginTop: 24}}
             label="Username"
             mode={'flat'}
-            value={username!}
+            value={username}
             onChangeText={_handleUsernameChange}
           />
 
@@ -71,10 +79,8 @@ const LoginScreen = () => {
             style={{width: '80%', marginTop: 24}}
             label="Password"
             mode={'flat'}
-            value={password!}
-            onChangeText={() => {
-              _handlePasswordChange;
-            }}
+            value={password}
+            onChangeText={_handlePasswordChange}
           />
 
           <Button style={{width: '80%', marginTop: 48}} mode="contained" onPress={_navigateToLock}>
