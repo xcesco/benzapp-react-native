@@ -18,6 +18,7 @@ import {AppDebugLog} from './src/utils/AppDebug';
 import AccountRepository from './src/repositories/account-repository';
 import SplashScreen from './src/screens/splash-screen';
 import {configure} from 'mobx';
+import {ApiClient} from './src/repositories/network';
 
 const theme = {
   ...DefaultTheme,
@@ -41,13 +42,15 @@ function HomeScreen() {
   );
 }
 
-const rootStore = new RootStore();
+
+const apiClient = new ApiClient();
+const accountRepository = new AccountRepository(apiClient);
+
+const rootStore = new RootStore(accountRepository);
 
 export async function applicationInit(): Promise<void> {
   AppDebugLog('app initialization - start');
-  const accountRepository = new AccountRepository();
   await accountRepository.refreshRemoteConfig();
-
   AppDebugLog('app initialization - done');
 }
 
@@ -64,7 +67,7 @@ function App() {
                       accountStore={rootStore.accountStore}>
               <NavigationContainer>
                 <Stack.Navigator
-                        initialRouteName="Login"
+                        initialRouteName="Splash"
                         screenOptions={{
                           header: props => <AppHeader {...props} />,
                         }}>

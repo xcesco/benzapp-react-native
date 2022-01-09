@@ -26,6 +26,10 @@ export default class AccountStore {
     }));
   }
 
+  async login(username: string, password: string): Promise<void> {
+    await this.accountRepository.login(username, password);
+  }
+
   remoteUrl = '';
 
   accountRepository: AccountRepository;

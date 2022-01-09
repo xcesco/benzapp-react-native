@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ImageBackground, SafeAreaView, StyleSheet, View} from 'react-native';
-import {Button, Colors, Text, TextInput} from 'react-native-paper';
+import {Button, Colors, IconButton, Text, TextInput} from 'react-native-paper';
 import assets from '../../assets';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
@@ -23,7 +23,7 @@ type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; noteStore: NoteStore, accountStore: AccountStore, back: any }) => {
   const navigation = useNavigation<ScreenProps>();
 
-  console.log('LoginScreen LOAD', props.accountStore);
+  console.log('LoginScreen LOAD');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,10 +43,14 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
 
   const _navigateToLock = (): void => {
     console.log(`${username} ${password}`);
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Lock'}],
+
+    props.accountStore.login(username, password).then((_) => {
+      console.log('fatto');
     });
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'Lock'}],
+    // });
   };
 
   return (
@@ -80,14 +84,16 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
                     <Text style={{
                       color: Colors.white,
                     }}>{props.accountStore.remoteUrlRead}</Text>
-                    <Button icon="sync" mode="contained" onPress={() => {
-                      setLoading(true)
-                      setTimeout(() => {
-                        props.accountStore.updateRemote();
-                        setLoading(false);
-                      }, 5000);
+                    <IconButton icon="sync" color={Colors.white}
+                                size={24}
+                                onPress={() => {
+                                  setLoading(true)
+                                  setTimeout(() => {
+                                    props.accountStore.updateRemote();
+                                    setLoading(false);
+                                  }, 5000);
 
-                    }}><Text>ss</Text></Button>
+                                }}><Text>ss</Text></IconButton>
                   </View>
 
                   <TextInput style={{width: '80%', marginTop: 24}} label="Username" mode={'flat'} value={username}
