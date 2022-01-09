@@ -28,7 +28,7 @@ type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 //   password: string | null;
 // }
 
-export const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; accountStore: AccountStore, noteStore: NoteStore }) => {
+const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; accountStore: AccountStore, noteStore: NoteStore, back: any }) => {
   const navigation = useNavigation<ScreenProps>();
 
   console.log('fatto', props.accountStore);
@@ -37,6 +37,7 @@ export const LoginScreen = inject('noteStore', 'accountStore')(observer((props: 
 
   props.accountStore.accountRepository.refreshRemoteConfig().then(value => {
     console.log('remote', value);
+
   });
 
   const _handleUsernameChange = (text: string): void => {
@@ -73,6 +74,10 @@ export const LoginScreen = inject('noteStore', 'accountStore')(observer((props: 
                         flexDirection: 'column',
                       }}>
                 <Icon name="lock-outline" size={128} color={Colors.white}/>
+                <Text
+                        style={{width: '80%', marginTop: 24}}
+
+                >{props.accountStore.counter}</Text>
                 <Text style={{fontSize: 48, color: Colors.white}}>Login</Text>
                 <TextInput
                         style={{width: '80%', marginTop: 24}}

@@ -3,7 +3,7 @@ import {Appbar, Colors, Menu} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // @ts-ignore
-export default function AppHeader({navigation, back}) {
+export default function AppHeader({navigation, back, title}) {
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -12,7 +12,7 @@ export default function AppHeader({navigation, back}) {
     <Appbar.Header style={{zIndex: 0, elevation: 0}}>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : <Icon name="menu" color={Colors.white} size={24} />}
 
-      <Appbar.Content title="Main page">
+      <Appbar.Content title="{navigation}">
         <Menu
           visible={visible}
           onDismiss={closeMenu}

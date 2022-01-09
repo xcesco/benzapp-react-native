@@ -7,7 +7,7 @@ import {KeyPad} from '../components/key-pad';
 
 type ScreenProp = StackNavigationProp<RootStackParamList, 'Lock'>;
 
-export function LockScreen() {
+export function LockScreen(props: { back: any }) {
   const navigation = useNavigation<ScreenProp>();
 
   const navigateToMain = (): void => {
@@ -18,11 +18,9 @@ export function LockScreen() {
   };
 
   return (
-    <KeyPad
-      onPressHandler={() => {
-        console.log('remsss');
-        navigateToMain();
-      }}
-    />
+          <KeyPad onPressHandler={() => {
+            console.log('remsss', props.back);
+            navigateToMain();
+          }}/>
   );
 }

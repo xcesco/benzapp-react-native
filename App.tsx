@@ -7,7 +7,6 @@ import assets from './assets';
 import {Provider} from 'mobx-react';
 import {LockScreen} from './src/screens/lock-screen';
 import {RefuelingListScreen} from './src/screens/RefuelingListScreen';
-import {SplashScreen} from './src/screens/SplashScreen';
 import {RefuelingDetailScreen} from './src/screens/RefuelingDetailScreen';
 import {MainScreen} from './src/screens/main-screen';
 import {VehicleDetailScreen} from './src/screens/VehicleDetailScreen';
@@ -15,6 +14,9 @@ import {VehicleQRCodeDetailScreen} from './src/screens/VehicleQRCodeDetailScreen
 import AppHeader from './src/components/app-header';
 import LoginScreen from './src/screens/login-screen';
 import {RootStore} from './src/stores/root-store';
+import {AppDebugLog} from './src/utils/AppDebug';
+import AccountRepository from './src/repositories/account-repository';
+import SplashScreen from './src/screens/splash-screen';
 
 const theme = {
   ...DefaultTheme,
@@ -33,11 +35,21 @@ function HomeScreen() {
   );
 }
 
+const rootStore = new RootStore();
+
+export async function applicationInit(): Promise<void> {
+  AppDebugLog('app initialization - start');
+  const accountRepository = new AccountRepository();
+  await accountRepository.refreshRemoteConfig();
+
+  AppDebugLog('app initialization - done');
+}
+
 
 function App() {
   const Stack = createNativeStackNavigator();
 
-  const rootStore = new RootStore();
+  applicationInit();
 
   // @ts-ignore
   return (
@@ -46,13 +58,23 @@ function App() {
                       accountStore={rootStore.accountStore}>
               <NavigationContainer>
                 <Stack.Navigator
-                        initialRouteName="Login"
+                        initialRouteName="Splash"
                         screenOptions={{
-                          header: props => <AppHeader {...props} />,
+                          header: props =>  <AppHeader {...props} />,
                         }}>
-                  <Stack.Screen name="Splash" component={SplashScreen}/>
-                  <Stack.Screen name="Login" component={LoginScreen}/>
-                  <Stack.Screen name="Lock" component={LockScreen}/>
+                  <Stack.Screen name="Splash" component={SplashScreen} options={{
+                    title: 'Home',
+                    headerShown: false,
+                  }}>
+                  </Stack.Screen>
+                  <Stack.Screen name="Login" component={LoginScreen} options={{
+                    title: 'Login',
+                    headerShown: true,
+                  }}/>
+                  <Stack.Screen name="Lock" component={LockScreen} options={{
+                    title: 'Home',
+                    headerShown: false,
+                  }}/>
                   <Stack.Screen name="Main" component={MainScreen} options={{title: 'Main'}}/>
                   <Stack.Screen name="VehicleList" component={VehicleDetailScreen}/>
                   <Stack.Screen name="VehicleDetail" component={VehicleDetailScreen}/>
