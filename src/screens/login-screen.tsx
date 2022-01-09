@@ -43,10 +43,14 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
 
   const _navigateToLock = (): void => {
     console.log(`${username} ${password}`);
+    setLoading(true)
 
-    props.accountStore.login(username, password).then((_) => {
-      console.log('fatto');
-    });
+    props.accountStore.login(username, password).then((value) => {
+      console.log('fatto', value);
+      setLoading(false)
+    }, (reason => {
+      console.log(reason)
+    }));
     // navigation.reset({
     //   index: 0,
     //   routes: [{name: 'Lock'}],
@@ -84,24 +88,25 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
                     <Text style={{
                       color: Colors.white,
                     }}>{props.accountStore.remoteUrlRead}</Text>
-                    <IconButton icon="sync" color={Colors.white}
-                                size={24}
-                                onPress={() => {
-                                  setLoading(true)
-                                  setTimeout(() => {
-                                    props.accountStore.updateRemote();
-                                    setLoading(false);
-                                  }, 5000);
+                    <IconButton icon="sync" color={Colors.white} size={24} onPress={() => {
+                      setLoading(true)
+                      setTimeout(() => {
+                        props.accountStore.updateRemote();
+                        setLoading(false);
+                      }, 2000);
 
-                                }}><Text>ss</Text></IconButton>
+                    }}><Text>ss</Text></IconButton>
                   </View>
 
-                  <TextInput style={{width: '80%', marginTop: 24}} label="Username" mode={'flat'} value={username}
+                  <TextInput autoCapitalize={'none'} style={{
+                    width: '80%',
+                    marginTop: 24
+                  }} label="Username" mode={'flat'} value={username}
                              onChangeText={_handleUsernameChange}/>
 
-                  <TextInput
-                          style={{width: '80%', marginTop: 24}} label="Password" mode={'flat'} value={password}
-                          onChangeText={_handlePasswordChange}/>
+                  <TextInput autoCapitalize={'none'} secureTextEntry={true}
+                             style={{width: '80%', marginTop: 24}} label="Password" mode={'flat'} value={password}
+                             onChangeText={_handlePasswordChange}/>
 
 
                   {loading ?

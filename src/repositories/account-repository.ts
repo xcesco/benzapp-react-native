@@ -15,17 +15,22 @@ export default class AccountRepository {
 
   private _apiClient: ApiClient;
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<string> {
     try {
       const response = await this._apiClient.userJwtControllerApi.authorizeUsingPOST({
         username: username,
         password: password
       });
 
+      console.log(response.data);
+
       this.updateClientJWTToken(response.data!);
+
+      return response.data.id_token!;
     } catch (e) {
       console.error(e);
     }
+    return 'INVALID';
   }
 
   public updateBaseUrl(baseUrl: string): void {
@@ -49,7 +54,7 @@ export default class AccountRepository {
     });
 
     try {
-      await remoteConfig().fetch(10*60);
+      await remoteConfig().fetch(60);
     } catch (e) {
       console.error(e);
     }

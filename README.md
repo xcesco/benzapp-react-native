@@ -24,3 +24,18 @@ https://medium.com/automating-react-native-app-release-to-google-play/rename-rea
 
 # Installazione api client servizi firebase
 
+# Axios
+Libreria per http
+Come logger (developer tool non visualizza log chiamate applicative)
+https://www.npmjs.com/package/axios-logger
+- npm i axios-logger
+-
+## Axios per network
+per logger
+https://www.npmjs.com/package/axios-logger
+
+
+https://wix.github.io/react-native-navigation/docs/installing
+https://rnfirebase.io/
+
+
