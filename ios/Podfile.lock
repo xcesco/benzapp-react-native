@@ -385,6 +385,8 @@ PODS:
     - React-perflogger (= 0.66.4)
   - RNCMaskedView (0.1.11):
     - React
+  - RNDefaultPreference (1.4.3):
+    - React
   - RNFBApp (14.2.2):
     - Firebase/CoreOnly (= 8.10.0)
     - React-Core
@@ -462,6 +464,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - RNDefaultPreference (from `../node_modules/react-native-default-preference`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBRemoteConfig (from `../node_modules/@react-native-firebase/remote-config`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -561,6 +564,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
+  RNDefaultPreference:
+    :path: "../node_modules/react-native-default-preference"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBRemoteConfig:
@@ -633,6 +638,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
+  RNDefaultPreference: 2f8d6d54230edbd78708ada8d63bb275e5a8415b
   RNFBApp: 78d0446e8b28dc30616c134a9e4d8d4b01f9f966
   RNFBRemoteConfig: 542d85179c812bc1770b956c5203caa43e2bd116
   RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a

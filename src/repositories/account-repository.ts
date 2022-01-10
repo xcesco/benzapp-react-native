@@ -1,6 +1,9 @@
 import remoteConfig from '@react-native-firebase/remote-config';
 import {AppDebugLog} from '../utils/AppDebug';
 import {ApiClient} from './network';
+import DefaultPreference from 'react-native-default-preference';
+import {AdminUserDTO} from './network/models';
+import AppPreferencesInstance from './persistence/app-preferences';
 
 const BACKEND_URL_PARAMETER_NAME = 'backend_base_url';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -31,6 +34,9 @@ export default class AccountRepository {
       const account = (await accountResourceApi.getAccountUsingGET()).data;
 
       console.log(account);
+
+      await AppPreferencesInstance.setAccount(account);
+      await AppPreferencesInstance.setJWToken(response.data.id_token);
 
       return response.data.id_token;
     } catch (e) {

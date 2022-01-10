@@ -35,7 +35,25 @@ per logger
 https://www.npmjs.com/package/axios-logger
 
 
+## Fix per problemi di rete
+Con Axios si sono verificati dei problemi con URL.search (in realta' e' un problema di react native).
+Risolto facendo
+
+```text
+ npm install react-native-url-polyfill
+```
+
+Ed inserendo nel file index.js
+
+```typescript
+import 'react-native-url-polyfill/auto';
+```
+
 https://wix.github.io/react-native-navigation/docs/installing
 https://rnfirebase.io/
 
-
+## Shared preference
+- https://github.com/kevinresol/react-native-default-preference
+-
+## Internalization
+https://github.com/zoontek/react-native-localize
