@@ -57,3 +57,9 @@ https://rnfirebase.io/
 -
 ## Internalization
 https://github.com/zoontek/react-native-localize
+
+## SQLite
+expo-sqlite
+expo install expo-sqlite
+- https://github.com/andpor/react-native-sqlite-storage (2.4k)
+- https://github.com/craftzdog/react-native-sqlite-2 (2.7.1)
