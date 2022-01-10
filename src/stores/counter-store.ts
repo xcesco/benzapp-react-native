@@ -2,18 +2,19 @@
 import {action, makeObservable, observable} from 'mobx';
 
 export class CounterStore {
-  @observable count = 0;
+  //@observable
+  count = 0;
 
   constructor() {
     makeObservable(this);
   }
 
-  @action.bound
+  //@action.bound
   increment() {
     this.count += 1;
   }
 
-  @action.bound
+  //@action.bound
   decrement() {
     this.count -= 1;
   }

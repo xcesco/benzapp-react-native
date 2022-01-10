@@ -23,11 +23,16 @@ export default class AccountRepository {
         password: password
       });
 
-      console.log(response.data);
+      console.log(response.data.id_token);
 
-      this.updateClientJWTToken(response.data.idToken);
+      this.updateClientJWTToken(response.data.id_token);
 
-      return response.data.idToken;
+      const accountResourceApi = this._apiClient.accountResourceApi;
+      const account = (await accountResourceApi.getAccountUsingGET()).data;
+
+      console.log(account);
+
+      return response.data.id_token;
     } catch (e) {
       console.error(e);
     }
@@ -55,7 +60,7 @@ export default class AccountRepository {
     });
 
     try {
-      await remoteConfig().fetch(120);
+      await remoteConfig().fetch(300);
     } catch (e) {
       console.error(e);
     }
