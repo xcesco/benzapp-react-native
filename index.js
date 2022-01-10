@@ -19,11 +19,13 @@ global.Buffer = Buffer;
 global.URL = URL;
 global.URLSearchParams = URLSearchParams;
 
-// setGlobalConfig({
-//   status: true,
-//   headers: true,
-// });
+setGlobalConfig({
+  status: true,
+  headers: true,
+});
 
-// globalAxios.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+globalAxios.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+globalAxios.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+
 
 AppRegistry.registerComponent(appName, () => App);

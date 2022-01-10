@@ -1,8 +1,9 @@
 import remoteConfig from '@react-native-firebase/remote-config';
 import {AppDebugLog} from '../utils/AppDebug';
-import {ApiClient, JWTToken} from './network';
+import {ApiClient} from './network';
 
 const BACKEND_URL_PARAMETER_NAME = 'backend_base_url';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MAINTENANCE_MODE = 'maintenance_mode';
 
 export default class AccountRepository {
@@ -17,16 +18,16 @@ export default class AccountRepository {
 
   async login(username: string, password: string): Promise<string> {
     try {
-      const response = await this._apiClient.userJwtControllerApi.authorizeUsingPOST({
+      let response = await this._apiClient.userJwtControllerApi.authorizeUsingPOST({
         username: username,
         password: password
       });
 
       console.log(response.data);
 
-      this.updateClientJWTToken(response.data!);
+      this.updateClientJWTToken(response.data.idToken);
 
-      return response.data.id_token!;
+      return response.data.idToken;
     } catch (e) {
       console.error(e);
     }
@@ -37,7 +38,7 @@ export default class AccountRepository {
     this._apiClient.updateBaseUrl(baseUrl);
   }
 
-  public updateClientJWTToken(jwtToken: JWTToken): void {
+  public updateClientJWTToken(jwtToken: string): void {
     this._apiClient.updateJWTToken(jwtToken);
   }
 
@@ -54,7 +55,7 @@ export default class AccountRepository {
     });
 
     try {
-      await remoteConfig().fetch(60);
+      await remoteConfig().fetch(120);
     } catch (e) {
       console.error(e);
     }

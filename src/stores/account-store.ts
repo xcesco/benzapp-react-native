@@ -18,15 +18,13 @@ export default class AccountStore {
     //makeAutoObservable(this);
   }
 
-
   updateRemote() {
     this.accountRepository.refreshRemoteConfig().then(action(value => {
-      console.log('CAZZO', value);
       this.remoteUrl = value
     }));
   }
 
-  async login(username: string, password: string): Promise<string> {
+  login(username: string, password: string): Promise<string> {
     return this.accountRepository.login(username, password);
   }
 

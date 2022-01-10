@@ -48,13 +48,14 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
     props.accountStore.login(username, password).then((value) => {
       console.log('fatto', value);
       setLoading(false)
+      // navigation.reset({
+      //   index: 0,
+      //   routes: [{name: 'Lock'}],
+      // });
     }, (reason => {
       console.log(reason)
     }));
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{name: 'Lock'}],
-    // });
+
   };
 
   return (

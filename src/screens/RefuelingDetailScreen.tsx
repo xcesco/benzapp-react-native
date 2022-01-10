@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/RootStackParamList';
+import {RootStackParamList} from '../navigation/root-stack-param-list';
 
 type ScreenProp = StackNavigationProp<RootStackParamList, 'RefuelingDetail'>;
 

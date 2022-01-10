@@ -1,12 +1,11 @@
+import {Configuration} from './configuration';
 import {
   AccountResourceApi,
   DelegaResourceApi,
-  JWTToken,
   RifornimentoResourceApi,
   TesseraResourceApi,
   UserJwtControllerApi
-} from './api';
-import {Configuration} from './configuration';
+} from './api'
 
 export class ApiClient {
   constructor() {
@@ -68,8 +67,8 @@ export class ApiClient {
     this._delegaResourceApi = new DelegaResourceApi(configuration);
   }
 
-  updateJWTToken(value: JWTToken): void {
-    this.init(null, value.id_token);
+  updateJWTToken(value: string): void {
+    this.init(null, value);
   }
 
   updateBaseUrl(baseUrl: string) {

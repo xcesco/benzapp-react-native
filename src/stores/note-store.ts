@@ -1,13 +1,15 @@
-import {action, makeObservable, observable} from 'mobx';
+import {action, makeObservable} from 'mobx';
 import Note from './Note';
 
 export default class NoteStore {
   constructor() {
-    makeObservable(this);
+    //makeObservable(this);
   }
 
-  @observable notes: Note[] = [];
-  @observable counter = 1;
+  //@observable
+  notes: Note[] = [];
+  //@observable
+  counter = 1;
 
   saveNote(note: Note) {
     const idx = this.notes.findIndex((n) => note.noteId === n.noteId);
@@ -36,7 +38,7 @@ export default class NoteStore {
     }
   }
 
-  @action
+ // @action
   addNote(): void {
     console.log('avvio');
     const note = {
