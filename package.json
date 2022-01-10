@@ -23,6 +23,7 @@
     "mobx-react": "^7.2.1",
     "react": "17.0.2",
     "react-native": "0.66.4",
+    "react-native-default-preference": "^1.4.3",
     "react-native-gesture-handler": "^2.1.0",
     "react-native-i18n": "^2.0.15",
     "react-native-paper": "^4.11.1",
