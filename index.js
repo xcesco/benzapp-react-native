@@ -11,7 +11,7 @@ import * as AxiosLogger from 'axios-logger';
 import {setGlobalConfig} from 'axios-logger';
 import 'react-native-url-polyfill/auto';
 import I18n from './src/i18n/I18n';
-import {init} from './src/repositories/persistence/db';
+import {initAndPopulateDb} from './src/repositories/persistence/db';
 
 I18n.locale = 'it';
 
@@ -29,7 +29,9 @@ setGlobalConfig({
 globalAxios.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
 globalAxios.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
 
-init();
+initAndPopulateDb().then((_)=>{
+  console.log('db terminata');
+})
 
 function errorCB(err) {
   console.log('SQL Error: ' + err);

@@ -1,38 +1,53 @@
-import * as SQLite from 'expo-sqlite';
+import {SQLResultSet} from 'expo-sqlite';
 import {stations} from '../../../assets/json/stations';
-import {Marchio} from '../model/marchio';
+import {StationDao} from './dao/station_dao';
+import {NotificationDao} from './dao/notification_dao';
+import {VehicleDao} from './dao/vehicle_dao';
+import {RefuelingDao} from './dao/refueling_dao';
+import {WebSQLDatabase} from 'expo-sqlite/src/SQLite.types';
+import {Connection} from './connection';
 
-const db = SQLite.openDatabase('benzapp-react-native.db');
+// https://blog.gennady.pp.ua/wrapper-for-expo-sqlite-with-async-await-migrations-and-transactions-support/
+// https://gist.github.com/GendelfLugansk/db31d7742c4dbc3d6d768fa525474aff
+const connection = new Connection('benzapp-react-native.db');
 
-function transformMarchio(marchio_id: string) {
-  const marchio = Marchio[Number(marchio_id)];
-  return marchio.toString();
-}
+export const notificationDao = new NotificationDao(connection);
+export const refuelingDao = new RefuelingDao(connection);
+export const stationDao = new StationDao(connection);
+export const vehicleDao = new VehicleDao(connection);
 
-export const init = () => {
-  db.transaction((tx) => {
-    // creazione del db
-    tx.executeSql('CREATE TABLE IF NOT EXISTS notification (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, messaggio TEXT, targa TEXT);');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS refueling (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, data TEXT, gestore BLOB, gestore_id INTEGER, litri_erogati REAL, prezzo_al_litro REAL, sconto REAL, targa TEXT, tessera BLOB, tipo_carburante TEXT);');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS station (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, comune TEXT, indirizzo TEXT, latitudine REAL, longitudine REAL, marchio TEXT, provincia TEXT, tipo TEXT);');
-    tx.executeSql('CREATE TABLE IF NOT EXISTS vehicle (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, carburante TEXT, cittadino BLOB, codice TEXT, data_emissione TEXT, delega INTEGER, delegas BLOB, immagine TEXT, immagine_content_type TEXT, rifornimentos BLOB, targa TEXT, veicolo TEXT);');
+export const initAndPopulateDb = async () => {
+  console.log('db-avvio');
+  await connection.beginTransaction();
 
-    // populator: workaround per evitare di inserire nuovamente le stazioni: se non ci sono elementi allora li aggiungo.
-    tx.executeSql('SELECT * FROM station', [], (transaction, resultSet) => {
-      if (resultSet.rows.length === 0) {
-        console.log('sono qui');
-        let data = stations;
-        for (const item of data) {
-          console.log('leggo', item);
-          // @ts-ignore
-          tx.executeSql('INSERT INTO station (comune, indirizzo, latitudine, longitudine, marchio, provincia, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)', [item['comune'], item['indirizzo'], item['latitudine'], item['longitudine'], transformMarchio(item['marchio_id']), item['provincia'], item['tipo']]);
-        }
-        console.log('INSERITIO qui');
-      } else {
-        console.log('alaredy donecaricato');
-      }
-    })
-  }, (error) => {
-    console.log(error);
+  await connection.execute(NotificationDao.SQL_TABLE_CREATION);
+  await connection.execute(RefuelingDao.SQL_TABLE_CREATION);
+  await connection.execute(StationDao.SQL_TABLE_CREATION);
+  await connection.execute(VehicleDao.SQL_TABLE_CREATION);
+
+  let value = await connection.execute('SELECT * FROM station ORDER BY comune asc, indirizzo asc');
+  if (value.rows.length === 0) {
+    console.log('sono qui');
+    for (const item of stations) {
+      console.log('leggo', item);
+      await stationDao.insert(item);
+    }
+    console.log('INSERITIO qui');
+  } else {
+    console.log('alaredy donecaricato');
+  }
+   await connection.commitTransaction();
+  console.log('db-finito');
+};
+
+
+export function queryOne(database: WebSQLDatabase, sql: string, args?: (number | string)[]): Promise<SQLResultSet> {
+  return new Promise<SQLResultSet>((resolve, _) => {
+    database.transaction((tx) =>
+      tx.executeSql(sql, args, (transaction, resultSet) => {
+        resolve(resultSet);
+      })
+    );
   });
 }
+
