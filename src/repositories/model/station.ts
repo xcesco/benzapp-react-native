@@ -2,7 +2,7 @@ import {Marchio} from './marchio';
 
 export interface Station {
   id: number;
-  provincia:string;
+  provincia: string;
   comune: string;
   indirizzo: string;
   longitudine: number;
