@@ -20,22 +20,19 @@ export class Connection {
     return new Promise((resolve, reject) => {
       console.log(`sql: ${sqlStatement}`);
       this._db.exec([{sql: sqlStatement, args}], false, (err, res) => {
-        console.log('sono qui',res);
-        // @ts-ignore
-        return resolve(res[0]);
-        // if (err) {
-        //   return reject(err);
-        // }
-        //
+        console.log('sql response: ',res);
+
+        if (err) {
+          return reject(err);
+        }
+
         // if (!(res) || !this.isResultSet(res[0])) {
         //   // @ts-ignore
         //   return reject(<ResultSetError>res[0].error);
         // }
-        //
-        // if (res && this.isResultSet(res[0])) {
-        //   // @ts-ignore
-        //   resolve(<ResultSet>res[0]);
-        // }
+
+        // @ts-ignore
+        return resolve(res[0]);
       });
     });
   }

@@ -7,13 +7,14 @@ import {RootStackParamList} from '../navigation/root-stack-param-list';
 import assets from '../../assets';
 import * as Progress from 'react-native-progress';
 import {inject, observer} from 'mobx-react';
-import {RootStore} from '../stores/root-store';
 import {AppDebugLog} from '../utils/AppDebug';
+import HomeStore from '../stores/home-store';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Splash'>;
 
-const SplashScreen = inject('rootStore')
-        (observer((props: { componentId: string; rootStore: RootStore, back: any }) => {
+const SplashScreen = inject('rootStore', 'homeStore')
+        (observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
+                  AppDebugLog('display> splash-screen');
                   const navigation = useNavigation<ScreenProps>();
 
                   const navigateToLogin = (): void => {
@@ -23,16 +24,30 @@ const SplashScreen = inject('rootStore')
                     });
                   };
 
+                  const navigateToLock = (): void => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: 'Lock'}],
+                    });
+                  };
+
                   const initAsyncApplication = async (): Promise<void> => {
-                    await props.rootStore.accountStore.updateRemote();
-                    await setTimeout(() => {
+                    await props.homeStore.updateRemote();
+
+                    const hasAccount = await props.homeStore.checkAccountAndSetNavigation();
+                    if (hasAccount) {
+                      navigateToLock();
+                    } else {
+                      navigateToLogin();
+                    }
+                    setTimeout(() => {
                     }, 2000);
                     AppDebugLog('remote config caricato');
                   };
 
                   initAsyncApplication().then(_ => {
                     AppDebugLog('goto next', props.back);
-                    navigateToLogin();
+
                   });
 
                   return (

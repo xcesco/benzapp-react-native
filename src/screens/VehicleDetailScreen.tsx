@@ -4,7 +4,7 @@ import {Button} from 'react-native-paper';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/RootStackParamList';
+import {RootStackParamList} from '../navigation/root-stack-param-list';
 
 type ScreenProp = StackNavigationProp<RootStackParamList, 'VehicleDetail'>;
 

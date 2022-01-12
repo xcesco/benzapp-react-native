@@ -29,13 +29,6 @@ setGlobalConfig({
 globalAxios.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
 globalAxios.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
 
-initAndPopulateDb().then((_)=>{
-  console.log('db terminata');
-})
-
-function errorCB(err) {
-  console.log('SQL Error: ' + err);
-}
 
 
 AppRegistry.registerComponent(appName, () => App);

@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultTheme, Provider as PaperProvider, Text} from 'react-native-paper';
 import assets from './assets';
 import {Provider} from 'mobx-react';
-import {LockScreen} from './src/screens/lock-screen';
+import LockScreen from './src/screens/lock-screen';
 import {RefuelingListScreen} from './src/screens/RefuelingListScreen';
 import {RefuelingDetailScreen} from './src/screens/RefuelingDetailScreen';
 import {MainScreen} from './src/screens/main-screen';
@@ -19,6 +19,17 @@ import AccountRepository from './src/repositories/account-repository';
 import SplashScreen from './src/screens/splash-screen';
 import {configure} from 'mobx';
 import {ApiClient} from './src/repositories/network';
+import {
+  dbConnection,
+  initAndPopulateDb,
+  notificationDao,
+  refuelingDao,
+  vehicleDao
+} from './src/repositories/persistence/db';
+import HomeStore from './src/stores/home-store';
+import {VehicleRepository} from './src/repositories/vehicle_repository';
+import RefuelingRepository from './src/repositories/refueling-repository';
+import {NotificationRepository} from './src/repositories/notification_repository';
 
 const theme = {
   ...DefaultTheme,
@@ -42,29 +53,32 @@ function HomeScreen() {
   );
 }
 
-
 const apiClient = new ApiClient();
 const accountRepository = new AccountRepository(apiClient);
+const vehicleRepository = new VehicleRepository(apiClient, dbConnection, vehicleDao);
+const refuelingRepository = new RefuelingRepository(apiClient, dbConnection, refuelingDao);
+const notificationRepository = new NotificationRepository(apiClient, dbConnection, notificationDao);
 
 const rootStore = new RootStore(accountRepository);
+const homeStore = new HomeStore(accountRepository, vehicleRepository, refuelingRepository, notificationRepository);
 
 export async function applicationInit(): Promise<void> {
   AppDebugLog('app initialization - start');
+  await initAndPopulateDb();
   await accountRepository.refreshRemoteConfig();
   AppDebugLog('app initialization - done');
 }
 
+applicationInit();
 
 function App() {
   const Stack = createNativeStackNavigator();
-
-  applicationInit();
 
   // @ts-ignore
   return (
           <PaperProvider theme={theme}>
             <Provider rootStore={rootStore} noteStore={rootStore.noteStore}
-                      accountStore={rootStore.accountStore}>
+                      homeStore={homeStore}>
               <NavigationContainer>
                 <Stack.Navigator
                         initialRouteName="Splash"

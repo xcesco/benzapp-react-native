@@ -4,3 +4,10 @@ export interface VehicleSummary {
   risparmio: number;
   targa: string;
 }
+
+export interface VehicleSummaryDb {
+  spesa: number;
+  litri_erogati: number;
+  risparmio: number;
+  targa: string;
+}

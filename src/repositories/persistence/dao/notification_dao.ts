@@ -1,21 +1,44 @@
-import {SQLResultSet, SQLTransaction} from 'expo-sqlite';
+import {ResultSet} from 'expo-sqlite';
 import {Connection} from '../connection';
+import {Notification} from '../../model/notification';
 
 export class NotificationDao {
+  static readonly SQL_TABLE_CREATION: string = 'CREATE TABLE IF NOT EXISTS notifications (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, messaggio TEXT, targa TEXT);';
+  readonly SQL_DELETE_ALL = 'DELETE FROM notifications';
+  readonly SQL_INSERT: string = 'INSERT INTO notifications (messaggio, targa) VALUES (?, ?)';
+  readonly SQL_SELECT_ALL = 'SELECT * FROM notifications';
+  readonly SQL_SELECT_COUNT = 'SELECT count(*) FROM notifications';
+  private database: Connection;
+
   constructor(database: Connection) {
     this.database = database;
   }
 
-  static readonly SQL_TABLE_CREATION: string = 'CREATE TABLE IF NOT EXISTS notification (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, messaggio TEXT, targa TEXT);';
+  async deleteAll(): Promise<ResultSet> {
+    // @ts-ignore
+    return this.database.execute(this.SQL_DELETE_ALL, []);
+  }
 
-  private database: Connection;
+  async insert(item: Notification): Promise<ResultSet> {
+    // @ts-ignore
+    return this.database.execute(this.SQL_INSERT, [item.messaggio, item.targa]);
+  }
 
-  query(tx: SQLTransaction, sql: string, args?: (number | string)[]): Promise<SQLResultSet> {
-    return new Promise<SQLResultSet>((resolve, _) => {
-      tx.executeSql(sql, args, (transaction, resultSet) => {
-        resolve(resultSet);
-      });
-    });
+  async findlAll(): Promise<ResultSet> {
+    // @ts-ignore
+    return this.database.execute(this.SQL_SELECT_ALL, []).then;
+  }
+
+  async findCount(): Promise<ResultSet> {
+    // @ts-ignore
+    return this.database.execute(this.SQL_SELECT_COUNT, []);
+  }
+
+  private fromDb(item: { [x: string]: any; }): Notification {
+    return {
+      messaggio: item['messaggio'],
+      targa: item['targa']
+    }
   }
 }
 

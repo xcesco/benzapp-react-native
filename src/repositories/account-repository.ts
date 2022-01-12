@@ -1,9 +1,9 @@
 import remoteConfig from '@react-native-firebase/remote-config';
 import {AppDebugLog} from '../utils/AppDebug';
 import {ApiClient} from './network';
-import DefaultPreference from 'react-native-default-preference';
 import {AdminUserDTO} from './network/models';
 import AppPreferencesInstance from './persistence/app-preferences';
+import {notificationDao, refuelingDao, vehicleDao} from './persistence/db';
 
 const BACKEND_URL_PARAMETER_NAME = 'backend_base_url';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,6 +18,19 @@ export default class AccountRepository {
   private _backendBaseUrl!: string;
 
   private _apiClient: ApiClient;
+
+  async getAccount(): Promise<AdminUserDTO> {
+    return AppPreferencesInstance.getAccount();
+  }
+
+  async getJWTToken(): Promise<string> {
+    return AppPreferencesInstance.getJWToken();
+  }
+
+  async hasAccount(): Promise<boolean> {
+    const account = await AppPreferencesInstance.getAccount();
+    return account !== undefined && account !== null;
+  }
 
   async login(username: string, password: string): Promise<string> {
     try {
@@ -43,6 +56,14 @@ export default class AccountRepository {
       console.error(e);
     }
     return 'INVALID';
+  }
+
+  async logout(): Promise<void> {
+    await AppPreferencesInstance.removeAccount();
+
+    await refuelingDao.deleteAll();
+    await vehicleDao.deleteAll();
+    await notificationDao.deleteAll();
   }
 
   public updateBaseUrl(baseUrl: string): void {

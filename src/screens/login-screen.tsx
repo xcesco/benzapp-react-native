@@ -8,9 +8,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
 import NoteStore from '../stores/note-store';
-import AccountStore from '../stores/account-store';
 import * as Progress from 'react-native-progress';
 import I18n from 'react-native-i18n';
+import HomeStore from '../stores/home-store';
+import {AppDebugLog} from '../utils/AppDebug';
 // import NoteListPage from '../../stores/NoteListPage';
 // import AccountStore from '../../stores/AccountStore';
 // import {NavigationInjectedProps} from 'react-navigation';
@@ -21,16 +22,16 @@ import I18n from 'react-native-i18n';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 
-const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { componentId: string; noteStore: NoteStore, accountStore: AccountStore, back: any }) => {
+const LoginScreen = inject( 'homeStore')(observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
   const navigation = useNavigation<ScreenProps>();
 
-  console.log('LoginScreen LOAD');
+  AppDebugLog('display> login-screen');
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = React.useState(false);
-  const onToggleSnackBar = () => setVisible(!visible);
+  // const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => setVisible(false);
 
   // props.accountStore.accountRepository.refreshRemoteConfig().then(value => {
@@ -52,8 +53,8 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
     setVisible(true);
     setLoading(true)
 
-    props.accountStore.login(username, password).then((value) => {
-      if (value === 'INVALID') {
+    props.homeStore.login(username, password).then((value) => {
+      if (value === true) {
         setMessage(I18n.t('loginError'))
       } else {
         setMessage(I18n.t('loginSuccess'))
@@ -88,11 +89,11 @@ const LoginScreen = inject('noteStore', 'accountStore')(observer((props: { compo
                   }}>
                     <Text style={{
                       color: Colors.white,
-                    }}>{props.accountStore.remoteUrlRead}</Text>
+                    }}>{props.homeStore.remoteUrl}</Text>
                     <IconButton icon="sync" color={Colors.white} size={24} onPress={() => {
                       setLoading(true)
                       setTimeout(() => {
-                        props.accountStore.updateRemote();
+                        props.homeStore.updateRemote();
                         setLoading(false);
                       }, 2000);
 
