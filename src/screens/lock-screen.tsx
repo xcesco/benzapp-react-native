@@ -1,18 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
-import {KeyPad} from '../components/key-pad';
 import {AppDebugLog} from '../utils/AppDebug';
 import {inject, observer} from 'mobx-react';
-import HomeStore from '../stores/home-store';
+import {Pin} from '../components/pin';
+import LockStore from '../stores/lock-store';
+import {action} from 'mobx';
 
 type ScreenProp = StackNavigationProp<RootStackParamList, 'Lock'>;
 
-const LockScreen = inject('homeStore')(observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
-  AppDebugLog('display> lock-screen');
+const LockScreen = inject('lockStore')(observer((props: { componentId: string; lockStore: LockStore, back: any }) => {
+  AppDebugLog('display> lock-screen', props.lockStore.primoAccesso, props.lockStore.pin);
 
+  const [initializiated, setInitializiated] = useState(false);
   const navigation = useNavigation<ScreenProp>();
 
   const navigateToMain = (): void => {
@@ -22,11 +24,24 @@ const LockScreen = inject('homeStore')(observer((props: { componentId: string; h
     });
   };
 
+  useEffect(() => {
+    if (!initializiated) {
+      action(() => props.lockStore.actionGetCurrentPIN());
+      action(() => props.lockStore.actionPrimoAccesso());
+
+      setInitializiated(true);
+    }
+  }, [initializiated, props.lockStore]);
+
   return (
-          <KeyPad onPressHandler={() => {
-            console.log('remsss', props.back);
+          <Pin
+                  primoAccesso={props.lockStore.primoAccesso}
+                  initialPin={props.lockStore.pin} onSubmitPinHandler={() => {
             navigateToMain();
-          }}/>
+          }}
+                  onGeneratedPinHandler={(pin) => {
+                    props.lockStore.actionSavePin(pin);
+                  }}/>
   );
 }));
 

@@ -30,6 +30,8 @@ import HomeStore from './src/stores/home-store';
 import {VehicleRepository} from './src/repositories/vehicle_repository';
 import RefuelingRepository from './src/repositories/refueling-repository';
 import {NotificationRepository} from './src/repositories/notification_repository';
+import {SecureRepository} from './src/repositories/secure-repository';
+import LockStore from './src/stores/lock-store';
 
 const theme = {
   ...DefaultTheme,
@@ -54,11 +56,14 @@ function HomeScreen() {
 }
 
 const apiClient = new ApiClient();
+
+const secureRepository = new SecureRepository();
 const accountRepository = new AccountRepository(apiClient);
 const vehicleRepository = new VehicleRepository(apiClient, dbConnection, vehicleDao);
 const refuelingRepository = new RefuelingRepository(apiClient, dbConnection, refuelingDao);
 const notificationRepository = new NotificationRepository(apiClient, dbConnection, notificationDao);
 
+const lockStore = new LockStore(secureRepository);
 const rootStore = new RootStore(accountRepository);
 const homeStore = new HomeStore(accountRepository, vehicleRepository, refuelingRepository, notificationRepository);
 
@@ -78,7 +83,7 @@ function App() {
   return (
           <PaperProvider theme={theme}>
             <Provider rootStore={rootStore} noteStore={rootStore.noteStore}
-                      homeStore={homeStore}>
+                      homeStore={homeStore} lockStore={lockStore}>
               <NavigationContainer>
                 <Stack.Navigator
                         initialRouteName="Splash"

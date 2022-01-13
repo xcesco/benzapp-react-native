@@ -21,7 +21,7 @@ import {AppDebugLog} from '../utils/AppDebug';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 
-const LoginScreen = inject( 'homeStore')(observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
+const LoginScreen = inject('homeStore')(observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
   const navigation = useNavigation<ScreenProps>();
 
   AppDebugLog('display> login-screen');

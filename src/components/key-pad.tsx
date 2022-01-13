@@ -1,117 +1,90 @@
-import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Avatar, Button, Colors, Text} from 'react-native-paper';
-import assets from '../../assets';
-import {observer} from 'mobx-react';
+import {Button, Colors, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
+import assets from '../../assets';
 
-export const KeyPad = observer((props: { onPressHandler(): void }) => {
+export const KeyPad = (props: { onPressHandler(key: string): void, onPressBackHandler(): void, onPressSubmitHandler(): void }) => {
 
-  const [currentPin, setCurrentPin] = useState('');
+  return (<View style={style.panelBottom}>
+    <View style={style.keyRow}>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('1')
+      }}>
+        <Text style={style.key}>1</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('2')
+      }}>
+        <Text style={style.key}>2</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('3')
+      }}>
+        <Text style={style.key}>3</Text>
+      </Button>
+    </View>
+    <View style={style.keyRow}>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('4')
+      }}>
+        <Text style={style.key}>4</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('5')
+      }}>
+        <Text style={style.key}>5</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('6')
+      }}>
+        <Text style={style.key}>6</Text>
+      </Button>
+    </View>
+    <View style={style.keyRow}>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('7')
+      }}>
+        <Text style={style.key}>7</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('8')
+      }}>
+        <Text style={style.key}>8</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('9')
+      }}>
+        <Text style={style.key}>9</Text>
+      </Button>
+    </View>
+    <View style={style.keyRow}>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressBackHandler()
+      }}>
+        <Icon name="backspace" color={Colors.black} size={36}/>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressHandler('0')
+      }}>
+        <Text style={style.key}>0</Text>
+      </Button>
+      <Button mode="outlined" style={style.keyButton} onPress={() => {
+        props.onPressSubmitHandler()
+      }}>
+        <Text style={style.key}>
+          <Icon name="check" color={Colors.black} size={36}/>
+        </Text>
+      </Button>
+    </View>
+    <Button mode="outlined" onPress={() => {
+      props.onPressSubmitHandler();
+    }}>
+      <Text>Goto Main</Text>
+    </Button>
+  </View>)
+};
 
-  function onPressHandler(key: string): void {
-    console.log(key);
-    setCurrentPin(value => limitPinSize(value + key));
-  }
-
-  function onPressBackHandler(): void {
-    if (currentPin.length > 0) {
-      setCurrentPin(value => value.slice(0, -1));
-    }
-  }
-
-  function limitPinSize(value: string): string {
-    return value.slice(0, 6);
-  }
-
-  return (
-          <View style={style.container}>
-            <View style={style.panelHeader}>
-              <Text style={style.pinLabel}> React Native Benzapp</Text>
-            </View>
-            <View style={style.panelTop}>
-              <Avatar.Icon icon="lock" size={64} style={style.icon} color={assets.colors.primaryColor}/>
-              <Text style={style.pinLabel}>Inserisci il PIN</Text>
-              <Text style={style.pinText}>{currentPin.split('').map(_ => (
-                      <Icon name="circle" color={Colors.white} size={14}/>))}</Text>
-              {/*<Text style={style.pinLabel}>PIN VALIDO</Text>*/}
-            </View>
-            <View style={style.panelBottom}>
-              <View style={style.keyRow}>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('1')
-                }}>
-                  <Text style={style.key}>1</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('2')
-                }}>
-                  <Text style={style.key}>2</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('3')
-                }}>
-                  <Text style={style.key}>3</Text>
-                </Button>
-              </View>
-              <View style={style.keyRow}>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('4')
-                }}>
-                  <Text style={style.key}>4</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('5')
-                }}>
-                  <Text style={style.key}>5</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('6')
-                }}>
-                  <Text style={style.key}>6</Text>
-                </Button>
-              </View>
-              <View style={style.keyRow}>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('7')
-                }}>
-                  <Text style={style.key}>7</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('8')
-                }}>
-                  <Text style={style.key}>8</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('9')
-                }}>
-                  <Text style={style.key}>9</Text>
-                </Button>
-              </View>
-              <View style={style.keyRow}>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressBackHandler()
-                }}>
-                  <Icon name="backspace" color={Colors.black} size={36}/>
-                </Button>
-                <Button mode="outlined" style={style.keyButton} onPress={() => {
-                  onPressHandler('0')
-                }}>
-                  <Text style={style.key}>0</Text>
-                </Button>
-                <Button mode="outlined" style={style.keyButton}>
-                  <Text style={style.key}>
-                    <Icon name="check" color={Colors.black} size={36}/>
-                  </Text>
-                </Button>
-              </View>
-              <Button mode="outlined" onPress={props.onPressHandler}>
-                <Text>Goto Main</Text>
-              </Button>
-            </View>
-          </View>
-  );
-});
 
 const style = StyleSheet.create({
   container: {
