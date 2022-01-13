@@ -31,22 +31,25 @@ const SplashScreen = inject('rootStore', 'homeStore')
                     });
                   };
 
-                  const initAsyncApplication = async (): Promise<void> => {
+                  const initAsyncApplication = async (): Promise<boolean> => {
                     await props.homeStore.updateRemote();
 
                     const hasAccount = await props.homeStore.checkAccountAndSetNavigation();
+
+                    await setTimeout(() => {
+                      AppDebugLog('remote config caricato');
+                    }, 2000);
+
+                    return hasAccount;
+                  };
+
+                  initAsyncApplication().then(hasAccount => {
+                    AppDebugLog('goto next', props.back);
                     if (hasAccount) {
                       navigateToLock();
                     } else {
                       navigateToLogin();
                     }
-                    setTimeout(() => {
-                    }, 2000);
-                    AppDebugLog('remote config caricato');
-                  };
-
-                  initAsyncApplication().then(_ => {
-                    AppDebugLog('goto next', props.back);
 
                   });
 

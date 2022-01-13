@@ -7,7 +7,6 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
-import NoteStore from '../stores/note-store';
 import * as Progress from 'react-native-progress';
 import I18n from 'react-native-i18n';
 import HomeStore from '../stores/home-store';
@@ -30,7 +29,7 @@ const LoginScreen = inject( 'homeStore')(observer((props: { componentId: string;
   const [message, setMessage] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   // const onToggleSnackBar = () => setVisible(!visible);
   const onDismissSnackBar = () => setVisible(false);
 
@@ -39,11 +38,11 @@ const LoginScreen = inject( 'homeStore')(observer((props: { componentId: string;
   //
   // });
 
-  const _handleUsernameChange = (text: string): void => {
+  const usernameChangeHandler = (text: string): void => {
     setUsername(_ => text);
   };
 
-  const _handlePasswordChange = (text: string): void => {
+  const passwordChangeHandler = (text: string): void => {
     setPassword(_ => text);
   };
 
@@ -104,11 +103,11 @@ const LoginScreen = inject( 'homeStore')(observer((props: { componentId: string;
                     width: '80%',
                     marginTop: 24
                   }} label="Username" mode={'flat'} value={username}
-                             onChangeText={_handleUsernameChange}/>
+                             onChangeText={usernameChangeHandler}/>
 
                   <TextInput autoCapitalize={'none'} secureTextEntry={true}
                              style={{width: '80%', marginTop: 24}} label="Password" mode={'flat'} value={password}
-                             onChangeText={_handlePasswordChange}/>
+                             onChangeText={passwordChangeHandler}/>
 
 
                   {loading ?
