@@ -70,8 +70,11 @@ const homeStore = new HomeStore(accountRepository, vehicleRepository, refuelingR
 export async function applicationInit(): Promise<void> {
   AppDebugLog('app initialization - start');
   await initAndPopulateDb();
+
+  await lockStore.init();
+
   await accountRepository.refreshRemoteConfig();
-  AppDebugLog('app initialization - done');
+  AppDebugLog('app initialization - end');
 }
 
 applicationInit();
@@ -79,6 +82,7 @@ applicationInit();
 function App() {
   const Stack = createNativeStackNavigator();
 
+  // @ts-ignore
   // @ts-ignore
   return (
           <PaperProvider theme={theme}>

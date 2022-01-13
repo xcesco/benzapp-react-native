@@ -12,7 +12,7 @@ import {action} from 'mobx';
 type ScreenProp = StackNavigationProp<RootStackParamList, 'Lock'>;
 
 const LockScreen = inject('lockStore')(observer((props: { componentId: string; lockStore: LockStore, back: any }) => {
-  AppDebugLog('display> lock-screen', props.lockStore.primoAccesso, props.lockStore.pin);
+  AppDebugLog(`display> lock-screen: primoAccesso: ${props.lockStore.primoAccesso} pin: ${props.lockStore.pin}`);
 
   const [initializiated, setInitializiated] = useState(false);
   const navigation = useNavigation<ScreenProp>();
@@ -26,21 +26,25 @@ const LockScreen = inject('lockStore')(observer((props: { componentId: string; l
 
   useEffect(() => {
     if (!initializiated) {
+      console.log(`display> lock-screen: initialize`);
       action(() => props.lockStore.actionGetCurrentPIN());
       action(() => props.lockStore.actionPrimoAccesso());
 
       setInitializiated(true);
+    } else {
+      console.log(`display> lock-screen: ALREADY initialized`);
     }
   }, [initializiated, props.lockStore]);
 
   return (
           <Pin
                   primoAccesso={props.lockStore.primoAccesso}
-                  initialPin={props.lockStore.pin} onSubmitPinHandler={() => {
-            navigateToMain();
-          }}
+                  initialPin={props.lockStore.pin ?? ''}
+                  onSubmitPinHandler={() => {
+                    navigateToMain();
+                  }}
                   onGeneratedPinHandler={(pin) => {
-                    props.lockStore.actionSavePin(pin);
+                    action(() => props.lockStore.actionSavePin(pin));
                   }}/>
   );
 }));

@@ -43,15 +43,16 @@ const SplashScreen = inject('rootStore', 'homeStore')
                     return hasAccount;
                   };
 
-                  initAsyncApplication().then(hasAccount => {
-                    AppDebugLog('goto next', props.back);
-                    if (hasAccount) {
-                      navigateToLock();
-                    } else {
-                      navigateToLogin();
-                    }
-
-                  });
+                  setTimeout(() => {
+                    initAsyncApplication().then(hasAccount => {
+                      AppDebugLog('goto next', props.back);
+                      if (hasAccount) {
+                        navigateToLock();
+                      } else {
+                        navigateToLogin();
+                      }
+                    });
+                  }, 3000);
 
                   return (
                           <View style={style.container}>

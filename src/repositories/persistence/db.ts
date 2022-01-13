@@ -6,6 +6,7 @@ import {VehicleDao} from './dao/vehicle_dao';
 import {RefuelingDao} from './dao/refueling_dao';
 import {WebSQLDatabase} from 'expo-sqlite/src/SQLite.types';
 import {Connection} from './connection';
+import AppPreferencesInstance from './app-preferences';
 
 // https://blog.gennady.pp.ua/wrapper-for-expo-sqlite-with-async-await-migrations-and-transactions-support/
 // https://gist.github.com/GendelfLugansk/db31d7742c4dbc3d6d768fa525474aff
@@ -16,6 +17,12 @@ export const stationDao = new StationDao(dbConnection);
 export const vehicleDao = new VehicleDao(dbConnection);
 
 export const initAndPopulateDb = async () => {
+  const primoAccesso=await AppPreferencesInstance.isPrimoAccesso();
+
+  if (!primoAccesso) {
+    console.log('db-avvio - skipped');
+    return;
+  }
   console.log('db-avvio');
   await dbConnection.beginTransaction();
 

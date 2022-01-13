@@ -30,11 +30,12 @@ export class AppPreferences {
 
   async isPrimoAccesso(): Promise<boolean> {
     const value = await DefaultPreference.get('PrimoAccesso');
+    console.log(`app-preference > read isPrimoAccesso ${value}`);
 
     if (value === undefined || value === null || value === 'true') {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 }

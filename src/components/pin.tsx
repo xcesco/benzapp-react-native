@@ -16,13 +16,13 @@ export const Pin = observer((props: { primoAccesso: boolean, initialPin: string,
     let message = '';
     switch (value) {
       case TypePasscodeStatus.typeCheckPassword:
-        message=I18n.t('lockLabelCheckPin');
+        message = I18n.t('lockLabelCheckPin');
         break;
       case TypePasscodeStatus.typeSetPasscode:
-        message=I18n.t('lockLabelSetPin');
+        message = I18n.t('lockLabelSetPin');
         break;
       case TypePasscodeStatus.typeSetSecondPasscode:
-        message=I18n.t('lockLabelSetSecondPin');
+        message = I18n.t('lockLabelSetSecondPin');
         break;
     }
 
@@ -55,7 +55,10 @@ export const Pin = observer((props: { primoAccesso: boolean, initialPin: string,
         if (currentPin === previousPin) {
           setMessage(I18n.t('lockMessageOk'));
           props.onGeneratedPinHandler(currentPin);
-          props.onSubmitPinHandler(currentPin);
+
+          setTimeout(() => {
+            props.onSubmitPinHandler(currentPin);
+          }, 2000);
         } else {
           setMessage(I18n.t('lockMessageSecondError'));
           setTimeout(() => {

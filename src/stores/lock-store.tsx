@@ -4,7 +4,7 @@ import {action, makeObservable, observable} from 'mobx';
 
 export default class LockStore {
   // observable
-  pin: string;
+  pin: string | null;
   // observable
   primoAccesso: boolean;
   private _secureRepository: SecureRepository;
@@ -19,25 +19,30 @@ export default class LockStore {
       pin: observable,
       primoAccesso: observable,
 
-      //remoteUrlRead: computed,
-
+      init:action,
       actionGetCurrentPIN: action,
       actionSavePin: action,
       actionPrimoAccesso: action
     });
   }
 
+  async init(): Promise<void> {
+    await this.actionPrimoAccesso();
+    await this.actionGetCurrentPIN();
+  }
+
   // action
-  async actionGetCurrentPIN(): Promise<string> {
-    this.pin = await this._secureRepository.readPin() ?? '';
+  async actionGetCurrentPIN(): Promise<string | null> {
+    this.pin = await this._secureRepository.readPin();
 
     return this.pin;
   }
 
   //action
   async actionSavePin(pin: string): Promise<void> {
-    this.primoAccesso=false;
-    this.pin=pin;
+    console.log(`lock-store > actionSavePin: primoAccesso: ${pin}`);
+    this.primoAccesso = false;
+    this.pin = pin;
 
     await AppPreferencesInstance.setPrimoAccesso(this.primoAccesso);
     await this._secureRepository.writePin(this.pin);
