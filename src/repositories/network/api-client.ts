@@ -6,7 +6,6 @@ import {
   TesseraResourceApi,
   UserJwtControllerApi
 } from './api'
-import {AppDebugLog} from '../../utils/AppDebug';
 
 export class ApiClient {
   constructor() {
@@ -61,7 +60,7 @@ export class ApiClient {
     }
 
     const configuration = new Configuration({basePath: this._baseUrl, accessToken: this._jwtToken});
-    AppDebugLog('set rest configuration',configuration, token, this._jwtToken);
+    console.log('update configuration', configuration, token, this._jwtToken);
 
     this._userJwtControllerApi = new UserJwtControllerApi(configuration);
     this._accountResourceApi = new AccountResourceApi(configuration);

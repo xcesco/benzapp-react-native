@@ -8,20 +8,28 @@ import {inject, observer} from 'mobx-react';
 import {Pin} from '../components/pin';
 import LockStore from '../stores/lock-store';
 import {action} from 'mobx';
+import HomeStore from '../stores/home-store';
 
 type ScreenProp = StackNavigationProp<RootStackParamList, 'Lock'>;
 
-const LockScreen = inject('lockStore')(observer((props: { componentId: string; lockStore: LockStore, back: any }) => {
+const LockScreen = inject('lockStore', 'homeStore')(observer((props: { componentId: string; lockStore: LockStore, homeStore: HomeStore, back: any }) => {
   AppDebugLog(`display> lock-screen: primoAccesso: ${props.lockStore.primoAccesso} pin: ${props.lockStore.pin}`);
 
   const [initializiated, setInitializiated] = useState(false);
   const navigation = useNavigation<ScreenProp>();
 
   const navigateToMain = (): void => {
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{name: 'Main'}],
-    // });
+    async function update() {
+      await props.homeStore.updateData();
+    }
+
+    update().then(_ => {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Main'}],
+      });
+    })
+
   };
 
   useEffect(() => {

@@ -21,6 +21,7 @@ export class RefuelingDao {
   }
 
   async insert(item: Refueling): Promise<ResultSet> {
+    console.log('params: ',[...this.toDb(item)]);
     // @ts-ignore
     return this.database.execute(this.SQL_INSERT, [...this.toDb(item)]);
   }
@@ -50,17 +51,18 @@ export class RefuelingDao {
   }
 
   private toDb(item: Refueling): [] {
+    //(data, gestore, gestore_id, litri_erogati, prezzo_al_litro, sconto, targa, tessera, tipo_carburante)
     // @ts-ignore
     const value = [
       item.data,
       JSON.stringify(item.gestore),
+      item.gestoreId,
       item.litriErogati,
       item.prezzoAlLitro,
       item.sconto,
-      item.tessera,
-      item.tipoCarburante,
       item.targa,
-      item.gestoreId
+      JSON.stringify(item.tessera),
+      item.tipoCarburante
     ];
     // @ts-ignore
     return value;

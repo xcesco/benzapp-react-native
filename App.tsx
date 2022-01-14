@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {DefaultTheme, Provider as PaperProvider, Text} from 'react-native-paper';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import assets from './assets';
 import {Provider} from 'mobx-react';
 import LockScreen from './src/screens/lock-screen';
@@ -47,14 +46,6 @@ configure({
   enforceActions: 'observed',
 })
 
-function HomeScreen() {
-  return (
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text>Home Screen</Text>
-          </View>
-  );
-}
-
 const apiClient = new ApiClient();
 
 const secureRepository = new SecureRepository();
@@ -67,17 +58,20 @@ const lockStore = new LockStore(secureRepository);
 const rootStore = new RootStore(accountRepository);
 const homeStore = new HomeStore(accountRepository, vehicleRepository, refuelingRepository, notificationRepository);
 
-export async function applicationInit(): Promise<void> {
+export async function applicationInit(): Promise<boolean> {
   AppDebugLog('app initialization - start');
   await initAndPopulateDb();
 
-  await lockStore.init();
-
   await accountRepository.refreshRemoteConfig();
-  AppDebugLog('app initialization - end');
-}
 
-applicationInit();
+  await lockStore.init();
+  await homeStore.init()
+  const hasAccount = await homeStore.initAccountAndJWTToken();
+
+  AppDebugLog(`app initialization - end (hasAccount: ${hasAccount})`);
+
+  return hasAccount;
+}
 
 function App() {
   const Stack = createNativeStackNavigator();

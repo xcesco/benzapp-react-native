@@ -53,7 +53,7 @@ const LoginScreen = inject('homeStore')(observer((props: { componentId: string; 
     setLoading(true)
 
     props.homeStore.login(username, password).then((value) => {
-      if (value === true) {
+      if (value === false) {
         setMessage(I18n.t('loginError'))
       } else {
         setMessage(I18n.t('loginSuccess'))

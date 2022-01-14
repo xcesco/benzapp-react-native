@@ -59,11 +59,9 @@ export default class HomeStore {
   // }
 
   // action
-  updateRemote() {
+  async updateRemote() {
     // note the action wrapper
-    this._accountRepository.refreshRemoteConfig().then(action(value => {
-      this.remoteUrl = value
-    }));
+    this.remoteUrl = await this._accountRepository.refreshRemoteConfig();
   }
 
   // action
@@ -89,23 +87,29 @@ export default class HomeStore {
   async login(username: string, password: string): Promise<boolean> {
     const loginResult = await this._accountRepository.login(username, password);
 
-    if (loginResult === 'INVALID') {
-      this.updateData();
+    if (loginResult !== 'INVALID') {
+      await this.updateData();
       return true;
     } else {
       return false;
     }
   }
 
-  async checkAccountAndSetNavigation(): Promise<boolean> {
-    const account=await this._accountRepository.getAccount();
-    const jwtToken=await this._accountRepository.getJWTToken();
+  async initAccountAndJWTToken(): Promise<boolean> {
+    const account = await this._accountRepository.getAccount();
+    const jwtToken = await this._accountRepository.getJWTToken();
 
-    if (account!==null && jwtToken!==null) {
-      await this._accountRepository.updateClientJWTToken(jwtToken);
+    if (account !== null && jwtToken !== null) {
+      console.log('checkAccountAndSetNavigation = TRUE', account, jwtToken)
+      this._accountRepository.updateClientJWTToken(jwtToken);
       return true;
     } else {
+      console.log('checkAccountAndSetNavigation = FALSE', account, jwtToken)
       return false;
     }
+  }
+
+  async init() {
+    await this.updateRemote();
   }
 }
