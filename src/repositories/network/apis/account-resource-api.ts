@@ -49,6 +49,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       if (key !== undefined) {
         localVarQueryParameter['key'] = key;
@@ -90,6 +91,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -131,6 +133,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -244,6 +247,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -285,6 +289,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -326,6 +331,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 

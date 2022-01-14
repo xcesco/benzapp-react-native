@@ -39,13 +39,15 @@ export default class LockStore {
   }
 
   //action
-  async actionSavePin(pin: string): Promise<void> {
+  async actionSavePin(pin: string): Promise<string> {
     console.log(`lock-store > actionSavePin: primoAccesso: ${pin}`);
     this.primoAccesso = false;
     this.pin = pin;
 
     await AppPreferencesInstance.setPrimoAccesso(this.primoAccesso);
     await this._secureRepository.writePin(this.pin);
+
+    return pin;
   }
 
   //action

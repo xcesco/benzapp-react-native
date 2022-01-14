@@ -242,6 +242,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (dataEquals !== undefined) {
                 localVarQueryParameter['data.equals'] = (dataEquals as any instanceof Date) ?
@@ -1075,6 +1076,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -1121,6 +1123,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -1360,6 +1363,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+           const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (dataEquals !== undefined) {
                 localVarQueryParameter['data.equals'] = (dataEquals as any instanceof Date) ?
@@ -2200,6 +2204,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -2237,6 +2242,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -2278,6 +2284,7 @@ export const RifornimentoResourceApiAxiosParamCreator = function (configuration?
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 

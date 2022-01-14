@@ -18,10 +18,10 @@ const LockScreen = inject('lockStore')(observer((props: { componentId: string; l
   const navigation = useNavigation<ScreenProp>();
 
   const navigateToMain = (): void => {
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Main'}],
-    });
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'Main'}],
+    // });
   };
 
   useEffect(() => {
@@ -44,7 +44,10 @@ const LockScreen = inject('lockStore')(observer((props: { componentId: string; l
                     navigateToMain();
                   }}
                   onGeneratedPinHandler={(pin) => {
-                    action(() => props.lockStore.actionSavePin(pin));
+                    console.log('action > actionSavePin');
+                    props.lockStore.actionSavePin(pin).then(value => {
+                      console.log(`action > actionSavePin saved ${value}`);
+                    });
                   }}/>
   );
 }));

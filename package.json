@@ -64,11 +64,6 @@
     "@types/react": "^17"
   },
   "expo": {
-    "autolinking": {
-      "exclude": [
-        "expo-file-system"
-      ]
-    }
   },
   "jest": {
     "preset": "react-native",

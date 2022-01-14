@@ -65,6 +65,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (deviceIdContains !== undefined) {
                 localVarQueryParameter['deviceId.contains'] = deviceIdContains;
@@ -170,6 +171,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -216,6 +218,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -278,6 +281,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (deviceIdContains !== undefined) {
                 localVarQueryParameter['deviceId.contains'] = deviceIdContains;
@@ -400,6 +404,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -437,6 +442,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -478,6 +484,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 

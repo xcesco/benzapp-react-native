@@ -69,6 +69,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (cittadinoIdEquals !== undefined) {
                 localVarQueryParameter['cittadinoId.equals'] = cittadinoIdEquals;
@@ -191,6 +192,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -237,6 +239,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -303,6 +306,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (cittadinoIdEquals !== undefined) {
                 localVarQueryParameter['cittadinoId.equals'] = cittadinoIdEquals;
@@ -441,6 +445,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -478,6 +483,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -519,6 +525,7 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 

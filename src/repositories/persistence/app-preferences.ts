@@ -12,11 +12,19 @@ export class AppPreferences {
     return value;
   }
 
-  async getAccount(): Promise<AdminUserDTO> {
-    return (JSON.parse(await DefaultPreference.get('AdminUserDTO')));
+  async getAccount(): Promise<AdminUserDTO | null> {
+    const valueJSON = await DefaultPreference.get('AdminUserDTO');
+    console.log(`app-preference > read account ${valueJSON}`);
+
+    if (valueJSON === null || valueJSON === '') {
+      return JSON.parse(valueJSON);
+    } else {
+      return null;
+    }
   }
 
   async setAccount(account: AdminUserDTO): Promise<void> {
+    console.log(`app-preference > read account ${JSON.stringify(account)}`);
     await DefaultPreference.set('AdminUserDTO', JSON.stringify(account));
   }
 
@@ -25,6 +33,7 @@ export class AppPreferences {
   }
 
   async setPrimoAccesso(value: boolean): Promise<void> {
+    console.log(`app-preference > write isPrimoAccesso ${value}`);
     await DefaultPreference.set('PrimoAccesso', String(value));
   }
 

@@ -19,7 +19,7 @@ export default class AccountRepository {
 
   private _apiClient: ApiClient;
 
-  async getAccount(): Promise<AdminUserDTO> {
+  async getAccount(): Promise<AdminUserDTO | null> {
     return AppPreferencesInstance.getAccount();
   }
 

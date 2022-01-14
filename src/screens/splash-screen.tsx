@@ -14,7 +14,7 @@ type ScreenProps = StackNavigationProp<RootStackParamList, 'Splash'>;
 
 const SplashScreen = inject('rootStore', 'homeStore')
         (observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
-                  AppDebugLog('display> splash-screen');
+                  console.log('display> splash-screen');
                   const navigation = useNavigation<ScreenProps>();
 
                   const navigateToLogin = (): void => {

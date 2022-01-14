@@ -106,6 +106,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (codiceFiscaleContains !== undefined) {
                 localVarQueryParameter['codiceFiscale.contains'] = codiceFiscaleContains;
@@ -337,6 +338,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -383,6 +385,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -486,6 +489,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (codiceFiscaleContains !== undefined) {
                 localVarQueryParameter['codiceFiscale.contains'] = codiceFiscaleContains;
@@ -732,6 +736,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -769,6 +774,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -810,6 +816,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 

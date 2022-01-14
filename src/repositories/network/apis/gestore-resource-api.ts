@@ -138,6 +138,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (benzinaPrezzoAlLitroEquals !== undefined) {
                 localVarQueryParameter['benzinaPrezzoAlLitro.equals'] = benzinaPrezzoAlLitroEquals;
@@ -463,6 +464,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -509,6 +511,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -644,6 +647,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (benzinaPrezzoAlLitroEquals !== undefined) {
                 localVarQueryParameter['benzinaPrezzoAlLitro.equals'] = benzinaPrezzoAlLitroEquals;
@@ -987,6 +991,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -1024,6 +1029,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -1065,6 +1071,7 @@ export const GestoreResourceApiAxiosParamCreator = function (configuration?: Con
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
