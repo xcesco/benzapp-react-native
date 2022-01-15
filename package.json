@@ -67,7 +67,7 @@
   "resolutions": {
     "@types/react": "^17"
   },
-  "expo-only-android": {
+  "expo": {
     "autolinking": {
       "exclude": [
         "expo-file-system"

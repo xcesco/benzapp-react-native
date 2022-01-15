@@ -63,6 +63,21 @@ expo-sqlite
 expo install expo-sqlite
 - https://github.com/andpor/react-native-sqlite-storage (2.4k)
 - https://github.com/craftzdog/react-native-sqlite-2 (2.7.1)
--
+
+Per eseguire la build su Android, nel file `package.json` inserire la configurazione
+
+```json
+ "expo": {
+    "autolinking": {
+      "exclude": [
+        "expo-file-system"
+      ]
+    }
+  },
+```
+
+Nel caso di build su iOS, togliere la configurazione (o rinominarla in expo-android)
+
 ## FCM
+- https://rnfirebase.io/messaging/notifications#handling-interaction
 - https://betterprogramming.pub/how-to-set-up-firebase-push-notifications-in-a-react-native-app-a9405af32093

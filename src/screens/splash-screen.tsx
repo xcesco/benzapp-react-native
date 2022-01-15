@@ -9,6 +9,7 @@ import * as Progress from 'react-native-progress';
 import {inject, observer} from 'mobx-react';
 import HomeStore from '../stores/home-store';
 import {applicationInit} from '../../App';
+import {registryMessageHandler} from '../fcm/messaging';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Splash'>;
 
@@ -31,8 +32,12 @@ const SplashScreen = inject('rootStore', 'homeStore')
                       });
                     };
 
-                    async function initializeApplication() {
+                    async function startup() {
                       const hasAccount = await applicationInit();
+                      const fcmRegistered= await registryMessageHandler();
+
+                      console.log(`display> splash-screen: fcmRegistered ${fcmRegistered}`);
+
 
                       console.log(`display> splash-screen: hasAccount ${hasAccount}`);
                       if (hasAccount) {
@@ -42,7 +47,7 @@ const SplashScreen = inject('rootStore', 'homeStore')
                       }
                     }
 
-                    initializeApplication();
+                    startup();
                   }, [navigation, props.back]);
 
                   return (
