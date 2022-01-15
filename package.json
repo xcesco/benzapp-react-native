@@ -33,6 +33,7 @@
     "react-native-i18n": "^2.0.15",
     "react-native-paper": "^4.11.1",
     "react-native-progress": "^5.0.0",
+    "react-native-push-notification": "^8.1.1",
     "react-native-qrcode-svg": "^6.1.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
@@ -66,7 +67,7 @@
   "resolutions": {
     "@types/react": "^17"
   },
-  "expo": {
+  "expo-only-android": {
     "autolinking": {
       "exclude": [
         "expo-file-system"

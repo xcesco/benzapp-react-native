@@ -17,7 +17,7 @@ export class AppPreferences {
     const valueJSON = await DefaultPreference.get('AdminUserDTO');
     console.log(`app-preference > read account ${valueJSON}`);
 
-    if (valueJSON === null || valueJSON === '') {
+    if (valueJSON === null || valueJSON===undefined || valueJSON === '') {
       return null;
     } else {
       return JSON.parse(valueJSON);

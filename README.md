@@ -63,3 +63,6 @@ expo-sqlite
 expo install expo-sqlite
 - https://github.com/andpor/react-native-sqlite-storage (2.4k)
 - https://github.com/craftzdog/react-native-sqlite-2 (2.7.1)
+-
+## FCM
+- https://betterprogramming.pub/how-to-set-up-firebase-push-notifications-in-a-react-native-app-a9405af32093
