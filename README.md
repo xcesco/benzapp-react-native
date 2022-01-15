@@ -1,5 +1,8 @@
 # React Native Benzapp
 
+# Icone
+https://materialdesignicons.com/
+
 ## Installazione
 i18n
 react-navigation

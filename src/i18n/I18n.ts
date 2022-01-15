@@ -17,6 +17,10 @@ I18n.translations = {
     lockMessageOk: 'PIN valido',
     lockMessageError: 'PIN errato, riprovare',
     lockMessageSecondError: 'PIN non coincidente, riprovare',
+
+    tabHome:'Home',
+    tabMap:'Mappa',
+    tabStations:'Stazioni'
   }
 };
 

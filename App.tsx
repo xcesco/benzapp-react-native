@@ -23,14 +23,17 @@ import {
   initAndPopulateDb,
   notificationDao,
   refuelingDao,
+  stationDao,
   vehicleDao
 } from './src/repositories/persistence/db';
 import HomeStore from './src/stores/home-store';
-import {VehicleRepository} from './src/repositories/vehicle_repository';
+import {VehicleRepository} from './src/repositories/vehicle-repository';
 import RefuelingRepository from './src/repositories/refueling-repository';
 import {NotificationRepository} from './src/repositories/notification_repository';
 import {SecureRepository} from './src/repositories/secure-repository';
 import LockStore from './src/stores/lock-store';
+import {StationRepository} from './src/repositories/station-repository';
+import StationListStore from './src/ui/stations/station-list-store';
 
 const theme = {
   ...DefaultTheme,
@@ -53,10 +56,12 @@ const accountRepository = new AccountRepository(apiClient);
 const vehicleRepository = new VehicleRepository(apiClient, dbConnection, vehicleDao);
 const refuelingRepository = new RefuelingRepository(apiClient, dbConnection, refuelingDao);
 const notificationRepository = new NotificationRepository(apiClient, dbConnection, notificationDao);
+const stationRepository = new StationRepository(dbConnection, stationDao);
 
 const lockStore = new LockStore(secureRepository);
 const rootStore = new RootStore(accountRepository);
 const homeStore = new HomeStore(accountRepository, vehicleRepository, refuelingRepository, notificationRepository);
+const stationListStore = new StationListStore(stationRepository);
 
 export async function applicationInit(): Promise<boolean> {
   AppDebugLog('app initialization - start');
@@ -77,11 +82,13 @@ function App() {
   const Stack = createNativeStackNavigator();
 
   // @ts-ignore
-  // @ts-ignore
   return (
           <PaperProvider theme={theme}>
-            <Provider rootStore={rootStore} noteStore={rootStore.noteStore}
-                      homeStore={homeStore} lockStore={lockStore}>
+            <Provider rootStore={rootStore}
+                      noteStore={rootStore.noteStore}
+                      stationListStore={stationListStore}
+                      homeStore={homeStore}
+                      lockStore={lockStore}>
               <NavigationContainer>
                 <Stack.Navigator
                         initialRouteName="Splash"

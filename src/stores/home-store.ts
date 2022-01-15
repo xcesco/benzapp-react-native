@@ -2,7 +2,7 @@ import {action, makeObservable, observable} from 'mobx';
 import AccountRepository from '../repositories/account-repository';
 import AppPreferencesInstance from '../repositories/persistence/app-preferences';
 import RefuelingRepository from '../repositories/refueling-repository';
-import {VehicleRepository} from '../repositories/vehicle_repository';
+import {VehicleRepository} from '../repositories/vehicle-repository';
 import {NotificationRepository} from '../repositories/notification_repository';
 import {Notification} from '../repositories/model/notification';
 import {Tessera} from '../repositories/network/models';
@@ -35,7 +35,6 @@ export default class HomeStore {
     this._refuelingRepository = refuelingRepository;
     this._notificationRepository = notificationRepository;
     this.remoteUrl = '10.0.0.2';
-    console.log('>>>>>>>>>>>>>>>>');
 
     makeObservable(this, {
       loading: observable,
@@ -45,7 +44,6 @@ export default class HomeStore {
       rifornimenti: observable,
 
       //remoteUrlRead: computed,
-
       updateRemote: action,
       login: action
     });
