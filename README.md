@@ -81,3 +81,10 @@ Nel caso di build su iOS, togliere la configurazione (o rinominarla in expo-andr
 ## FCM
 - https://rnfirebase.io/messaging/notifications#handling-interaction
 - https://betterprogramming.pub/how-to-set-up-firebase-push-notifications-in-a-react-native-app-a9405af32093
+
+
+## Build IOS
+https://stackoverflow.com/questions/42110496/how-to-build-ipa-application-for-react-native-ios
+
+react-native run-ios --configuration=release
+Build/Products/Release/"<Your_Filename>.app"
