@@ -77,11 +77,6 @@ export const KeyPad = (props: { onPressHandler(key: string): void, onPressBackHa
         </Text>
       </Button>
     </View>
-    <Button mode="outlined" onPress={() => {
-      props.onPressSubmitHandler();
-    }}>
-      <Text>Goto Main</Text>
-    </Button>
   </View>)
 };
 

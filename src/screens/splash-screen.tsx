@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -7,52 +7,48 @@ import {RootStackParamList} from '../navigation/root-stack-param-list';
 import assets from '../../assets';
 import * as Progress from 'react-native-progress';
 import {inject, observer} from 'mobx-react';
-import {AppDebugLog} from '../utils/AppDebug';
 import HomeStore from '../stores/home-store';
+import {applicationInit} from '../../App';
+import {registryMessageHandler} from '../fcm/messaging';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Splash'>;
 
 const SplashScreen = inject('rootStore', 'homeStore')
         (observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
-                  AppDebugLog('display> splash-screen');
                   const navigation = useNavigation<ScreenProps>();
+                  console.log('display> splash-screen');
 
-                  const navigateToLogin = (): void => {
-                    navigation.reset({
-                      index: 0,
-                      routes: [{name: 'Login'}],
-                    });
-                  };
+                  useEffect(() => {
+                    const navigateToLogin = (): void => {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: 'Login'}],
+                      });
+                    };
+                    const navigateToLock = (): void => {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: 'Lock'}],
+                      });
+                    };
 
-                  const navigateToLock = (): void => {
-                    navigation.reset({
-                      index: 0,
-                      routes: [{name: 'Lock'}],
-                    });
-                  };
+                    async function startup() {
+                      const hasAccount = await applicationInit();
+                      const fcmRegistered= await registryMessageHandler();
 
-                  const initAsyncApplication = async (): Promise<boolean> => {
-                    await props.homeStore.updateRemote();
+                      console.log(`display> splash-screen: fcmRegistered ${fcmRegistered}`);
 
-                    const hasAccount = await props.homeStore.checkAccountAndSetNavigation();
 
-                    await setTimeout(() => {
-                      AppDebugLog('remote config caricato');
-                    }, 2000);
-
-                    return hasAccount;
-                  };
-
-                  setTimeout(() => {
-                    initAsyncApplication().then(hasAccount => {
-                      AppDebugLog('goto next', props.back);
+                      console.log(`display> splash-screen: hasAccount ${hasAccount}`);
                       if (hasAccount) {
                         navigateToLock();
                       } else {
                         navigateToLogin();
                       }
-                    });
-                  }, 3000);
+                    }
+
+                    startup();
+                  }, [navigation, props.back]);
 
                   return (
                           <View style={style.container}>

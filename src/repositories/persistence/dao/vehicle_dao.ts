@@ -3,8 +3,8 @@ import {Connection} from '../connection';
 import {Vehicle} from '../../model/vehicle';
 
 export class VehicleDao {
-  static readonly SQL_TABLE_CREATION: string = 'CREATE TABLE IF NOT EXISTS vehicles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, carburante TEXT, cittadino BLOB, codice TEXT, data_emissione TEXT, delega INTEGER, delegas BLOB, immagine TEXT, immagine_content_type TEXT, rifornimentos BLOB, targa TEXT, veicolo TEXT);';
-  readonly SQL_INSERT = 'INSERT INTO vehicles (carburante, cittadino, codice, data_emissione, delega, delegas, immagine, immagine_content_type, rifornimentos, targa, veicolo)) VALUES (?, ?, ?, ?, ?, ?)';
+  static readonly SQL_TABLE_CREATION: string = 'CREATE TABLE IF NOT EXISTS vehicles (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, carburante TEXT, cittadino BLOB, codice TEXT, data_emissione TEXT, delega INTEGER, immagine TEXT, immagine_content_type TEXT, targa TEXT, veicolo TEXT);';
+  readonly SQL_INSERT = 'INSERT INTO vehicles (carburante, cittadino, codice, data_emissione, delega, immagine, immagine_content_type, targa, veicolo) VALUES (?, ?, ?, ?, ?, ?, ? , ? ,?)';
   readonly SQL_DELETE_ALL = 'DELETE FROM vehicles';
   readonly SQL_SUM_LITRI_EROGATI_BY_TARGA = 'SELECT targa, spesa, litriErogati, risparmio FROM vehicle_summaries WHERE targa=?';
   readonly SQL_SELECT_BY_TARGA = 'SELECT * FROM vehicles WHERE targa = ? ORDER BY targa';
@@ -26,6 +26,7 @@ export class VehicleDao {
   }
 
   async insert(item: Vehicle): Promise<ResultSet> {
+    console.log('params: ',[...this.toDb(item)]);
     // @ts-ignore
     return this.database.execute(this.SQL_INSERT, [...this.toDb(item)]);
   }

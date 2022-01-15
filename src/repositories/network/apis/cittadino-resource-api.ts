@@ -106,6 +106,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (codiceFiscaleContains !== undefined) {
                 localVarQueryParameter['codiceFiscale.contains'] = codiceFiscaleContains;
@@ -310,7 +311,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -337,6 +338,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+            const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -349,7 +351,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
             const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
@@ -383,6 +385,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -393,7 +396,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -486,6 +489,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             if (codiceFiscaleContains !== undefined) {
                 localVarQueryParameter['codiceFiscale.contains'] = codiceFiscaleContains;
@@ -700,7 +704,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -732,6 +736,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -742,7 +747,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -769,6 +774,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -781,7 +787,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
             const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
@@ -810,6 +816,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             const localVarQueryParameter = {} as any;
 
             // authentication benzappAuth required
+          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -822,7 +829,7 @@ export const CittadinoResourceApiAxiosParamCreator = function (configuration?: C
             }
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
             const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 

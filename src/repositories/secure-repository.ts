@@ -4,7 +4,7 @@ import {AppDebugLog} from '../utils/AppDebug';
 
 export class SecureRepository {
   async write(key: string, value: string): Promise<void> {
-    AppDebugLog(`SecureRepository > write (${key}, ${value})`);
+    console.log(`@SecureRepository > write (${key}, ${value})`);
     return await EncryptedStorage.setItem(key, value);
   }
 
@@ -16,7 +16,7 @@ export class SecureRepository {
 
   async read(key: string): Promise<string | null> {
     const value = await EncryptedStorage.getItem(key);
-    AppDebugLog(`SecureRepository > write (${key}, ${value})`);
+    console.log(`@SecureRepository > read (${key}, ${value})`);
 
     return value;
   }

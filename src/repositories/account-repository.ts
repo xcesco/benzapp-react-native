@@ -19,12 +19,12 @@ export default class AccountRepository {
 
   private _apiClient: ApiClient;
 
-  async getAccount(): Promise<AdminUserDTO> {
-    return AppPreferencesInstance.getAccount();
+  async getAccount(): Promise<AdminUserDTO | null> {
+    return await AppPreferencesInstance.getAccount();
   }
 
   async getJWTToken(): Promise<string> {
-    return AppPreferencesInstance.getJWToken();
+    return await AppPreferencesInstance.getJWToken();
   }
 
   async hasAccount(): Promise<boolean> {
@@ -39,9 +39,10 @@ export default class AccountRepository {
         password: password
       });
 
-      console.log(response.data.id_token);
+      const jwtToken=response.data.id_token;
+      console.log(`update token ${jwtToken}`);
 
-      this.updateClientJWTToken(response.data.id_token);
+      this.updateClientJWTToken(jwtToken);
 
       const accountResourceApi = this._apiClient.accountResourceApi;
       const account = (await accountResourceApi.getAccountUsingGET()).data;
@@ -49,7 +50,7 @@ export default class AccountRepository {
       console.log(account);
 
       await AppPreferencesInstance.setAccount(account);
-      await AppPreferencesInstance.setJWToken(response.data.id_token);
+      await AppPreferencesInstance.setJWToken(jwtToken);
 
       return response.data.id_token;
     } catch (e) {

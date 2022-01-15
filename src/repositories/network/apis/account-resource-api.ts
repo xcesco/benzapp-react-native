@@ -49,6 +49,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       if (key !== undefined) {
         localVarQueryParameter['key'] = key;
@@ -63,7 +64,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       }
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
 
       return {
         url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -90,6 +91,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -102,7 +104,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       }
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
       const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 
@@ -131,6 +133,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -143,7 +146,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       }
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
       const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 
@@ -184,7 +187,6 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
 
-      AppDebugLog('@@@@@@@@', localVarRequestOptions);
       return {
         url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
         options: localVarRequestOptions,
@@ -244,6 +246,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -256,7 +259,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       }
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
       const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 
@@ -285,6 +288,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -297,7 +301,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       }
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
       const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 
@@ -326,6 +330,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       const localVarQueryParameter = {} as any;
 
       // authentication benzappAuth required
+      const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -338,7 +343,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
       }
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
       const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
       localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 

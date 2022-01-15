@@ -9,14 +9,23 @@ export class AppPreferences {
   async getJWToken(): Promise<string> {
     const value = await DefaultPreference.get('JWTToken');
 
+    console.log(`app-preference > read jwt ${value}`);
     return value;
   }
 
-  async getAccount(): Promise<AdminUserDTO> {
-    return (JSON.parse(await DefaultPreference.get('AdminUserDTO')));
+  async getAccount(): Promise<AdminUserDTO | null> {
+    const valueJSON = await DefaultPreference.get('AdminUserDTO');
+    console.log(`app-preference > read account ${valueJSON}`);
+
+    if (valueJSON === null || valueJSON===undefined || valueJSON === '') {
+      return null;
+    } else {
+      return JSON.parse(valueJSON);
+    }
   }
 
   async setAccount(account: AdminUserDTO): Promise<void> {
+    console.log(`app-preference > write account ${JSON.stringify(account)}`);
     await DefaultPreference.set('AdminUserDTO', JSON.stringify(account));
   }
 
@@ -25,6 +34,7 @@ export class AppPreferences {
   }
 
   async setPrimoAccesso(value: boolean): Promise<void> {
+    console.log(`app-preference > write isPrimoAccesso ${value}`);
     await DefaultPreference.set('PrimoAccesso', String(value));
   }
 
