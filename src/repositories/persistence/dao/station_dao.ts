@@ -20,9 +20,11 @@ export class StationDao {
   }
 
   async selectAll(): Promise<Station[]> {
-    const result = await this.database.execute(this.SQL_SELECT_ALL, []);
+    const resultSet = await this.database.execute(this.SQL_SELECT_ALL, []);
 
-    return result.rows.map(item => this.fromDb(item));
+    const result = resultSet.rows.map(item => this.fromDb(item));
+    console.log('station_dao > selectAll', resultSet.rows, result);
+    return result;
   }
 
   private fromDb(item: { [x: string]: any; }) {
@@ -45,17 +47,17 @@ export function transformMarchioToDB(marchio_id: string): string {
 }
 
 export function transformMarchioFromDB(marchio: string): Marchio {
-  if (marchio == Marchio.q8.toString()) {
+  if (marchio === 'q8') {
     return Marchio.q8;
-  } else if (marchio == Marchio.eni.toString()) {
+  } else if (marchio === 'eni') {
     return Marchio.eni;
-  } else if (marchio == Marchio.esso.toString()) {
+  } else if (marchio === 'esso') {
     return Marchio.esso;
-  } else if (marchio == Marchio.tamoil.toString()) {
+  } else if (marchio === 'tamoil') {
     return Marchio.tamoil;
-  } else if (marchio == Marchio.kerotris.toString()) {
+  } else if (marchio === 'kerotris') {
     return Marchio.kerotris;
-  } else if (marchio == Marchio.oilItalia.toString()) {
+  } else if (marchio === 'oilItalia') {
     return Marchio.oilItalia;
   }
 

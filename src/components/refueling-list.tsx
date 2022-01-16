@@ -2,7 +2,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
 import HomeStore from '../stores/home-store';
-import {View} from 'react-native';
+import {FlatList, View} from 'react-native';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Main'>;
 
