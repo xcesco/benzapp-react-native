@@ -81,6 +81,16 @@ Per eseguire la build su Android, nel file `package.json` inserire la configuraz
 
 Nel caso di build su iOS, togliere la configurazione (o rinominarla in expo-android)
 
+## IOs
+pinch out & in
+
+45.65969545095563, 13.79476925592051
+45,65969545095563, 13,79476925592051
+
+You can move the two gray circles that represent your fingers around the screen by holding <kbd>Option</kbd> and <kbd>Shift</kbd> and moving the mouse.
+
+https://stackoverflow.com/questions/11622579/how-to-pinch-out-in-ios-simulator-when-map-view-is-only-a-portion-of-the-screen
+
 ## FCM
 - https://rnfirebase.io/messaging/notifications#handling-interaction
 - https://betterprogramming.pub/how-to-set-up-firebase-push-notifications-in-a-react-native-app-a9405af32093
@@ -91,3 +101,17 @@ https://stackoverflow.com/questions/42110496/how-to-build-ipa-application-for-re
 
 react-native run-ios --configuration=release
 Build/Products/Release/"<Your_Filename>.app"
+
+
+## Google maps
+navigazione
+- https://www.npmjs.com/package/react-native-google-maps-directions
+-
+https://www.freecodecamp.org/news/how-to-integrate-maps-in-react-native-using-react-native-maps-5745490fe055/
+https://developers.google.com/maps/documentation/javascript/react-map
+https://developers.google.com/maps/documentation/javascript/overview
+
+come impostare le coordinate da emulatore (ios)
+https://medium.com/@oleary.audio/xcode-simulating-gps-coordinates-b4ab51f0119c
+
+
