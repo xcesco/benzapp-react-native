@@ -12,6 +12,7 @@ import {inject, observer} from 'mobx-react';
 import HomeStore from '../stores/home-store';
 import StationListStore from '../ui/stations/station-list-store';
 import assets from '../../assets';
+import StationMapFragment from '../ui/stations/station-map-fragment';
 
 type screenProp = StackNavigationProp<RootStackParamList, 'Main'>;
 
@@ -80,9 +81,17 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
     );
   };
 
+  const StationMapRoute = () => {
+    return (
+            <StationMapFragment list={props.stationListStore.stations}/>
+    );
+  };
+
+
+
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
-    map: AlbumsRoute,
+    map: StationMapRoute,
     stations: StationListRoute
   });
 
