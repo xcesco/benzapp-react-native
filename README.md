@@ -114,4 +114,14 @@ https://developers.google.com/maps/documentation/javascript/overview
 come impostare le coordinate da emulatore (ios)
 https://medium.com/@oleary.audio/xcode-simulating-gps-coordinates-b4ab51f0119c
 
+Clustering
+https://www.npmjs.com/package/react-native-map-clustering
+
+react-native-maps
+https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md
+https://stackoverflow.com/questions/39654594/marker-click-event-on-react-native-maps-not-working-in-react-ios
+
+bug
+https://stackoverflow.com/questions/51915353/react-native-maps-markers-image-doesnt-show-using-custom-marker-in-react-nativ
+https://github.com/react-native-maps/react-native-maps/issues/1870
 

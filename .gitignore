@@ -62,3 +62,6 @@ buck-out/
 # Secrets
 /android/app/google-services.json
 /ios/GoogleService-Info.plist
+/ios/ReactNativeBenzapp/Secrets.h
+/ios/ReactNativeBenzapp/Secrets.m
+/android/app/src/main/res/values/secrets.xml

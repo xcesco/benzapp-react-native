@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		6172F2D35A4C3AA820D92908 /* libPods-ReactNativeBenzapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-ReactNativeBenzapp.a */; };
 		722E32BB278B0BD900E6F009 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 722E32BA278B0BD900E6F009 /* GoogleService-Info.plist */; };
+		72976B8F279490A0008987C1 /* Secrets.m in Sources */ = {isa = PBXBuildFile; fileRef = 72976B8E279490A0008987C1 /* Secrets.m */; };
 		7EF68E3733C33B6898317E18 /* libPods-ReactNativeBenzapp-ReactNativeBenzappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-ReactNativeBenzapp-ReactNativeBenzappTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9140B33C9E254D44E9E09022 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CC47B1AF8DD230F5D342B /* ExpoModulesProvider.swift */; };
@@ -43,6 +44,8 @@
 		6423831EA8574132BED9D8CC /* libPods-ReactNativeBenzapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeBenzapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-ReactNativeBenzapp-ReactNativeBenzappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeBenzapp-ReactNativeBenzappTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeBenzapp-ReactNativeBenzappTests/Pods-ReactNativeBenzapp-ReactNativeBenzappTests.debug.xcconfig"; sourceTree = "<group>"; };
 		722E32BA278B0BD900E6F009 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		72976B8D279490A0008987C1 /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secrets.h; path = ReactNativeBenzapp/Secrets.h; sourceTree = "<group>"; };
+		72976B8E279490A0008987C1 /* Secrets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Secrets.m; path = ReactNativeBenzapp/Secrets.m; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeBenzapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A25CC47B1AF8DD230F5D342B /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ReactNativeBenzapp-ReactNativeBenzappTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		A4AEB9863E2AACF8759A5141 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ReactNativeBenzapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 		13B07FAE1A68108700A75B9A /* ReactNativeBenzapp */ = {
 			isa = PBXGroup;
 			children = (
+				72976B8D279490A0008987C1 /* Secrets.h */,
+				72976B8E279490A0008987C1 /* Secrets.m */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -460,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				72976B8F279490A0008987C1 /* Secrets.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				E4E43ADF1EB07484DDBE2D3E /* ExpoModulesProvider.swift in Sources */,
 			);

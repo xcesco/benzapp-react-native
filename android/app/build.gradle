@@ -210,6 +210,15 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
+    // configurazione google-maps - begin
+    implementation(project(':react-native-maps')){
+           exclude group: 'com.google.android.gms', module: 'play-services-base'
+           exclude group: 'com.google.android.gms', module: 'play-services-maps'
+       }
+     implementation 'com.google.android.gms:play-services-base:18.0.1'
+     implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    // configurazione google-maps - end
+
     implementation 'com.google.firebase:firebase-analytics:17.3.0'
     implementation 'com.google.firebase:firebase-messaging'
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
