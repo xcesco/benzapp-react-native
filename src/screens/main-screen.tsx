@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -29,6 +29,7 @@ const AlbumsRoute = () => (
 
 export const MainScreen = inject('homeStore', 'stationListStore')(observer((props: { componentId: string; homeStore: HomeStore, stationListStore: StationListStore, back: any }) => {
   const navigation = useNavigation<screenProp>();
+  const [initializiated, setInitializiated] = useState(false);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'home', title: I18n.t('tabHome'), icon: 'home'},
@@ -47,8 +48,12 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
     };
 
     useEffect(() => {
-      props.stationListStore.selectAll();
-      props.homeStore.updateData(true);
+      if (initializiated===false) {
+        props.stationListStore.selectAll();
+        props.homeStore.updateData(true);
+        setInitializiated(true);
+      }
+
     });
 
     return (
