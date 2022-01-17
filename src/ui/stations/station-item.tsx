@@ -6,7 +6,7 @@ import {getMarchioImage} from '../../repositories/model/marchio';
 import assets from '../../../assets';
 import {openGoogleMaps} from '../../utils/navigation-helper';
 
-export default function StationItem(props: { componentId?: string; item: Station }) {
+export default function StationItem(props: { componentId?: string; item: Station, displaySeparator?: boolean }) {
   return (<View style={{flexDirection: 'column'}}>
     <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: 4, marginLeft: 12}}>
       <Image style={{
@@ -40,7 +40,7 @@ export default function StationItem(props: { componentId?: string; item: Station
                 onPress={() => openGoogleMaps(props.item.latitudine, props.item.longitudine)}/>
       </View>
     </View>
-    <Divider/>
+    {(props.displaySeparator === undefined || props.displaySeparator===true) && (<Divider/>)}
   </View>);
 }
 

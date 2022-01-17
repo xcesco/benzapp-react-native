@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Dimensions, Image, Platform, StyleSheet, Text, View} from 'react-native';
 import {Station} from '../../repositories/model/station';
 import MapView from 'react-native-map-clustering';
-import {Callout, Marker} from 'react-native-maps';
+import {Callout, CalloutSubview, Marker} from 'react-native-maps';
 import {Colors} from 'react-native-paper';
 import StationItem from './station-item';
 import {TouchableHighlight} from 'react-native-gesture-handler';
@@ -30,12 +30,13 @@ export default function StationMapFragment(props: { componentId?: string; list: 
         latitude: item.latitudine,
         longitude: item.longitudine
       }}>
-        <Callout tooltip={true} onPress={() => {
+        <Callout onPress={() => {
           openGoogleMaps(item.latitudine, item.longitudine);
         }}>
-          <TouchableHighlight>
-            <View style={{backgroundColor: Colors.white, width: 400}}>
-              <StationItem item={item}/>
+         <TouchableHighlight onPress={() => {
+            openGoogleMaps(item.latitudine, item.longitudine);}}>
+            <View>
+              <StationItem item={item} displaySeparator={false}/>
             </View>
           </TouchableHighlight>
         </Callout>
