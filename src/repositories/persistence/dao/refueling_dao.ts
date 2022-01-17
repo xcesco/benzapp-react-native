@@ -6,7 +6,7 @@ export class RefuelingDao {
   static readonly SQL_TABLE_CREATION: string = 'CREATE TABLE IF NOT EXISTS refuelings (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, data TEXT, gestore BLOB, gestore_id INTEGER, litri_erogati REAL, prezzo_al_litro REAL, sconto REAL, targa TEXT, tessera BLOB, tipo_carburante TEXT);';
   readonly SQL_DELETE_ALL = 'DELETE FROM refuelings';
   readonly SQL_INSERT: string = 'INSERT INTO refuelings (data, gestore, gestore_id, litri_erogati, prezzo_al_litro, sconto, targa, tessera, tipo_carburante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  readonly SQL_SELECT_ALL = 'SELECT * FROM refueling ORDER BY data desc';
+  readonly SQL_SELECT_ALL = 'SELECT * FROM refuelings ORDER BY data desc';
   readonly SQL_SELECT_BY_TARGA = 'SELECT * FROM refuelings WHERE targa = ? ORDER BY data desc';
   readonly SQL_SELECT_BY_ID = 'SELECT * FROM refuelings WHERE id = ? ORDER BY data desc';
   private database: Connection;
@@ -21,7 +21,7 @@ export class RefuelingDao {
   }
 
   async insert(item: Refueling): Promise<ResultSet> {
-    console.log('params: ',[...this.toDb(item)]);
+    //console.log('params: ',[...this.toDb(item)]);
     // @ts-ignore
     return this.database.execute(this.SQL_INSERT, [...this.toDb(item)]);
   }
@@ -30,6 +30,8 @@ export class RefuelingDao {
     // @ts-ignore
     const result = await this.database.execute(this.SQL_SELECT_ALL, []);
     const value: Refueling[] = result.rows.map(item => this.fromDb(item));
+
+    console.log('sssdfsdfsdfsdds', value);
 
     return value;
   }
@@ -60,7 +62,7 @@ export class RefuelingDao {
       item.litriErogati,
       item.prezzoAlLitro,
       item.sconto,
-      item.targa,
+      item.tessera.targa,
       JSON.stringify(item.tessera),
       item.tipoCarburante
     ];
@@ -72,15 +74,15 @@ export class RefuelingDao {
     // @ts-ignore
     const value: Refueling = {
       id: item['id'],
-      data: new Date(item['date']),
+      data: new Date(item['data']),
       gestore: JSON.parse(item['gestore']),
-      litriErogati: item['litriErogati'],
-      prezzoAlLitro: item['prezzoAlLitro'],
+      litriErogati: item['litri_erogati'],
+      prezzoAlLitro: item['prezzo_al_litro'],
       sconto: item['sconto'],
       tessera: item['tessera'],
-      tipoCarburante: item['tipoCarburante'],
+      tipoCarburante: item['tipo_carburante'],
       targa: item['targa'],
-      gestoreId: item['gestoreId']
+      gestoreId: item['gestore_id']
     };
 
     return value;

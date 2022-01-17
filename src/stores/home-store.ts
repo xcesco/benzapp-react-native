@@ -44,6 +44,7 @@ export default class HomeStore {
       rifornimenti: observable,
 
       //remoteUrlRead: computed,
+      updateData:action,
       updateRemote: action,
       login: action
     });
@@ -63,18 +64,22 @@ export default class HomeStore {
   }
 
   // action
-  async updateData(updateUI: boolean = false): Promise<void> {
+  async updateData(updateUI: boolean = false): Promise<boolean> {
     if (updateUI === true) {
       this.loading = true;
     }
 
+
     this.tessere = await this._vehicleRepository.update();
     this.rifornimenti = await this._refuelingRepository.update();
+    console.log('sss',this.rifornimenti);
     this.notifiche = await this._notificationRepository.update();
 
     if (updateUI === true) {
       this.loading = false;
     }
+
+    return true;
   }
 
   async isPrimoAccesso(): Promise<boolean> {

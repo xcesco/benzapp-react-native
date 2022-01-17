@@ -25,6 +25,7 @@
     "expo-sqlite": "^10.1.0",
     "mobx": "^6.3.12",
     "mobx-react": "^7.2.1",
+    "moment": "^2.29.1",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-default-preference": "^1.4.3",
@@ -70,7 +71,7 @@
   "resolutions": {
     "@types/react": "^17"
   },
-  "expo-android": {
+  "expo": {
     "autolinking": {
       "exclude": [
         "expo-file-system"

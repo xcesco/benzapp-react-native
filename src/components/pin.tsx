@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {Avatar, Colors, Text} from 'react-native-paper';
 import assets from '../../assets';
 import {observer} from 'mobx-react';
@@ -33,7 +33,6 @@ export const Pin = observer((props: { primoAccesso: boolean, initialPin: string,
   const [label, setLabel] = useState(defineLabelByStatus(currentStatus));
 
   function onPressHandler(key: string): void {
-    console.log(key);
     setCurrentPin(value => limitPinSize(value + key));
   }
 
@@ -111,10 +110,15 @@ const style = StyleSheet.create({
 
   panelHeader: {
     backgroundColor: assets.colors.primaryColor,
-    flex: 0.4,
-    paddingVertical: 24,
     flexDirection: 'row',
+    alignContent: 'center',
     alignItems: 'flex-start',
+    flex: 0.6,
+    ...Platform.select({
+      ios: {
+        paddingTop: 24
+      }
+    })
   },
 
   panelTop: {

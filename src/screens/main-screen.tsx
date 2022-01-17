@@ -7,25 +7,15 @@ import {RootStackParamList} from '../navigation/root-stack-param-list';
 import I18n from 'react-native-i18n';
 import StationListFragment from '../ui/stations/station-list-fragment';
 import {BottomNavigation, Button, Colors, Text} from 'react-native-paper';
-import AppTab2 from '../components/app-tab2';
 import {inject, observer} from 'mobx-react';
 import HomeStore from '../stores/home-store';
 import StationListStore from '../ui/stations/station-list-store';
 import assets from '../../assets';
 import StationMapFragment from '../ui/stations/station-map-fragment';
+import HomeFragment from '../ui/home/home-fragment';
+import {action} from 'mobx';
 
 type screenProp = StackNavigationProp<RootStackParamList, 'Main'>;
-
-const AlbumsRoute = () => (
-        <AppTab2
-                name="ciao"
-                baseCounter={1}
-                onPress={() => {
-                  console.log('suca');
-                }}
-        />
-);
-
 
 export const MainScreen = inject('homeStore', 'stationListStore')(observer((props: { componentId: string; homeStore: HomeStore, stationListStore: StationListStore, back: any }) => {
   const navigation = useNavigation<screenProp>();
@@ -37,7 +27,16 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
     {key: 'stations', title: I18n.t('tabStations'), icon: 'format-list-bulleted'},
   ]);
 
-  const HomeRoute = () => {
+  useEffect(() => {
+    if (!initializiated) {
+      setInitializiated(true);
+      props.stationListStore.selectAll();
+      props.homeStore.updateData(true);
+    }
+
+  }, [initializiated, props.stationListStore, props.homeStore]);
+
+  const HomeRouteOld = () => {
     const navigation = useNavigation<screenProp>();
 
     const navigateToLogin = (): void => {
@@ -46,15 +45,6 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
         routes: [{name: 'Login'}],
       });
     };
-
-    useEffect(() => {
-      if (initializiated===false) {
-        props.stationListStore.selectAll();
-        props.homeStore.updateData(true);
-        setInitializiated(true);
-      }
-
-    });
 
     return (
             <View style={style.container}>
@@ -80,6 +70,12 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
             </View>)
   };
 
+  const HomeRoute = () => {
+    return (
+            <HomeFragment refuelings={props.homeStore.rifornimenti} vechicles={props.homeStore.tessere}/>
+    );
+  };
+
   const StationListRoute = () => {
     return (
             <StationListFragment list={props.stationListStore.stations}/>
@@ -91,8 +87,6 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
             <StationMapFragment list={props.stationListStore.stations}/>
     );
   };
-
-
 
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
@@ -108,7 +102,5 @@ const style = StyleSheet.create({
   container: {
     flex: 1, alignItems: 'center', alignContent: 'center', backgroundColor: assets.colors.primaryColor
   },
-  bottom: {
-
-  }
+  bottom: {}
 });

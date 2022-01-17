@@ -106,8 +106,9 @@ function App() {
                   <Stack.Screen name="Lock" component={LockScreen} options={{
                     title: 'Home',
                     headerShown: false,
+
                   }}/>
-                  <Stack.Screen name="Main" component={MainScreen} options={{title: 'Main'}}/>
+                  <Stack.Screen name="Main" component={MainScreen} options={{title: 'React Native Benzapp'}}/>
                   <Stack.Screen name="VehicleList" component={VehicleDetailScreen}/>
                   <Stack.Screen name="VehicleDetail" component={VehicleDetailScreen}/>
                   <Stack.Screen name="VehicleQRCodeDetail" component={VehicleQRCodeDetailScreen}/>

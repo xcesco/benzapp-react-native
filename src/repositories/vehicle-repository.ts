@@ -35,10 +35,10 @@ export class VehicleRepository {
       await this._vehicleDao.insert(item);
     }
 
-    //const result=await this._vehicleDao.selectAll();
+    const result=await this._vehicleDao.selectAll();
 
     await this._connection.commitTransaction();
 
-    return [];
+    return result;
   }
 }

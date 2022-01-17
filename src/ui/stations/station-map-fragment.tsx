@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, Platform, StyleSheet, Text, View} from 'react-native';
 import {Station} from '../../repositories/model/station';
 import MapView from 'react-native-map-clustering';
 import {Callout, Marker} from 'react-native-maps';

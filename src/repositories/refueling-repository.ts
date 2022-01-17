@@ -16,7 +16,6 @@ export default class RefuelingRepository {
   private _refuelingDao: RefuelingDao;
 
   async update(): Promise<Refueling[]> {
-    const result: Refueling[] = [];
     const list = (await this._apiClient.rifornimentoResourceApi.getAllRifornimentosUsingGET(1000)).data;
 
     await this._connection.beginTransaction();
@@ -24,8 +23,9 @@ export default class RefuelingRepository {
     for (const item of list) {
       const refueling = refuelingOf(item);
       await this._refuelingDao.insert(refueling);
-      result.push(refueling);
     }
+
+    const result: Refueling[] = await this._refuelingDao.findlAll();
 
     await this._connection.commitTransaction();
 
