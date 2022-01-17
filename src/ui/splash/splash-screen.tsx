@@ -3,17 +3,17 @@ import {StyleSheet, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/root-stack-param-list';
-import assets from '../../assets';
+import {RootStackParamList} from '../../navigation/root-stack-param-list';
+import assets from '../../../assets';
 import * as Progress from 'react-native-progress';
 import {inject, observer} from 'mobx-react';
-import HomeStore from '../stores/home-store';
-import {applicationInit} from '../../App';
-import {registryMessageHandler} from '../fcm/messaging';
+import HomeStore from '../home/home-store';
+import {applicationInit} from '../../../App';
+import {registryMessageHandler} from '../../fcm/messaging';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Splash'>;
 
-const SplashScreen = inject('rootStore', 'homeStore')
+const SplashScreen = inject('homeStore')
 (observer((props: { componentId: string; homeStore: HomeStore, back: any }) => {
           const navigation = useNavigation<ScreenProps>();
           console.log('display> splash-screen');

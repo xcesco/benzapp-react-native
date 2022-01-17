@@ -31,8 +31,6 @@ export class RefuelingDao {
     const result = await this.database.execute(this.SQL_SELECT_ALL, []);
     const value: Refueling[] = result.rows.map(item => this.fromDb(item));
 
-    console.log('sssdfsdfsdfsdds', value);
-
     return value;
   }
 

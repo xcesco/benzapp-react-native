@@ -43,7 +43,6 @@ export default function AppHeader({navigation, back, options}) {
                 />
               </Menu>
             </Appbar.Content>
-            <Appbar.Action icon="magnify"/>
             <Appbar.Action icon="dots-vertical"/>
           </Appbar.Header>
   );

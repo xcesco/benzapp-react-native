@@ -3,16 +3,16 @@ import {StyleSheet, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/root-stack-param-list';
+import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import I18n from 'react-native-i18n';
-import StationListFragment from '../ui/stations/station-list-fragment';
+import StationListFragment from '../stations/station-list-fragment';
 import {BottomNavigation, Button, Colors, Text} from 'react-native-paper';
 import {inject, observer} from 'mobx-react';
-import HomeStore from '../stores/home-store';
-import StationListStore from '../ui/stations/station-list-store';
-import assets from '../../assets';
-import StationMapFragment from '../ui/stations/station-map-fragment';
-import HomeFragment from '../ui/home/home-fragment';
+import HomeStore from '../home/home-store';
+import StationListStore from '../stations/station-list-store';
+import assets from '../../../assets';
+import StationMapFragment from '../stations/station-map-fragment';
+import HomeFragment from '../home/home-fragment';
 import {action} from 'mobx';
 
 type screenProp = StackNavigationProp<RootStackParamList, 'Main'>;

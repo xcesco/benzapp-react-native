@@ -32,4 +32,12 @@ export default class RefuelingRepository {
     return result;
   }
 
+  async findAll(): Promise<Refueling[]> {
+    await this._connection.beginTransaction();
+    const result: Refueling[] = await this._refuelingDao.findlAll();
+    await this._connection.commitTransaction();
+
+    return result;
+  }
+
 }

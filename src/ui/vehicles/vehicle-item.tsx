@@ -4,7 +4,11 @@ import {Tessera} from '../../repositories/network/models';
 import assets from '../../../assets';
 import {View} from 'react-native';
 
-export default function VehicleItem(props: { componentId?: string; item: Tessera, displaySeparator?: boolean }) {
+export default function VehicleItem(props: {
+  componentId?: string; item: Tessera, displaySeparator?: boolean,
+  onSelectQRCodeHandler(item: Tessera): void,
+  onSelectDetailHandler(item: Tessera): void
+}) {
   return (<List.Item style={{
     borderBottomColor: '#CCCCCC',
     borderBottomWidth: 1,
@@ -33,12 +37,12 @@ export default function VehicleItem(props: { componentId?: string; item: Tessera
                                        icon="qrcode"
                                        color={Colors.indigo500}
                                        size={20}
-                                       onPress={() => console.log('vv')}/>
+                                       onPress={() => props.onSelectQRCodeHandler(props.item)}/>
                                <IconButton
                                        icon="arrow-right-bold"
                                        color={Colors.indigo500}
                                        size={20}
-                                       onPress={() => console.log('vv')}/>
+                                       onPress={() => props.onSelectDetailHandler(props.item)}/>
                              </View>
 
                      }/>);

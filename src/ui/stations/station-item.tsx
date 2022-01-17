@@ -11,8 +11,8 @@ export default function StationItem(props: { componentId?: string; item: Station
     <View style={{flexDirection: 'row', alignItems: 'center', marginVertical: 4, marginLeft: 12}}>
       <Image style={{
         flex: 1,
-        width: 64,
-        height: 64,
+        width: 48,
+        height: 48,
         marginRight: 8
       }} source={getMarchioImage(props.item.marchio)}/>
       <View style={{flex: 4, flexDirection: 'column'}}>

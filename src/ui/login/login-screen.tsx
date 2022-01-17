@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {ImageBackground, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Colors, IconButton, Snackbar, Text, TextInput} from 'react-native-paper';
-import assets from '../../assets';
+import assets from '../../../assets';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../navigation/root-stack-param-list';
+import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
 import * as Progress from 'react-native-progress';
 import I18n from 'react-native-i18n';
-import HomeStore from '../stores/home-store';
-import {AppDebugLog} from '../utils/AppDebug';
+import HomeStore from '../home/home-store';
+import {AppDebugLog} from '../../utils/AppDebug';
+import {action} from 'mobx';
 // import NoteListPage from '../../stores/NoteListPage';
 // import AccountStore from '../../stores/AccountStore';
 // import {NavigationInjectedProps} from 'react-navigation';
@@ -92,7 +93,7 @@ const LoginScreen = inject('homeStore')(observer((props: { componentId: string; 
                     <IconButton icon="sync" color={Colors.white} size={24} onPress={() => {
                       setLoading(true)
                       setTimeout(() => {
-                        props.homeStore.updateRemote();
+                        action(() => props.homeStore.updateRemote());
                         setLoading(false);
                       }, 2000);
 

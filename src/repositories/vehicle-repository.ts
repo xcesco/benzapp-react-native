@@ -2,6 +2,7 @@ import {fromDelega, fromTessera, Vehicle} from './model/vehicle';
 import {ApiClient} from './network/api-client';
 import {Connection} from './persistence/connection';
 import {VehicleDao} from './persistence/dao/vehicle_dao';
+import {Refueling} from './model/refueling';
 
 export class VehicleRepository {
   constructor(apiClient: ApiClient, connection: Connection, vehicleDao: VehicleDao) {
@@ -37,6 +38,14 @@ export class VehicleRepository {
 
     const result=await this._vehicleDao.selectAll();
 
+    await this._connection.commitTransaction();
+
+    return result;
+  }
+
+  async findAll(): Promise<Vehicle[]> {
+    await this._connection.beginTransaction();
+    const result: Vehicle[] = await this._vehicleDao.selectAll();
     await this._connection.commitTransaction();
 
     return result;

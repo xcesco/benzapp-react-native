@@ -1,5 +1,5 @@
-import {SecureRepository} from '../repositories/secure-repository';
-import AppPreferencesInstance from '../repositories/persistence/app-preferences';
+import {SecureRepository} from '../../repositories/secure-repository';
+import AppPreferencesInstance from '../../repositories/persistence/app-preferences';
 import {action, makeObservable, observable} from 'mobx';
 
 export default class LockStore {

@@ -1,12 +1,12 @@
 import {action, makeObservable, observable} from 'mobx';
-import AccountRepository from '../repositories/account-repository';
-import AppPreferencesInstance from '../repositories/persistence/app-preferences';
-import RefuelingRepository from '../repositories/refueling-repository';
-import {VehicleRepository} from '../repositories/vehicle-repository';
-import {NotificationRepository} from '../repositories/notification_repository';
-import {Notification} from '../repositories/model/notification';
-import {Tessera} from '../repositories/network/models';
-import {Refueling} from '../repositories/model/refueling';
+import AccountRepository from '../../repositories/account-repository';
+import AppPreferencesInstance from '../../repositories/persistence/app-preferences';
+import RefuelingRepository from '../../repositories/refueling-repository';
+import {VehicleRepository} from '../../repositories/vehicle-repository';
+import {NotificationRepository} from '../../repositories/notification_repository';
+import {Notification} from '../../repositories/model/notification';
+import {Tessera} from '../../repositories/network/models';
+import {Refueling} from '../../repositories/model/refueling';
 
 export default class HomeStore {
   // observable
