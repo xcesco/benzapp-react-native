@@ -1,13 +1,13 @@
 import React from 'react';
 import {Avatar, Chip, Colors, IconButton, List} from 'react-native-paper';
-import {Tessera} from '../../repositories/network/models';
 import assets from '../../../assets';
 import {View} from 'react-native';
+import {Vehicle} from '../../repositories/model/vehicle';
 
 export default function VehicleItem(props: {
-  componentId?: string; item: Tessera, displaySeparator?: boolean,
-  onSelectQRCodeHandler(item: Tessera): void,
-  onSelectDetailHandler(item: Tessera): void
+  componentId?: string; item: Vehicle, displaySeparator?: boolean,
+  onSelectQRCodeHandler(item: Vehicle): void,
+  onSelectDetailHandler(item: Vehicle): void
 }) {
   return (<List.Item style={{
     borderBottomColor: '#CCCCCC',
@@ -29,10 +29,11 @@ export default function VehicleItem(props: {
                                justifyContent: 'flex-start',
                                marginVertical: 16
                              }}>
-                               <Chip style={{
-                                 backgroundColor: assets.colors.primaryColor,
-                                 marginRight: 8
-                               }} textStyle={{color: Colors.white}}>Delega</Chip>
+                               {props.item.delega===1 &&
+                                       <Chip style={{
+                                         backgroundColor: assets.colors.primaryColor,
+                                         marginRight: 8
+                                       }} textStyle={{color: Colors.white}}>Delega</Chip>}
                                <IconButton
                                        icon="qrcode"
                                        color={Colors.indigo500}

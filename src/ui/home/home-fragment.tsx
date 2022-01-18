@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Refueling} from '../../repositories/model/refueling';
-import {Button, Card, Colors, Divider, List} from 'react-native-paper';
+import {Button, Card, Colors, Dialog, Divider, List, Paragraph, Portal} from 'react-native-paper';
 import VehicleItem from '../vehicles/vehicle-item';
 import {Tessera} from '../../repositories/network/models';
 import assets from '../../../assets';
@@ -10,17 +10,26 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
+import {Vehicle} from '../../repositories/model/vehicle';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Main'>;
 
-export default function HomeFragment(props: { componentId?: string; vechicles: Tessera[], refuelings: Refueling[] }) {
+export default function HomeFragment(props: { componentId?: string; vechicles: Vehicle[], refuelings: Refueling[] }) {
   const navigation = useNavigation<ScreenProps>();
 
+  const [visible, setVisible] = useState(false);
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+
 // @ts-ignore
-  const _renderTesseraItem = (renderItem: { item: Tessera }) => {
+  const _renderVehicleItem = (renderItem: { item: Vehicle }) => {
     return (
             <VehicleItem item={renderItem.item} onSelectDetailHandler={(item) => {
-              navigation.navigate('VehicleDetail',{id: item.id})
+              if (item.delega===1) {
+                showDialog();
+              } else {
+                navigation.navigate('VehicleDetail', {id: item.id!})
+              }
             }} onSelectQRCodeHandler={(item: Tessera) => {
               navigation.navigate('VehicleQRCodeDetail', {id: item.id})
             }}/>
@@ -46,7 +55,7 @@ export default function HomeFragment(props: { componentId?: string; vechicles: T
                    navigation.navigate('VehicleList')
                  }}>Vedi tutte ({props.vechicles.length})</Button>)}/>
       <Divider/>
-      <FlatList data={props.vechicles.slice(0, 2)} renderItem={_renderTesseraItem}/>
+      <FlatList data={props.vechicles.slice(0, 2)} renderItem={_renderVehicleItem}/>
     </Card>
 
     <Card style={{marginTop: 48, marginHorizontal: 12, elevation: 4, zIndex: 4}}>
@@ -61,6 +70,18 @@ export default function HomeFragment(props: { componentId?: string; vechicles: T
       <Divider/>
       <FlatList data={props.refuelings.slice(0, 2)} renderItem={_renderRefuelingItem}/>
     </Card>
+
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Title>Informazione</Dialog.Title>
+        <Dialog.Content>
+          <Paragraph>Sulle deleghe non è possibile effettuare tale operazione.</Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={hideDialog}>Ok</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </Portal>
   </View>);
 }
 

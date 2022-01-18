@@ -10,7 +10,7 @@ export interface Vehicle {
   immagineContentType: string;
   targa: string;
   veicolo: TesseraVeicoloEnum;
-  delega: boolean;
+  delega: number;
 }
 
 export function fromDelega(delega: Delega): Vehicle {
@@ -23,7 +23,7 @@ export function fromDelega(delega: Delega): Vehicle {
     immagineContentType: delega.tessera?.immagineContentType ?? '',
     targa: delega.tessera?.targa ?? '',
     veicolo: delega.tessera?.veicolo ?? TesseraVeicoloEnum.AUTOVEICOLO,
-    delega: true
+    delega: 1
   };
 }
 
@@ -37,6 +37,6 @@ export function fromTessera(tessera: Tessera): Vehicle {
     immagineContentType: tessera.immagineContentType ?? '',
     targa: tessera.targa ?? '',
     veicolo: tessera.veicolo ?? TesseraVeicoloEnum.AUTOVEICOLO,
-    delega: false
+    delega: 0
   };
 }

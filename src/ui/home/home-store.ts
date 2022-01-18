@@ -7,20 +7,17 @@ import {NotificationRepository} from '../../repositories/notification_repository
 import {Notification} from '../../repositories/model/notification';
 import {Tessera} from '../../repositories/network/models';
 import {Refueling} from '../../repositories/model/refueling';
+import {Vehicle} from '../../repositories/model/vehicle';
 
 export default class HomeStore {
   // observable
   loading: boolean = false;
-
   // observable
   remoteUrl = '';
-
   // observable
   notifiche: Notification[] = [];
-
   // observable
-  tessere: Tessera[] = [];
-
+  tessere: Vehicle[] = [];
   // observable
   rifornimenti: Refueling[] = [];
 
@@ -68,7 +65,6 @@ export default class HomeStore {
     if (updateUI === true) {
       this.loading = true;
     }
-
 
     this.tessere = await this._vehicleRepository.update();
     this.rifornimenti = await this._refuelingRepository.update();

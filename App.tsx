@@ -115,7 +115,9 @@ function App() {
                   <Stack.Screen name="VehicleList" component={VehicleListScreen} options={{
                     title: 'Lista tessere',
                   }}/>
-                  <Stack.Screen name="VehicleDetail" component={VehicleDetailScreen}/>
+                  <Stack.Screen name="VehicleDetail" component={VehicleDetailScreen} options={{
+                    title: 'Dettaglio tessera',
+                  }}/>
                   <Stack.Screen name="VehicleQRCodeDetail" component={VehicleQRCodeDetailScreen}/>
                   <Stack.Screen name="RefuelingList" component={RefuelingListScreen} options={{
                     title: 'Lista rifornimenti',
