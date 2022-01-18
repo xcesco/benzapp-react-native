@@ -8,8 +8,7 @@ import {inject, observer} from 'mobx-react';
 import {Avatar, Colors, TextInput} from 'react-native-paper';
 import moment from 'moment';
 import {RifornimentoTipoCarburanteEnum} from '../../repositories/network/models';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import assets from '../../../assets';
+import {TextInputWithIcon} from '../../components/text-input-with-icon';
 
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'RefuelingDetail'>;
 type ScreenRouteProp = RouteProp<RootStackParamList, 'RefuelingDetail'>;
@@ -60,41 +59,10 @@ export const RefuelingDetailScreen = inject('refuelingStore')(observer((props: {
                       label="Indirizzo"
                       value={props.refuelingStore.rifornimento.gestore.indirizzo + ', ' + props.refuelingStore.rifornimento.gestore.comune}
                       editable={false}/>
-              <View style={{flexDirection: 'row'}}>
-                <Icon name="currency-eur" color={assets.colors.gray} size={64} style={{
-                  marginRight: 8,
-                }}/>
-                <TextInput
-                        style={{...style.textField, flex: 4}}
-                        multiline={false}
-                        left={() => (<Icon name={'currency-eu'}/>)}
-                        label="Importo"
-                        value={(props.refuelingStore.rifornimento.litriErogati * (props.refuelingStore.rifornimento.prezzoAlLitro - props.refuelingStore.rifornimento.sconto)).toFixed(2) + ' €'}
-                        editable={false}/>
-              </View>
-              <View style={{flexDirection: 'row'}}>
-                <Icon name="gas-station" color={assets.colors.gray} size={64} style={{
-                  marginRight: 8,
-                }}/>
-                <TextInput
-                        style={{...style.textField, flex: 4}}
-                        multiline={false}
-                        label="Litri erogati"
-                        value={(props.refuelingStore.rifornimento.litriErogati).toFixed(2) + ' L.'}
-                        editable={false}/>
-              </View>
 
-              <View style={{flexDirection: 'row'}}>
-                <Icon name="piggy-bank" color={assets.colors.gray} size={64} style={{
-                  marginRight: 8,
-                }}/>
-                <TextInput
-                        style={{...style.textField, flex: 4}}
-                        multiline={false}
-                        label="Sconto"
-                        value={(props.refuelingStore.rifornimento.litriErogati * props.refuelingStore.rifornimento.sconto).toFixed(2) + ' €'}
-                        editable={false}/>
-              </View>
+              <TextInputWithIcon iconName="currency-eur" label="Importo" text={(props.refuelingStore.rifornimento.litriErogati * (props.refuelingStore.rifornimento.prezzoAlLitro - props.refuelingStore.rifornimento.sconto)).toFixed(2) + ' €'}/>
+              <TextInputWithIcon iconName="gas-station" label="Litri erogati" text={(props.refuelingStore.rifornimento.litriErogati).toFixed(2) + ' L.'}/>
+              <TextInputWithIcon iconName="piggy-bank" label="Sconto" text={(props.refuelingStore.rifornimento.litriErogati * props.refuelingStore.rifornimento.sconto).toFixed(2) + ' €'}/>
             </View>
           </View>
   )
