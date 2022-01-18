@@ -7,8 +7,8 @@ export class RefuelingDao {
   readonly SQL_DELETE_ALL = 'DELETE FROM refuelings';
   readonly SQL_INSERT: string = 'INSERT INTO refuelings (data, gestore, gestore_id, litri_erogati, prezzo_al_litro, sconto, targa, tessera, tipo_carburante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
   readonly SQL_SELECT_ALL = 'SELECT * FROM refuelings ORDER BY data desc';
-  readonly SQL_SELECT_BY_TARGA = 'SELECT * FROM refuelings WHERE targa = ? ORDER BY data desc';
-  readonly SQL_SELECT_BY_ID = 'SELECT * FROM refuelings WHERE id = ? ORDER BY data desc';
+  readonly SQL_SELECT_BY_TARGA = 'SELECT * FROM refuelings WHERE targa = ?';
+  readonly SQL_SELECT_BY_ID = 'SELECT * FROM refuelings WHERE id = ?';
   private database: Connection;
 
   constructor(database: Connection) {

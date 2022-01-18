@@ -20,9 +20,9 @@ export default function HomeFragment(props: { componentId?: string; vechicles: T
   const _renderTesseraItem = (renderItem: { item: Tessera }) => {
     return (
             <VehicleItem item={renderItem.item} onSelectDetailHandler={(item) => {
-              navigation.navigate('VehicleDetail')
+              navigation.navigate('VehicleDetail',{id: item.id})
             }} onSelectQRCodeHandler={(item: Tessera) => {
-              navigation.navigate('VehicleQRCodeDetail')
+              navigation.navigate('VehicleQRCodeDetail', {id: item.id})
             }}/>
     )
   }
@@ -31,7 +31,7 @@ export default function HomeFragment(props: { componentId?: string; vechicles: T
   const _renderRefuelingItem = (renderItem: { item: Refueling }) => {
     return (
             <RefuelingItem item={renderItem.item} onSelectDetailHandler={(item) => {
-              navigation.navigate('RefuelingDetail')
+              navigation.navigate('RefuelingDetail', {id: item.id})
             }}/>
     )
   }

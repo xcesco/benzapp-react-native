@@ -4,8 +4,8 @@ export type RootStackParamList = {
   Lock: undefined;
   Main: undefined;
   VehicleList: undefined;
-  VehicleDetail: undefined;
-  VehicleQRCodeDetail: undefined;
+  VehicleDetail: { id: number };
+  VehicleQRCodeDetail: { id:number };
   RefuelingList: undefined;
-  RefuelingDetail: undefined;
+  RefuelingDetail: { id:number };
 };

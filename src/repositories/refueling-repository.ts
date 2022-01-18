@@ -40,4 +40,11 @@ export default class RefuelingRepository {
     return result;
   }
 
+  async findById(id: any) {
+    await this._connection.beginTransaction();
+    const result: Refueling = await this._refuelingDao.findById(id);
+    await this._connection.commitTransaction();
+
+    return result;
+  }
 }
