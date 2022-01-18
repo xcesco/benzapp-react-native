@@ -16,6 +16,7 @@ const assets = {
   colors: {
     primaryColor: '#1976d2',
     accentColor: '#FF5722',
+    gray: '#9E9E9E'
   },
 };
 

@@ -31,7 +31,6 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
     if (!initializiated) {
       setInitializiated(true);
       props.stationListStore.selectAll();
-      props.homeStore.updateData(true);
     }
 
   }, [initializiated, props.stationListStore, props.homeStore]);

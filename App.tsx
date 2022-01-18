@@ -5,7 +5,6 @@ import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import assets from './assets';
 import {Provider} from 'mobx-react';
 import LockScreen from './src/ui/lock/lock-screen';
-import {RefuelingDetailScreen} from './src/screens/RefuelingDetailScreen';
 import {MainScreen} from './src/ui/main/main-screen';
 import {VehicleDetailScreen} from './src/screens/VehicleDetailScreen';
 import {VehicleQRCodeDetailScreen} from './src/screens/VehicleQRCodeDetailScreen';
@@ -36,6 +35,7 @@ import RefuelingStore from './src/ui/refuelings/refueling-store';
 import {RefuelingListScreen} from './src/ui/refuelings/refueling-list-screen';
 import VehicleStore from './src/ui/vehicles/vehicle-store';
 import {VehicleListScreen} from './src/ui/vehicles/vehicle-list-screen';
+import { RefuelingDetailScreen } from './src/ui/refuelings/refueling-detail-screen';
 
 const theme = {
   ...DefaultTheme,

@@ -18,7 +18,7 @@ export class Connection {
 
   execute(sqlStatement: string, args = []): Promise<ResultSet> {
     return new Promise((resolve, reject) => {
-      console.log(`sql: ${sqlStatement}`);
+      console.log(`sql: ${sqlStatement}`, args);
       this._db.exec([{sql: sqlStatement, args}], false, (err, res) => {
         console.log('sql response: ',res);
 

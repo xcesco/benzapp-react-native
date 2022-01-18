@@ -5,21 +5,25 @@ import RefuelingItem from './refueling-item';
 import {Refueling} from '../../repositories/model/refueling';
 import {inject, observer} from 'mobx-react';
 import RefuelingStore from './refueling-store';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
-import {runInAction} from 'mobx';
 
-type ScreenProp = StackNavigationProp<RootStackParamList, 'RefuelingList'>;
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'RefuelingList'>;
+type ScreenRouteProp = RouteProp<RootStackParamList, 'RefuelingList'>;
 
 export const RefuelingListScreen = inject('refuelingStore')(observer((props: { componentId: string; refuelingStore: RefuelingStore, back: any }) => {
   const [initializiated, setInitializiated] = useState(false);
-  const navigation = useNavigation<ScreenProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
+  const route = useRoute<ScreenRouteProp>();
+
 
   // @ts-ignore
   const _renderItem = (renderItem: { item: Refueling }) => {
     return (
-            <RefuelingItem item={renderItem.item}/>
+            <RefuelingItem item={renderItem.item} onSelectDetailHandler={(item) => {
+              navigation.navigate('RefuelingDetail', {id: item.id})
+            }}/>
     )
   }
 
