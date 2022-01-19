@@ -20,10 +20,10 @@ export const RefuelingDetailScreen = inject('refuelingStore')(observer((props: {
 
   useEffect(() => {
     if (!initializiated) {
-      setInitializiated(true);
       console.log(`refueling-screen > initialize`);
 
-      props.refuelingStore.findById(route.params.id)
+      props.refuelingStore.findById(route.params.id);
+      setInitializiated(true);
     } else {
       console.log(`refueling-screen > ALREADY initialized`);
     }

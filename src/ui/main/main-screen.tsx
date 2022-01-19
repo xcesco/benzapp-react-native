@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import I18n from 'react-native-i18n';
 import StationListFragment from '../stations/station-list-fragment';
-import {BottomNavigation, Button, Colors, Text} from 'react-native-paper';
+import {BottomNavigation, Colors} from 'react-native-paper';
 import {inject, observer} from 'mobx-react';
 import HomeStore from '../home/home-store';
 import StationListStore from '../stations/station-list-store';
 import assets from '../../../assets';
 import StationMapFragment from '../stations/station-map-fragment';
 import HomeFragment from '../home/home-fragment';
-import {action} from 'mobx';
 
 type screenProp = StackNavigationProp<RootStackParamList, 'Main'>;
 
@@ -35,38 +34,11 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
 
   }, [initializiated, props.stationListStore, props.homeStore]);
 
-  const HomeRouteOld = () => {
-    const navigation = useNavigation<screenProp>();
-
-    const navigateToLogin = (): void => {
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'Login'}],
-      });
-    };
-
-    return (
-            <View style={style.container}>
-              <Text>Home Screen</Text>
-              <Button mode="contained" onPress={navigateToLogin}>
-                <Text>Goto login</Text>
-              </Button>
-              <Button mode="contained" onPress={() => navigation.navigate('VehicleList')}>
-                <Text>Goto VehicleList</Text>
-              </Button>
-              <Button mode="contained" onPress={() => navigation.navigate('VehicleDetail')}>
-                <Text>Goto VehicleDetail</Text>
-              </Button>
-              <Button mode="contained" onPress={() => navigation.navigate('VehicleQRCodeDetail')}>
-                <Text>Goto VehicleQRCodeDetail</Text>
-              </Button>
-              <Button mode="contained" onPress={() => navigation.navigate('RefuelingList')}>
-                <Text>Goto RefuelingList</Text>
-              </Button>
-              <Button mode="contained" onPress={() => navigation.navigate('RefuelingDetail')}>
-                <Text>Goto RefuelingDetail</Text>
-              </Button>
-            </View>)
+  const navigateToLogin = (): void => {
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Login'}],
+    });
   };
 
   const HomeRoute = () => {
