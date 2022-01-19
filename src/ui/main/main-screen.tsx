@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import I18n from 'react-native-i18n';
 import StationListFragment from '../stations/station-list-fragment';
-import {BottomNavigation, Colors} from 'react-native-paper';
+import {Appbar, BottomNavigation, Colors} from 'react-native-paper';
 import {inject, observer} from 'mobx-react';
 import HomeStore from '../home/home-store';
 import StationListStore from '../stations/station-list-store';
 import assets from '../../../assets';
 import StationMapFragment from '../stations/station-map-fragment';
 import HomeFragment from '../home/home-fragment';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type screenProp = StackNavigationProp<RootStackParamList, 'Main'>;
 
@@ -31,8 +32,13 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
       setInitializiated(true);
       props.stationListStore.selectAll();
     }
-
   }, [initializiated, props.stationListStore, props.homeStore]);
+
+  useLayoutEffect(()=> {
+    navigation.setOptions({
+      headerLeft: (_) => (<Icon name="menu" color={Colors.white} size={35} onPress={ () => console.log('menu') }/>),
+    });
+  })
 
   const navigateToLogin = (): void => {
     navigation.reset({

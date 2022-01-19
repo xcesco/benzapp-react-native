@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Button, DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import {Button, Colors, DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import assets from './assets';
 import {Provider} from 'mobx-react';
 import LockScreen from './src/ui/lock/lock-screen';
@@ -37,6 +37,7 @@ import { RefuelingDetailScreen } from './src/ui/refuelings/refueling-detail-scre
 import { VehicleDetailScreen } from './src/ui/vehicles/vehicle-detail-screen';
 import {QRCodeScreen} from './src/ui/qrcode/qrcode-screen';
 import {Platform} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const theme = {
   ...DefaultTheme,
@@ -113,7 +114,7 @@ function App() {
                           headerTintColor: '#fff',
                           headerTitleStyle: {
                             fontWeight: 'bold',
-                          },
+                          }
                         }}>
                   <Stack.Screen name="Splash" component={SplashScreen} options={{
                     headerShown: false,
