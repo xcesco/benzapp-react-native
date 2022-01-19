@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
-import {Avatar, Colors} from 'react-native-paper';
+import {Appbar, Avatar, Colors} from 'react-native-paper';
 import moment from 'moment';
 import {TesseraCarburanteEnum} from '../../repositories/network/models';
 import {TextInputWithIcon} from '../../components/text-input-with-icon';
@@ -28,6 +28,15 @@ export const VehicleDetailScreen = inject('vehicleStore')(observer((props: { com
       console.log(`refueling-screen > ALREADY initialized`);
     }
   }, [initializiated, props.vehicleStore, route.params.id]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (<View style={{flexDirection: 'row'}}>
+        <Appbar.Action color={Colors.white} icon="gas-station" onPress={() => {
+        }}/>
+      </View>),
+    });
+  });
 
   return (
           <View style={style.container}>
@@ -62,7 +71,7 @@ export const VehicleDetailScreen = inject('vehicleStore')(observer((props: { com
               </View></View>
               <View style={{flex: 2}}>
                 <TextInputWithIcon iconName="currency-eur" label="Pagato" text={props.vehicleStore.vehicleSummary.spesa.toFixed(2) + ' €'}/>
-                <TextInputWithIcon iconName="piggy-bank" label="Contributo regionale" text={props.vehicleStore.vehicleSummary.risparmio.toFixed(2) + ' L.'}/>
+                <TextInputWithIcon iconName="piggy-bank" label="Contributo regionale" text={props.vehicleStore.vehicleSummary.risparmio.toFixed(2) + ' €'}/>
                 <TextInputWithIcon iconName="gas-station" label="Litri erogati" text={props.vehicleStore.vehicleSummary.litriErogati.toFixed(2) + ' L.'}/>
               </View>
             </View>

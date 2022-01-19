@@ -1,15 +1,14 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import {inject, observer} from 'mobx-react';
-import {Appbar, Colors} from 'react-native-paper';
+import {Appbar, Button, Colors} from 'react-native-paper';
 import {TextInputWithIcon} from '../../components/text-input-with-icon';
 import VehicleStore from '../vehicles/vehicle-store';
-import assets from '../../../assets';
-import {white} from 'react-native-paper/lib/typescript/styles/colors';
+import Share from 'react-native-share'
 
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'RefuelingDetail'>;
 type ScreenRouteProp = RouteProp<RootStackParamList, 'RefuelingDetail'>;
@@ -35,25 +34,45 @@ export const QRCodeScreen = inject('vehicleStore')(observer((props: { componentI
   //   });
   // }, [navigation]);
 // headerRight: () => (<Appbar.Action color={Colors.white} icon="dots-vertical" onPress={()=> {console.log(route.params.id);}}/>),
+  let svg: any;
+
+
+  function callback(dataURL: any) {
+    console.log(dataURL);
+    let shareImageBase64 = {
+      title: 'Invio QRCode',
+      url: `data:image/png;base64,${dataURL}`,
+      subject: 'Share Link', //  for email
+    };
+    Share.open(shareImageBase64).catch(error => console.log(error));
+  }
+
+  const saveQRCode = () => {
+    svg.toDataURL(callback);
+  }
 
   useEffect(() => {
     if (!initializiated) {
       console.log(`refueling-screen > initialize`);
 
       props.vehicleStore.findQRCodeById(route.params.id);
-      navigation.setOptions({
-        headerRight: () => (<Appbar.Action color={Colors.white} icon="share-variant" onPress={()=> {console.log(route.params.id);}}/>),
-      });
       setInitializiated(true);
     } else {
       console.log(`refueling-screen > ALREADY initialized`);
     }
-  }, [initializiated, navigation, props.vehicleStore, route.params.id]);
+  }, [initializiated, navigation, props.vehicleStore, route.params.id, svg]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (<Appbar.Action color={Colors.white} icon="share-variant" onPress={saveQRCode}/>),
+    });
+  });
 
   return (
           <View style={style.container}>
             <QRCode size={280}
                     value={JSON.stringify(props.vehicleStore.qrCodeInfo)}
+                    getRef={c => (svg = c)}
             />
             <Text></Text>
             <TextInputWithIcon label="Numero tessera" text={props.vehicleStore.qrCodeInfo.tesseraNumero}/>

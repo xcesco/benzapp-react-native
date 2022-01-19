@@ -128,3 +128,6 @@ https://github.com/react-native-maps/react-native-maps/issues/1870
 ## Toolbar
 - https://aboutreact.com/custom-header-using-navigation-options-in-react-native/#Left-and-Right-Header-Customization-using
 
+### Share
+https://github.com/react-native-share/react-native-share
+https://stackoverflow.com/questions/51269475/how-to-share-generated-qr-code-in-react-native

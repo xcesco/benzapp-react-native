@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {Refueling} from '../../repositories/model/refueling';
-import {Button, Card, Colors, Dialog, Divider, List, Paragraph, Portal} from 'react-native-paper';
+import {Appbar, Button, Card, Colors, Dialog, Divider, List, Paragraph, Portal} from 'react-native-paper';
 import VehicleItem from '../vehicles/vehicle-item';
 import {Tessera} from '../../repositories/network/models';
 import assets from '../../../assets';
@@ -21,11 +21,22 @@ export default function HomeFragment(props: { componentId?: string; vechicles: V
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (<View style={{flexDirection: 'row'}}>
+        <Appbar.Action color={Colors.white} icon="refresh" onPress={() => {
+        }}/>
+        <Appbar.Action color={Colors.white} icon="logout" onPress={() => {
+        }}/>
+      </View>),
+    });
+  });
+
 // @ts-ignore
   const _renderVehicleItem = (renderItem: { item: Vehicle }) => {
     return (
             <VehicleItem item={renderItem.item} onSelectDetailHandler={(item) => {
-              if (item.delega===1) {
+              if (item.delega === 1) {
                 showDialog();
               } else {
                 navigation.navigate('VehicleDetail', {id: item.id!})
