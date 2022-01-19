@@ -1,9 +1,9 @@
 import {SQLResultSet} from 'expo-sqlite';
 import {stations} from '../../../assets/json/stations';
-import {StationDao} from './dao/station_dao';
-import {NotificationDao} from './dao/notification_dao';
-import {VehicleDao} from './dao/vehicle_dao';
-import {RefuelingDao} from './dao/refueling_dao';
+import {StationDao} from './dao/station-dao';
+import {NotificationDao} from './dao/notification-dao';
+import {VehicleDao} from './dao/vehicle-dao';
+import {RefuelingDao} from './dao/refueling-dao';
 import {WebSQLDatabase} from 'expo-sqlite/src/SQLite.types';
 import {Connection} from './connection';
 import AppPreferencesInstance from './app-preferences';
@@ -17,7 +17,7 @@ export const stationDao = new StationDao(dbConnection);
 export const vehicleDao = new VehicleDao(dbConnection);
 
 export const initAndPopulateDb = async () => {
-  const primoAccesso=await AppPreferencesInstance.isPrimoAccesso();
+  const primoAccesso = await AppPreferencesInstance.isPrimoAccesso();
 
   if (!primoAccesso) {
     console.log('db-avvio - skipped');
@@ -42,7 +42,7 @@ export const initAndPopulateDb = async () => {
   } else {
     console.log('alaredy donecaricato');
   }
-   await dbConnection.commitTransaction();
+  await dbConnection.commitTransaction();
   console.log('db-finito');
 };
 

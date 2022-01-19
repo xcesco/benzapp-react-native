@@ -1,6 +1,7 @@
 import {Connection} from './persistence/connection';
-import {StationDao} from './persistence/dao/station_dao';
+import {StationDao} from './persistence/dao/station-dao';
 import {Station} from './model/station';
+import {dbConnection} from './persistence/db';
 
 export class StationRepository {
   constructor(connection: Connection, stationDao: StationDao) {
@@ -12,12 +13,16 @@ export class StationRepository {
   private _stationDao: StationDao;
 
   async selectAll(): Promise<Station[]> {
-    await this._connection.beginTransaction();
+    let stations = null;
+    try {
+      await this._connection.beginTransaction();
+      stations = await this._stationDao.selectAll();
+      await dbConnection.commitTransaction();
+    } catch (e) {
+      console.log(e);
+      await dbConnection.rollbackTransaction();
+    }
 
-    const stations = await this._stationDao.selectAll();
-
-    await this._connection.commitTransaction();
-
-    return stations;
+    return stations!;
   }
 }

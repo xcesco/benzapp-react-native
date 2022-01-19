@@ -125,3 +125,6 @@ bug
 https://stackoverflow.com/questions/51915353/react-native-maps-markers-image-doesnt-show-using-custom-marker-in-react-nativ
 https://github.com/react-native-maps/react-native-maps/issues/1870
 
+## Toolbar
+- https://aboutreact.com/custom-header-using-navigation-options-in-react-native/#Left-and-Right-Header-Customization-using
+

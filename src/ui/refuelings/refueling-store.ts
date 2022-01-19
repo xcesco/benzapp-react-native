@@ -79,6 +79,5 @@ export default class RefuelingStore {
       }
     )
     return true;
-
   }
 }

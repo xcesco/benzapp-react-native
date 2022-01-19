@@ -1,7 +1,8 @@
 import {ApiClient} from './network/api-client';
 import {Connection} from './persistence/connection';
-import {RefuelingDao} from './persistence/dao/refueling_dao';
+import {RefuelingDao} from './persistence/dao/refueling-dao';
 import {Refueling, refuelingOf} from './model/refueling';
+import {dbConnection} from './persistence/db';
 
 export default class RefuelingRepository {
 
@@ -41,10 +42,15 @@ export default class RefuelingRepository {
   }
 
   async findById(id: any) {
-    await this._connection.beginTransaction();
-    const result: Refueling = await this._refuelingDao.findById(id);
-    await this._connection.commitTransaction();
-
-    return result;
+    let result: Refueling;
+    try {
+      await this._connection.beginTransaction();
+      result = await this._refuelingDao.findById(id);
+      await this._connection.commitTransaction();
+    } catch (e) {
+      console.log(e);
+      await dbConnection.rollbackTransaction();
+    }
+    return result!;
   }
 }

@@ -1,21 +1,27 @@
 import * as React from 'react';
-import {Appbar, Colors, Menu} from 'react-native-paper';
+import {Appbar, Colors, Menu, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Platform} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 // @ts-ignore
-export default function AppHeader({navigation, back, options}) {
+export default function AppHeader({back, options}) {
+  const navigation = useNavigation();
+  console.log('sssaa', options)
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
   return (
-          <Appbar.Header style={{zIndex: 0, elevation: 0, ...Platform.select({
-                      android: {
-                        marginTop: 0
-                      }})}}>
+          <Appbar.Header style={{
+            zIndex: 0, elevation: 0, ...Platform.select({
+              android: {
+                marginTop: 0
+              }
+            })
+          }}>
             {back && <Appbar.BackAction onPress={navigation.goBack}/>}
-            {!back &&  <Icon name="menu" color={Colors.white} size={24}/>}
+            {!back && <Icon name="menu" color={Colors.white} size={24}/>}
 
             <Appbar.Content title={options.title}>
               <Menu
@@ -42,8 +48,11 @@ export default function AppHeader({navigation, back, options}) {
                         disabled
                 />
               </Menu>
+              {options.headerRight && options.headerRight}
             </Appbar.Content>
-            <Appbar.Action icon="dots-vertical"/>
+            <Appbar.Action icon="magnify"  />
+            <Appbar.Action icon="dots-vertical"  />
+
           </Appbar.Header>
   );
 }

@@ -4,11 +4,11 @@ import assets from '../../assets';
 import {Colors, TextInput} from 'react-native-paper';
 import React from 'react';
 
-export const TextInputWithIcon=(props: { iconName: string, label: string, text: string }) => {
+export const TextInputWithIcon=(props: { iconName?: string, label: string, text: string }) => {
   return <View style={{flexDirection: 'row'}}>
-    <Icon name={props.iconName} color={assets.colors.gray} size={64} style={{
+    {props.iconName && <Icon name={props.iconName} color={assets.colors.gray} size={48} style={{
       marginRight: 8,
-    }}/>
+    }}/>}
     <TextInput
             style={{...style.textField, flex: 4}}
             multiline={false}

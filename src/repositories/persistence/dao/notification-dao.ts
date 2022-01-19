@@ -16,22 +16,22 @@ export class NotificationDao {
 
   async deleteAll(): Promise<ResultSet> {
     // @ts-ignore
-    return this.database.execute(this.SQL_DELETE_ALL, []);
+    return (await this.database.execute(this.SQL_DELETE_ALL, []));
   }
 
   async insert(item: Notification): Promise<ResultSet> {
     // @ts-ignore
-    return this.database.execute(this.SQL_INSERT, [item.messaggio, item.targa]);
+    return (await this.database.execute(this.SQL_INSERT, [item.messaggio, item.targa]));
   }
 
-  async findlAll(): Promise<ResultSet> {
+  async findAll(): Promise<ResultSet> {
     // @ts-ignore
-    return this.database.execute(this.SQL_SELECT_ALL, []).then;
+    return (await this.database.execute(this.SQL_SELECT_ALL, []));
   }
 
   async findCount(): Promise<ResultSet> {
     // @ts-ignore
-    return this.database.execute(this.SQL_SELECT_COUNT, []);
+    return (await this.database.execute(this.SQL_SELECT_COUNT, []));
   }
 
   private fromDb(item: { [x: string]: any; }): Notification {

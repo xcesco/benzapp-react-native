@@ -21,6 +21,7 @@ const LockScreen = inject('lockStore', 'homeStore')(observer((props: { component
   const navigateToMain = (): void => {
     async function update() {
       await props.homeStore.updateData();
+      await props.lockStore.updatePrimoAccesso();
     }
 
     update().then(_ => {
@@ -36,7 +37,7 @@ const LockScreen = inject('lockStore', 'homeStore')(observer((props: { component
     if (!initializiated) {
       console.log(`display> lock-screen: initialize`);
       action(() => props.lockStore.actionGetCurrentPIN());
-      action(() => props.lockStore.actionPrimoAccesso());
+      action(() => props.lockStore.readPrimoAccesso());
 
       setInitializiated(true);
     } else {

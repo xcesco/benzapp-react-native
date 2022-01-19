@@ -22,12 +22,13 @@ export default class LockStore {
       init:action,
       actionGetCurrentPIN: action,
       actionSavePin: action,
-      actionPrimoAccesso: action
+      readPrimoAccesso: action,
+      updatePrimoAccesso:action
     });
   }
 
   async init(): Promise<void> {
-    await this.actionPrimoAccesso();
+    await this.readPrimoAccesso();
     await this.actionGetCurrentPIN();
   }
 
@@ -41,17 +42,20 @@ export default class LockStore {
   //action
   async actionSavePin(pin: string): Promise<string> {
     console.log(`lock-store > actionSavePin: primoAccesso: ${pin}`);
-    this.primoAccesso = false;
     this.pin = pin;
-
-    await AppPreferencesInstance.setPrimoAccesso(this.primoAccesso);
     await this._secureRepository.writePin(this.pin);
 
     return pin;
   }
 
   //action
-  async actionPrimoAccesso(): Promise<boolean> {
+  async updatePrimoAccesso(): Promise<void> {
+    this.primoAccesso = false;
+    await AppPreferencesInstance.setPrimoAccesso(this.primoAccesso);
+  }
+
+  //action
+  async readPrimoAccesso(): Promise<boolean> {
     this.primoAccesso = await AppPreferencesInstance.isPrimoAccesso();
 
     return this.primoAccesso;

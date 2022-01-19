@@ -1,13 +1,11 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import {Button, DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import assets from './assets';
 import {Provider} from 'mobx-react';
 import LockScreen from './src/ui/lock/lock-screen';
 import {MainScreen} from './src/ui/main/main-screen';
-import {VehicleDetailScreen} from './src/screens/VehicleDetailScreen';
-import {VehicleQRCodeDetailScreen} from './src/screens/VehicleQRCodeDetailScreen';
 import AppHeader from './src/components/app-header';
 import LoginScreen from './src/ui/login/login-screen';
 import {AppDebugLog} from './src/utils/AppDebug';
@@ -26,7 +24,7 @@ import {
 import HomeStore from './src/ui/home/home-store';
 import {VehicleRepository} from './src/repositories/vehicle-repository';
 import RefuelingRepository from './src/repositories/refueling-repository';
-import {NotificationRepository} from './src/repositories/notification_repository';
+import {NotificationRepository} from './src/repositories/notification-repository';
 import {SecureRepository} from './src/repositories/secure-repository';
 import LockStore from './src/ui/lock/lock-store';
 import {StationRepository} from './src/repositories/station-repository';
@@ -36,6 +34,9 @@ import {RefuelingListScreen} from './src/ui/refuelings/refueling-list-screen';
 import VehicleStore from './src/ui/vehicles/vehicle-store';
 import {VehicleListScreen} from './src/ui/vehicles/vehicle-list-screen';
 import { RefuelingDetailScreen } from './src/ui/refuelings/refueling-detail-screen';
+import { VehicleDetailScreen } from './src/ui/vehicles/vehicle-detail-screen';
+import {QRCodeScreen} from './src/ui/qrcode/qrcode-screen';
+import {Platform} from 'react-native';
 
 const theme = {
   ...DefaultTheme,
@@ -55,7 +56,7 @@ const apiClient = new ApiClient();
 
 const secureRepository = new SecureRepository();
 const accountRepository = new AccountRepository(apiClient);
-const vehicleRepository = new VehicleRepository(apiClient, dbConnection, vehicleDao);
+const vehicleRepository = new VehicleRepository(apiClient, dbConnection, vehicleDao, refuelingDao);
 const refuelingRepository = new RefuelingRepository(apiClient, dbConnection, refuelingDao);
 const notificationRepository = new NotificationRepository(apiClient, dbConnection, notificationDao);
 const stationRepository = new StationRepository(dbConnection, stationDao);
@@ -100,7 +101,19 @@ function App() {
                 <Stack.Navigator
                         initialRouteName="Splash"
                         screenOptions={{
-                          header: props => <AppHeader {...props} />,
+                          headerShadowVisible:false,
+                          headerStyle: {
+                            backgroundColor: assets.colors.primaryColor,
+                            ...Platform.select({
+                              android: {
+                                marginTop: 0
+                              }
+                            })
+                          },
+                          headerTintColor: '#fff',
+                          headerTitleStyle: {
+                            fontWeight: 'bold',
+                          },
                         }}>
                   <Stack.Screen name="Splash" component={SplashScreen} options={{
                     headerShown: false,
@@ -118,11 +131,20 @@ function App() {
                   <Stack.Screen name="VehicleDetail" component={VehicleDetailScreen} options={{
                     title: 'Dettaglio tessera',
                   }}/>
-                  <Stack.Screen name="VehicleQRCodeDetail" component={VehicleQRCodeDetailScreen}/>
+                  <Stack.Screen name="VehicleQRCodeDetail" component={QRCodeScreen} options={{
+                    title: 'QRCode',  headerRight: () => (
+                            <Button
+                                    onPress={() => alert('This is a button!')}
+                                    color="#fff"
+                            >ss</Button>
+                    )
+                  }}/>
                   <Stack.Screen name="RefuelingList" component={RefuelingListScreen} options={{
                     title: 'Lista rifornimenti',
                   }}/>
-                  <Stack.Screen name="RefuelingDetail" component={RefuelingDetailScreen}/>
+                  <Stack.Screen name="RefuelingDetail" component={RefuelingDetailScreen} options={{
+                    title: 'Dettaglio rifornimento',
+                  }}/>
                 </Stack.Navigator>
               </NavigationContainer>
             </Provider>
@@ -131,3 +153,7 @@ function App() {
 }
 
 export default App;
+function alert(arg0: string): void {
+    throw new Error('Function not implemented.');
+}
+

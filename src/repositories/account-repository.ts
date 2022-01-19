@@ -3,7 +3,7 @@ import {AppDebugLog} from '../utils/AppDebug';
 import {ApiClient} from './network';
 import {AdminUserDTO} from './network/models';
 import AppPreferencesInstance from './persistence/app-preferences';
-import {notificationDao, refuelingDao, vehicleDao} from './persistence/db';
+import {dbConnection, notificationDao, refuelingDao, vehicleDao} from './persistence/db';
 
 const BACKEND_URL_PARAMETER_NAME = 'backend_base_url';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,7 +39,7 @@ export default class AccountRepository {
         password: password
       });
 
-      const jwtToken=response.data.id_token;
+      const jwtToken = response.data.id_token;
       console.log(`update token ${jwtToken}`);
 
       this.updateClientJWTToken(jwtToken);
@@ -62,9 +62,16 @@ export default class AccountRepository {
   async logout(): Promise<void> {
     await AppPreferencesInstance.removeAccount();
 
-    await refuelingDao.deleteAll();
-    await vehicleDao.deleteAll();
-    await notificationDao.deleteAll();
+    try {
+      await dbConnection.beginTransaction();
+      await refuelingDao.deleteAll();
+      await vehicleDao.deleteAll();
+      await notificationDao.deleteAll();
+      await dbConnection.commitTransaction();
+    } catch (e) {
+      console.log(e);
+      await dbConnection.rollbackTransaction();
+    }
   }
 
   public updateBaseUrl(baseUrl: string): void {

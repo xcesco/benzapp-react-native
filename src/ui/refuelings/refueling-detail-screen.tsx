@@ -27,7 +27,7 @@ export const RefuelingDetailScreen = inject('refuelingStore')(observer((props: {
     } else {
       console.log(`refueling-screen > ALREADY initialized`);
     }
-  }, [initializiated, props.refuelingStore]);
+  }, [initializiated, props.refuelingStore, route.params.id]);
 
   return (
           <View style={style.container}>
@@ -61,8 +61,8 @@ export const RefuelingDetailScreen = inject('refuelingStore')(observer((props: {
                       editable={false}/>
 
               <TextInputWithIcon iconName="currency-eur" label="Importo" text={(props.refuelingStore.rifornimento.litriErogati * (props.refuelingStore.rifornimento.prezzoAlLitro - props.refuelingStore.rifornimento.sconto)).toFixed(2) + ' €'}/>
-              <TextInputWithIcon iconName="gas-station" label="Litri erogati" text={(props.refuelingStore.rifornimento.litriErogati).toFixed(2) + ' L.'}/>
               <TextInputWithIcon iconName="piggy-bank" label="Sconto" text={(props.refuelingStore.rifornimento.litriErogati * props.refuelingStore.rifornimento.sconto).toFixed(2) + ' €'}/>
+              <TextInputWithIcon iconName="gas-station" label="Litri erogati" text={(props.refuelingStore.rifornimento.litriErogati).toFixed(2) + ' L.'}/>
             </View>
           </View>
   )

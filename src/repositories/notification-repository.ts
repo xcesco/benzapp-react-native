@@ -1,7 +1,7 @@
 import {Notification} from './model/notification';
 import {ApiClient} from './network';
 import {Connection} from './persistence/connection';
-import {NotificationDao} from './persistence/dao/notification_dao';
+import {NotificationDao} from './persistence/dao/notification-dao';
 
 export class NotificationRepository {
   constructor(apiClient: ApiClient, dbConnection: Connection, notificationDao: NotificationDao) {

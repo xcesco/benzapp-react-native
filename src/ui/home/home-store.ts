@@ -66,10 +66,20 @@ export default class HomeStore {
       this.loading = true;
     }
 
-    this.tessere = await this._vehicleRepository.update();
-    this.rifornimenti = await this._refuelingRepository.update();
-    console.log('sss',this.rifornimenti);
-    this.notifiche = await this._notificationRepository.update();
+    const primoAccesso=await AppPreferencesInstance.isPrimoAccesso();
+
+    if (primoAccesso) {
+      console.log('primo accesso');
+      this.tessere = await this._vehicleRepository.update();
+      this.rifornimenti = await this._refuelingRepository.update();
+     // this.notifiche = await this._notificationRepository.update();
+    } else {
+      console.log('NOT primo accesso');
+      this.tessere=await this._vehicleRepository.findAll();
+      this.rifornimenti=await this._refuelingRepository.findAll();
+      //this.notifiche
+    }
+
 
     if (updateUI === true) {
       this.loading = false;
