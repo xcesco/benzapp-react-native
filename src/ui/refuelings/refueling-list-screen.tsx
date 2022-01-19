@@ -32,11 +32,16 @@ export const RefuelingListScreen = inject('refuelingStore')(observer((props: { c
       setInitializiated(true);
       console.log(`refueling-screen > initialize`);
 
-      props.refuelingStore.findAll();
+      if ((route.params!==null && route.params!==undefined)) {
+        props.refuelingStore.findAllByTarga(route.params.targa);
+      } else {
+        props.refuelingStore.findAll();
+      }
+
     } else {
       console.log(`refueling-screen > ALREADY initialized`);
     }
-  }, [initializiated, props.refuelingStore]);
+  }, [initializiated, props.refuelingStore, route.params]);
 
   return (<View style={style.container}>
     <FlatList data={props.refuelingStore.rifornimenti} renderItem={_renderItem}/>

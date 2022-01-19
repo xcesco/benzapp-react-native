@@ -47,7 +47,8 @@ export default class RefuelingStore {
       rifornimenti: observable,
 
       findAll: action,
-      findById: action
+      findById: action,
+      findAllByTarga: action
     });
 
   }
@@ -76,6 +77,20 @@ export default class RefuelingStore {
 
     runInAction(() => {
         this.rifornimento = result;
+      }
+    )
+    return true;
+  }
+
+  // action
+  async findAllByTarga(targa: string): Promise<boolean> {
+    console.log('RefuelingStore > findOne');
+
+    const result = await this._refuelingRepository.findAllByTarga(targa);
+    console.log('RefuelingStore > findOne: ', result);
+
+    runInAction(() => {
+        this.rifornimenti = result;
       }
     )
     return true;

@@ -6,6 +6,6 @@ export type RootStackParamList = {
   VehicleList: undefined;
   VehicleDetail: { id: number };
   VehicleQRCodeDetail: { id:number };
-  RefuelingList: undefined;
+  RefuelingList: { targa:string } | undefined;
   RefuelingDetail: { id:number };
 };

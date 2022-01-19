@@ -33,6 +33,7 @@ export const VehicleDetailScreen = inject('vehicleStore')(observer((props: { com
     navigation.setOptions({
       headerRight: () => (<View style={{flexDirection: 'row'}}>
         <Appbar.Action color={Colors.white} icon="gas-station" onPress={() => {
+            navigation.navigate('RefuelingList', { targa: props.vehicleStore.vehicle.targa})
         }}/>
       </View>),
     });

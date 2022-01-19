@@ -53,4 +53,18 @@ export default class RefuelingRepository {
     }
     return result!;
   }
+
+  async findAllByTarga(targa: string): Promise<Refueling[]> {
+    let result: Refueling[];
+    try {
+      await this._connection.beginTransaction();
+      result = await this._refuelingDao.findAllByTarga(targa);
+      await this._connection.commitTransaction();
+    } catch (e) {
+      console.log(e);
+      await dbConnection.rollbackTransaction();
+    }
+
+    return result!;
+  }
 }

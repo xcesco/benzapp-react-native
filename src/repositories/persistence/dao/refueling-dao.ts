@@ -8,7 +8,7 @@ export class RefuelingDao {
   readonly SQL_DELETE_ALL = 'DELETE FROM refuelings';
   readonly SQL_INSERT: string = 'INSERT INTO refuelings (data, gestore, gestore_id, litri_erogati, prezzo_al_litro, sconto, targa, tessera, tipo_carburante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
   readonly SQL_SELECT_ALL = 'SELECT * FROM refuelings ORDER BY data desc';
-  readonly SQL_SELECT_BY_TARGA = 'SELECT * FROM refuelings WHERE targa = ?';
+  readonly SQL_SELECT_BY_TARGA = 'SELECT * FROM refuelings WHERE targa = ? ORDER BY data desc';
   readonly SQL_SELECT_BY_ID = 'SELECT * FROM refuelings WHERE id = ?';
   readonly SQL_SELECT_SUM_LITRI_EROGATI_BY_TARGA = 'select sum((prezzo_al_litro-sconto)*litri_erogati) as spesa, sum(litri_erogati) as litriErogati, sum(sconto*litri_erogati) as risparmio from refuelings where targa= ?';
   private database: Connection;
@@ -31,6 +31,14 @@ export class RefuelingDao {
   async findlAll(): Promise<Refueling[]> {
     // @ts-ignore
     const result = (await this.database.execute(this.SQL_SELECT_ALL, []));
+    const value: Refueling[] = result.rows.map(item => this.fromDb(item));
+
+    return value;
+  }
+
+  async findAllByTarga(targa: string): Promise<Refueling[]> {
+    // @ts-ignore
+    const result = (await this.database.execute(this.SQL_SELECT_BY_TARGA, [targa]));
     const value: Refueling[] = result.rows.map(item => this.fromDb(item));
 
     return value;
@@ -98,4 +106,5 @@ export class RefuelingDao {
 
     return value;
   }
+
 }
