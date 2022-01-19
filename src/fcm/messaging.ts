@@ -1,13 +1,13 @@
 import messaging from '@react-native-firebase/messaging';
+import HomeStore from '../ui/home/home-store';
 
-export async function registryMessageHandler(): Promise<boolean> {
+export async function registryMessageHandler(homeStore: HomeStore): Promise<boolean> {
   console.log(
     'fcm > notification handler registered');
 
-  messaging().setAutoInitEnabled(true);
-  const token = await messaging().getToken();
-  console.log(`fcm > ${token}`)
-
+  await messaging().setAutoInitEnabled(true);
+  // const token = await messaging().getToken();
+  // console.log(`fcm > ${token}`)
 
   messaging().onNotificationOpenedApp(remoteMessage => {
     console.log(
@@ -17,8 +17,12 @@ export async function registryMessageHandler(): Promise<boolean> {
     //navigation.navigate(remoteMessage.data.type);
   });
 
-  messaging().onMessage(async (remoteMessage) => {
-    console.log('fcm > Message Data:', remoteMessage.data);
+  messaging().onMessage((remoteMessage) => {
+    console.log('eccomi');
+    console.log('fcm > Message Data:', remoteMessage.notification?.body);
+
+    homeStore.publishNotification(remoteMessage.notification?.body!);
+
 
     // Update a users messages list using AsyncStorage
     //const currentMessages = await AsyncStorage.getItem('messages');

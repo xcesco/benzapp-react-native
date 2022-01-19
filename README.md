@@ -79,7 +79,7 @@ Per eseguire la build su Android, nel file `package.json` inserire la configuraz
   },
 ```
 
-Nel caso di build su iOS, togliere la configurazione (o rinominarla in expo-android)
+Nel caso di build su iOS, togliere la configurazione (o rinominarla in `expo-android`, ed eseguire `pod install` nella cartella `ios`)
 
 ## IOs
 pinch out & in

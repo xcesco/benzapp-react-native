@@ -6,7 +6,7 @@ import {Callout, CalloutSubview, Marker} from 'react-native-maps';
 import {Colors} from 'react-native-paper';
 import StationItem from './station-item';
 import {TouchableHighlight} from 'react-native-gesture-handler';
-import {openGoogleMaps} from '../../utils/navigation-helper';
+import {openGoogleMaps} from '../../utils/helper';
 import {getMarchioImage} from '../../repositories/model/marchio';
 
 const INITIAL_REGION = {

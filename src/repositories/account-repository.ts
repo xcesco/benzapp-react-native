@@ -61,6 +61,7 @@ export default class AccountRepository {
 
   async logout(): Promise<void> {
     await AppPreferencesInstance.removeAccount();
+    await AppPreferencesInstance.setPrimoAccesso(true);
 
     try {
       await dbConnection.beginTransaction();

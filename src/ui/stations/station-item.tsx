@@ -4,7 +4,7 @@ import {Station} from '../../repositories/model/station';
 import {Caption, Colors, Divider, IconButton, Text} from 'react-native-paper';
 import {getMarchioImage} from '../../repositories/model/marchio';
 import assets from '../../../assets';
-import {openGoogleMaps} from '../../utils/navigation-helper';
+import {openGoogleMaps} from '../../utils/helper';
 
 export default function StationItem(props: { componentId?: string; item: Station, displaySeparator?: boolean }) {
   return (<View style={{flexDirection: 'column'}}>

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Button, Colors, DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import {Button, DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import assets from './assets';
 import {Provider} from 'mobx-react';
 import LockScreen from './src/ui/lock/lock-screen';
 import {MainScreen} from './src/ui/main/main-screen';
-import AppHeader from './src/components/app-header';
 import LoginScreen from './src/ui/login/login-screen';
 import {AppDebugLog} from './src/utils/AppDebug';
 import AccountRepository from './src/repositories/account-repository';
@@ -33,11 +32,10 @@ import RefuelingStore from './src/ui/refuelings/refueling-store';
 import {RefuelingListScreen} from './src/ui/refuelings/refueling-list-screen';
 import VehicleStore from './src/ui/vehicles/vehicle-store';
 import {VehicleListScreen} from './src/ui/vehicles/vehicle-list-screen';
-import { RefuelingDetailScreen } from './src/ui/refuelings/refueling-detail-screen';
-import { VehicleDetailScreen } from './src/ui/vehicles/vehicle-detail-screen';
+import {RefuelingDetailScreen} from './src/ui/refuelings/refueling-detail-screen';
+import {VehicleDetailScreen} from './src/ui/vehicles/vehicle-detail-screen';
 import {QRCodeScreen} from './src/ui/qrcode/qrcode-screen';
 import {Platform} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const theme = {
   ...DefaultTheme,
@@ -62,7 +60,7 @@ const refuelingRepository = new RefuelingRepository(apiClient, dbConnection, ref
 const notificationRepository = new NotificationRepository(apiClient, dbConnection, notificationDao);
 const stationRepository = new StationRepository(dbConnection, stationDao);
 
-const lockStore = new LockStore(secureRepository);
+const lockStore = new LockStore(secureRepository, apiClient);
 const homeStore = new HomeStore(accountRepository, vehicleRepository, refuelingRepository, notificationRepository);
 const refuelingStore = new RefuelingStore(refuelingRepository);
 const vehicleStore = new VehicleStore(vehicleRepository);
@@ -102,7 +100,7 @@ function App() {
                 <Stack.Navigator
                         initialRouteName="Splash"
                         screenOptions={{
-                          headerShadowVisible:false,
+                          headerShadowVisible: false,
                           headerStyle: {
                             backgroundColor: assets.colors.primaryColor,
                             ...Platform.select({
@@ -133,7 +131,7 @@ function App() {
                     title: 'Dettaglio tessera',
                   }}/>
                   <Stack.Screen name="VehicleQRCodeDetail" component={QRCodeScreen} options={{
-                    title: 'QRCode',  headerRight: () => (
+                    title: 'QRCode', headerRight: () => (
                             <Button
                                     onPress={() => alert('This is a button!')}
                                     color="#fff"
@@ -154,7 +152,8 @@ function App() {
 }
 
 export default App;
+
 function alert(arg0: string): void {
-    throw new Error('Function not implemented.');
+  throw new Error('Function not implemented.');
 }
 
