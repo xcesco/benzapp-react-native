@@ -2,6 +2,7 @@ import {Configuration} from './configuration';
 import {
   AccountResourceApi,
   DelegaResourceApi,
+  DeviceResourceApi,
   RifornimentoResourceApi,
   TesseraResourceApi,
   UserJwtControllerApi
@@ -12,7 +13,12 @@ export class ApiClient {
     this.init();
   }
 
+  get baseUrl(): string {
+    return this._baseUrl;
+  }
+
   private _baseUrl: string = 'http://localhost';
+
   private _jwtToken: string = '<NO-TOKEN>';
 
   // @ts-ignore
@@ -29,6 +35,9 @@ export class ApiClient {
 
   // @ts-ignore
   private _delegaResourceApi: DelegaResourceApi;
+
+  // @ts-ignore
+  private _deviceResourceApi: DeviceResourceApi;
 
   get userJwtControllerApi(): UserJwtControllerApi {
     return this._userJwtControllerApi;
@@ -50,6 +59,10 @@ export class ApiClient {
     return this._delegaResourceApi;
   }
 
+  get deviceResourceApi(): DeviceResourceApi {
+    return this._deviceResourceApi;
+  }
+
   private init(baseUrl: string | null = null, token: string | null = null): void {
     if (baseUrl !== undefined && baseUrl !== null) {
       this._baseUrl = baseUrl;
@@ -67,6 +80,7 @@ export class ApiClient {
     this._tesseraResourceApi = new TesseraResourceApi(configuration);
     this._rifornimentoResourceApi = new RifornimentoResourceApi(configuration);
     this._delegaResourceApi = new DelegaResourceApi(configuration);
+    this._deviceResourceApi=new DeviceResourceApi(configuration);
   }
 
   updateJWTToken(value: string): void {

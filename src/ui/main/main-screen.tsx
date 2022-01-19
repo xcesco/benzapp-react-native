@@ -14,6 +14,7 @@ import assets from '../../../assets';
 import StationMapFragment from '../stations/station-map-fragment';
 import HomeFragment from '../home/home-fragment';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {showSnackbar} from '../../utils/helper';
 
 type screenProp = StackNavigationProp<RootStackParamList, 'Main'>;
 
@@ -27,25 +28,47 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
     {key: 'stations', title: I18n.t('tabStations'), icon: 'format-list-bulleted'},
   ]);
 
-  useEffect(() => {
-    if (!initializiated) {
-      setInitializiated(true);
-      props.stationListStore.selectAll();
-    }
-  }, [initializiated, props.stationListStore, props.homeStore]);
-
-  useLayoutEffect(()=> {
-    navigation.setOptions({
-      headerLeft: (_) => (<Icon name="menu" color={Colors.white} size={35} onPress={ () => console.log('menu') }/>),
-    });
-  })
-
   const navigateToLogin = (): void => {
     navigation.reset({
       index: 0,
       routes: [{name: 'Login'}],
     });
   };
+
+  useEffect(() => {
+    console.log('loading', props.homeStore.loading);
+
+    if (!initializiated) {
+      props.homeStore.notificationSubject.subscribe(data => {
+        console.log('ricevo ', data);
+        props.homeStore.updateData(true);
+
+        showSnackbar(data);
+      });
+      setInitializiated(true);
+      props.stationListStore.selectAll();
+    }
+  }, [initializiated, props.homeStore.loading, props.stationListStore]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: (_) => (<Icon name="menu" color={Colors.white} size={35} onPress={() => console.log('menu')}/>),
+      headerRight: () => (<View style={{flexDirection: 'row'}}>
+        <Appbar.Action color={Colors.white} icon="refresh" onPress={() => {
+          props.homeStore.updateData(true);
+
+          showSnackbar('Effettuo update dati');
+        }}/>
+        <Appbar.Action color={Colors.white} icon="logout" onPress={() => {
+          props.homeStore.logout().then(_ => {
+            showSnackbar('Effettuo logout');
+            setTimeout(() =>
+                    navigateToLogin(), 2000);
+          });
+        }}/>
+      </View>),
+    });
+  })
 
   const HomeRoute = () => {
     return (
@@ -71,8 +94,11 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
     stations: StationListRoute
   });
 
-  return <BottomNavigation navigationState={{index, routes}} onIndexChange={setIndex} renderScene={renderScene}
-                           barStyle={{backgroundColor: Colors.white}} activeColor={assets.colors.primaryColor}/>;
+  return (
+  <BottomNavigation navigationState={{index, routes}} onIndexChange={setIndex}
+                    renderScene={renderScene} barStyle={{backgroundColor: Colors.white}}
+                    activeColor={assets.colors.primaryColor}
+  />);
 }));
 
 const style = StyleSheet.create({
@@ -81,3 +107,4 @@ const style = StyleSheet.create({
   },
   bottom: {}
 });
+

@@ -34,12 +34,11 @@ const SplashScreen = inject('homeStore')
 
             async function startup() {
               const hasAccount = await applicationInit();
-              const fcmRegistered = await registryMessageHandler();
+              const fcmRegistered = await registryMessageHandler(props.homeStore);
 
               console.log(`display> splash-screen: fcmRegistered ${fcmRegistered}`);
-
-
               console.log(`display> splash-screen: hasAccount ${hasAccount}`);
+
               if (hasAccount) {
                 navigateToLock();
               } else {
@@ -48,7 +47,7 @@ const SplashScreen = inject('homeStore')
             }
 
             startup();
-          }, [navigation, props.back]);
+          }, [navigation, props.back, props.homeStore]);
 
           return (
                   <View style={style.container}>

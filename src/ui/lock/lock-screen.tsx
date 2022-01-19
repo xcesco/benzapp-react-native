@@ -50,11 +50,14 @@ const LockScreen = inject('lockStore', 'homeStore')(observer((props: { component
                   primoAccesso={props.lockStore.primoAccesso}
                   initialPin={props.lockStore.pin ?? ''}
                   onSubmitPinHandler={() => {
-                    navigateToMain();
+                    props.lockStore.unlock().then(_ => {
+                      navigateToMain();
+                    })
+
                   }}
                   onGeneratedPinHandler={(pin) => {
                     console.log('action > actionSavePin');
-                    props.lockStore.actionSavePin(pin).then(value => {
+                    props.lockStore.savePin(pin).then(value => {
                       console.log(`action > actionSavePin saved ${value}`);
                     });
                   }}/>

@@ -11,6 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
 import {Vehicle} from '../../repositories/model/vehicle';
+import * as Progress from 'react-native-progress';
 
 type ScreenProps = StackNavigationProp<RootStackParamList, 'Main'>;
 
@@ -20,17 +21,6 @@ export default function HomeFragment(props: { componentId?: string; vechicles: V
   const [visible, setVisible] = useState(false);
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (<View style={{flexDirection: 'row'}}>
-        <Appbar.Action color={Colors.white} icon="refresh" onPress={() => {
-        }}/>
-        <Appbar.Action color={Colors.white} icon="logout" onPress={() => {
-        }}/>
-      </View>),
-    });
-  });
 
 // @ts-ignore
   const _renderVehicleItem = (renderItem: { item: Vehicle }) => {
