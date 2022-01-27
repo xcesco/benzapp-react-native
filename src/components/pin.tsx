@@ -81,7 +81,9 @@ export const Pin = observer((props: { primoAccesso: boolean, initialPin: string,
   }
 
   function limitPinSize(value: string | null): string {
-    if (value === null) return '';
+    if (value === null) {
+      return '';
+    }
     return value.slice(0, 6);
   }
 
@@ -116,9 +118,9 @@ const style = StyleSheet.create({
     flex: 0.6,
     ...Platform.select({
       ios: {
-        paddingTop: 24
-      }
-    })
+        paddingTop: 24,
+      },
+    }),
   },
 
   panelTop: {

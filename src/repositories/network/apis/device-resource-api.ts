@@ -11,656 +11,86 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { AxiosPromise, AxiosInstance } from 'axios';
-import { Configuration } from '../configuration';
+import globalAxios, {AxiosPromise, AxiosInstance} from 'axios';
+import {Configuration} from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { Device } from '../models';
+import {BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError} from '../base';
+import {Device} from '../models';
+
 /**
  * DeviceResourceApi - axios parameter creator
  * @export
  */
 export const DeviceResourceApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         *
-         * @summary countDevices
-         * @param {string} [deviceIdContains]
-         * @param {string} [deviceIdDoesNotContain]
-         * @param {string} [deviceIdEquals]
-         * @param {Array&lt;string&gt;} [deviceIdIn]
-         * @param {string} [deviceIdNotEquals]
-         * @param {Array&lt;string&gt;} [deviceIdNotIn]
-         * @param {boolean} [deviceIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {string} [ownerContains]
-         * @param {string} [ownerDoesNotContain]
-         * @param {string} [ownerEquals]
-         * @param {Array&lt;string&gt;} [ownerIn]
-         * @param {string} [ownerNotEquals]
-         * @param {Array&lt;string&gt;} [ownerNotIn]
-         * @param {boolean} [ownerSpecified]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        countDevicesUsingGET: async (deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/devices/count`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+  return {
+    /**
+     *
+     * @summary createDevice
+     * @param {Device} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createDeviceUsingPOST: async (body?: Device, options: any = {}): Promise<RequestArgs> => {
+      const localVarPath = `/api/devices`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {method: 'POST', ...baseOptions, ...options};
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
+      // authentication benzappAuth required
+      const authHeader = {'Authorization': `Bearer ${configuration!.accessToken}`};
 
-            if (deviceIdContains !== undefined) {
-                localVarQueryParameter['deviceId.contains'] = deviceIdContains;
-            }
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            if (deviceIdDoesNotContain !== undefined) {
-                localVarQueryParameter['deviceId.doesNotContain'] = deviceIdDoesNotContain;
-            }
+      const query = new URLSearchParams(localVarUrlObj.search);
+      for (const key in localVarQueryParameter) {
+        query.set(key, localVarQueryParameter[key]);
+      }
+      for (const key in options.query) {
+        query.set(key, options.query[key]);
+      }
+      localVarUrlObj.search = (new URLSearchParams(query)).toString();
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
+      const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 
-            if (deviceIdEquals !== undefined) {
-                localVarQueryParameter['deviceId.equals'] = deviceIdEquals;
-            }
-
-            if (deviceIdNotEquals !== undefined) {
-                localVarQueryParameter['deviceId.notEquals'] = deviceIdNotEquals;
-            }
-
-            if (deviceIdSpecified !== undefined) {
-                localVarQueryParameter['deviceId.specified'] = deviceIdSpecified;
-            }
-
-            if (idEquals !== undefined) {
-                localVarQueryParameter['id.equals'] = idEquals;
-            }
-
-            if (idGreaterThan !== undefined) {
-                localVarQueryParameter['id.greaterThan'] = idGreaterThan;
-            }
-
-            if (idGreaterThanOrEqual !== undefined) {
-                localVarQueryParameter['id.greaterThanOrEqual'] = idGreaterThanOrEqual;
-            }
-
-            if (idLessThan !== undefined) {
-                localVarQueryParameter['id.lessThan'] = idLessThan;
-            }
-
-            if (idLessThanOrEqual !== undefined) {
-                localVarQueryParameter['id.lessThanOrEqual'] = idLessThanOrEqual;
-            }
-
-            if (idNotEquals !== undefined) {
-                localVarQueryParameter['id.notEquals'] = idNotEquals;
-            }
-
-            if (idSpecified !== undefined) {
-                localVarQueryParameter['id.specified'] = idSpecified;
-            }
-
-            if (ownerContains !== undefined) {
-                localVarQueryParameter['owner.contains'] = ownerContains;
-            }
-
-            if (ownerDoesNotContain !== undefined) {
-                localVarQueryParameter['owner.doesNotContain'] = ownerDoesNotContain;
-            }
-
-            if (ownerEquals !== undefined) {
-                localVarQueryParameter['owner.equals'] = ownerEquals;
-            }
-
-            if (ownerNotEquals !== undefined) {
-                localVarQueryParameter['owner.notEquals'] = ownerNotEquals;
-            }
-
-            if (ownerSpecified !== undefined) {
-                localVarQueryParameter['owner.specified'] = ownerSpecified;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         *
-         * @summary createDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createDeviceUsingPOST: async (body?: Device, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/devices`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         *
-         * @summary deleteDevice
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteDeviceUsingDELETE: async (id: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteDeviceUsingDELETE.');
-            }
-            const localVarPath = `/api/devices/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         *
-         * @summary getAllDevices
-         * @param {string} [deviceIdContains]
-         * @param {string} [deviceIdDoesNotContain]
-         * @param {string} [deviceIdEquals]
-         * @param {Array&lt;string&gt;} [deviceIdIn]
-         * @param {string} [deviceIdNotEquals]
-         * @param {Array&lt;string&gt;} [deviceIdNotIn]
-         * @param {boolean} [deviceIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {string} [ownerContains]
-         * @param {string} [ownerDoesNotContain]
-         * @param {string} [ownerEquals]
-         * @param {Array&lt;string&gt;} [ownerIn]
-         * @param {string} [ownerNotEquals]
-         * @param {Array&lt;string&gt;} [ownerNotIn]
-         * @param {boolean} [ownerSpecified]
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllDevicesUsingGET: async (deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/devices`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            if (deviceIdContains !== undefined) {
-                localVarQueryParameter['deviceId.contains'] = deviceIdContains;
-            }
-
-            if (deviceIdDoesNotContain !== undefined) {
-                localVarQueryParameter['deviceId.doesNotContain'] = deviceIdDoesNotContain;
-            }
-
-            if (deviceIdEquals !== undefined) {
-                localVarQueryParameter['deviceId.equals'] = deviceIdEquals;
-            }
-
-            if (deviceIdNotEquals !== undefined) {
-                localVarQueryParameter['deviceId.notEquals'] = deviceIdNotEquals;
-            }
-
-            if (deviceIdSpecified !== undefined) {
-                localVarQueryParameter['deviceId.specified'] = deviceIdSpecified;
-            }
-
-            if (idEquals !== undefined) {
-                localVarQueryParameter['id.equals'] = idEquals;
-            }
-
-            if (idGreaterThan !== undefined) {
-                localVarQueryParameter['id.greaterThan'] = idGreaterThan;
-            }
-
-            if (idGreaterThanOrEqual !== undefined) {
-                localVarQueryParameter['id.greaterThanOrEqual'] = idGreaterThanOrEqual;
-            }
-
-            if (idLessThan !== undefined) {
-                localVarQueryParameter['id.lessThan'] = idLessThan;
-            }
-
-            if (idLessThanOrEqual !== undefined) {
-                localVarQueryParameter['id.lessThanOrEqual'] = idLessThanOrEqual;
-            }
-
-            if (idNotEquals !== undefined) {
-                localVarQueryParameter['id.notEquals'] = idNotEquals;
-            }
-
-            if (idSpecified !== undefined) {
-                localVarQueryParameter['id.specified'] = idSpecified;
-            }
-
-            if (ownerContains !== undefined) {
-                localVarQueryParameter['owner.contains'] = ownerContains;
-            }
-
-            if (ownerDoesNotContain !== undefined) {
-                localVarQueryParameter['owner.doesNotContain'] = ownerDoesNotContain;
-            }
-
-            if (ownerEquals !== undefined) {
-                localVarQueryParameter['owner.equals'] = ownerEquals;
-            }
-
-            if (ownerNotEquals !== undefined) {
-                localVarQueryParameter['owner.notEquals'] = ownerNotEquals;
-            }
-
-            if (ownerSpecified !== undefined) {
-                localVarQueryParameter['owner.specified'] = ownerSpecified;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
-
-            if (sort) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         *
-         * @summary getDevice
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDeviceUsingGET: async (id: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getDeviceUsingGET.');
-            }
-            const localVarPath = `/api/devices/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         *
-         * @summary partialUpdateDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        partialUpdateDeviceUsingPATCH: async (body?: Device, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/devices`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         *
-         * @summary updateDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateDeviceUsingPUT: async (body?: Device, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/devices`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+        options: localVarRequestOptions,
+      };
+    },
+  }
 };
 
 /**
  * DeviceResourceApi - functional programming interface
  * @export
  */
-export const DeviceResourceApiFp = function(configuration?: Configuration) {
-    return {
-        /**
-         *
-         * @summary countDevices
-         * @param {string} [deviceIdContains]
-         * @param {string} [deviceIdDoesNotContain]
-         * @param {string} [deviceIdEquals]
-         * @param {Array&lt;string&gt;} [deviceIdIn]
-         * @param {string} [deviceIdNotEquals]
-         * @param {Array&lt;string&gt;} [deviceIdNotIn]
-         * @param {boolean} [deviceIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {string} [ownerContains]
-         * @param {string} [ownerDoesNotContain]
-         * @param {string} [ownerEquals]
-         * @param {Array&lt;string&gt;} [ownerIn]
-         * @param {string} [ownerNotEquals]
-         * @param {Array&lt;string&gt;} [ownerNotIn]
-         * @param {boolean} [ownerSpecified]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async countDevicesUsingGET(deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).countDevicesUsingGET(deviceIdContains, deviceIdDoesNotContain, deviceIdEquals, deviceIdIn, deviceIdNotEquals, deviceIdNotIn, deviceIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, ownerContains, ownerDoesNotContain, ownerEquals, ownerIn, ownerNotEquals, ownerNotIn, ownerSpecified, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         *
-         * @summary createDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createDeviceUsingPOST(body?: Device, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).createDeviceUsingPOST(body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         *
-         * @summary deleteDevice
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteDeviceUsingDELETE(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).deleteDeviceUsingDELETE(id, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         *
-         * @summary getAllDevices
-         * @param {string} [deviceIdContains]
-         * @param {string} [deviceIdDoesNotContain]
-         * @param {string} [deviceIdEquals]
-         * @param {Array&lt;string&gt;} [deviceIdIn]
-         * @param {string} [deviceIdNotEquals]
-         * @param {Array&lt;string&gt;} [deviceIdNotIn]
-         * @param {boolean} [deviceIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {string} [ownerContains]
-         * @param {string} [ownerDoesNotContain]
-         * @param {string} [ownerEquals]
-         * @param {Array&lt;string&gt;} [ownerIn]
-         * @param {string} [ownerNotEquals]
-         * @param {Array&lt;string&gt;} [ownerNotIn]
-         * @param {boolean} [ownerSpecified]
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllDevicesUsingGET(deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Device>>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).getAllDevicesUsingGET(deviceIdContains, deviceIdDoesNotContain, deviceIdEquals, deviceIdIn, deviceIdNotEquals, deviceIdNotIn, deviceIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, ownerContains, ownerDoesNotContain, ownerEquals, ownerIn, ownerNotEquals, ownerNotIn, ownerSpecified, page, size, sort, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         *
-         * @summary getDevice
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getDeviceUsingGET(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).getDeviceUsingGET(id, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         *
-         * @summary partialUpdateDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async partialUpdateDeviceUsingPATCH(body?: Device, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).partialUpdateDeviceUsingPATCH(body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         *
-         * @summary updateDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateDeviceUsingPUT(body?: Device, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
-            const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).updateDeviceUsingPUT(body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-    }
+export const DeviceResourceApiFp = function (configuration?: Configuration) {
+  return {
+
+    /**
+     *
+     * @summary createDevice
+     * @param {Device} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async createDeviceUsingPOST(body?: Device, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
+      const localVarAxiosArgs = await DeviceResourceApiAxiosParamCreator(configuration).createDeviceUsingPOST(body, options);
+      return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+        const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+        return axios.request(axiosRequestArgs);
+      };
+    },
+  }
 };
 
 /**
@@ -668,125 +98,19 @@ export const DeviceResourceApiFp = function(configuration?: Configuration) {
  * @export
  */
 export const DeviceResourceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    return {
-        /**
-         *
-         * @summary countDevices
-         * @param {string} [deviceIdContains]
-         * @param {string} [deviceIdDoesNotContain]
-         * @param {string} [deviceIdEquals]
-         * @param {Array&lt;string&gt;} [deviceIdIn]
-         * @param {string} [deviceIdNotEquals]
-         * @param {Array&lt;string&gt;} [deviceIdNotIn]
-         * @param {boolean} [deviceIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {string} [ownerContains]
-         * @param {string} [ownerDoesNotContain]
-         * @param {string} [ownerEquals]
-         * @param {Array&lt;string&gt;} [ownerIn]
-         * @param {string} [ownerNotEquals]
-         * @param {Array&lt;string&gt;} [ownerNotIn]
-         * @param {boolean} [ownerSpecified]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        countDevicesUsingGET(deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, options?: any): AxiosPromise<number> {
-            return DeviceResourceApiFp(configuration).countDevicesUsingGET(deviceIdContains, deviceIdDoesNotContain, deviceIdEquals, deviceIdIn, deviceIdNotEquals, deviceIdNotIn, deviceIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, ownerContains, ownerDoesNotContain, ownerEquals, ownerIn, ownerNotEquals, ownerNotIn, ownerSpecified, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary createDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createDeviceUsingPOST(body?: Device, options?: any): AxiosPromise<Device> {
-            return DeviceResourceApiFp(configuration).createDeviceUsingPOST(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary deleteDevice
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteDeviceUsingDELETE(id: number, options?: any): AxiosPromise<void> {
-            return DeviceResourceApiFp(configuration).deleteDeviceUsingDELETE(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary getAllDevices
-         * @param {string} [deviceIdContains]
-         * @param {string} [deviceIdDoesNotContain]
-         * @param {string} [deviceIdEquals]
-         * @param {Array&lt;string&gt;} [deviceIdIn]
-         * @param {string} [deviceIdNotEquals]
-         * @param {Array&lt;string&gt;} [deviceIdNotIn]
-         * @param {boolean} [deviceIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {string} [ownerContains]
-         * @param {string} [ownerDoesNotContain]
-         * @param {string} [ownerEquals]
-         * @param {Array&lt;string&gt;} [ownerIn]
-         * @param {string} [ownerNotEquals]
-         * @param {Array&lt;string&gt;} [ownerNotIn]
-         * @param {boolean} [ownerSpecified]
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllDevicesUsingGET(deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, options?: any): AxiosPromise<Array<Device>> {
-            return DeviceResourceApiFp(configuration).getAllDevicesUsingGET(deviceIdContains, deviceIdDoesNotContain, deviceIdEquals, deviceIdIn, deviceIdNotEquals, deviceIdNotIn, deviceIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, ownerContains, ownerDoesNotContain, ownerEquals, ownerIn, ownerNotEquals, ownerNotIn, ownerSpecified, page, size, sort, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary getDevice
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDeviceUsingGET(id: number, options?: any): AxiosPromise<Device> {
-            return DeviceResourceApiFp(configuration).getDeviceUsingGET(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary partialUpdateDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        partialUpdateDeviceUsingPATCH(body?: Device, options?: any): AxiosPromise<Device> {
-            return DeviceResourceApiFp(configuration).partialUpdateDeviceUsingPATCH(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary updateDevice
-         * @param {Device} [body]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateDeviceUsingPUT(body?: Device, options?: any): AxiosPromise<Device> {
-            return DeviceResourceApiFp(configuration).updateDeviceUsingPUT(body, options).then((request) => request(axios, basePath));
-        },
-    };
+  return {
+
+    /**
+     *
+     * @summary createDevice
+     * @param {Device} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createDeviceUsingPOST(body?: Device, options?: any): AxiosPromise<Device> {
+      return DeviceResourceApiFp(configuration).createDeviceUsingPOST(body, options).then((request) => request(axios, basePath));
+    },
+  };
 };
 
 /**
@@ -796,128 +120,17 @@ export const DeviceResourceApiFactory = function (configuration?: Configuration,
  * @extends {BaseAPI}
  */
 export class DeviceResourceApi extends BaseAPI {
-    /**
-     *
-     * @summary countDevices
-     * @param {string} [deviceIdContains]
-     * @param {string} [deviceIdDoesNotContain]
-     * @param {string} [deviceIdEquals]
-     * @param {Array&lt;string&gt;} [deviceIdIn]
-     * @param {string} [deviceIdNotEquals]
-     * @param {Array&lt;string&gt;} [deviceIdNotIn]
-     * @param {boolean} [deviceIdSpecified]
-     * @param {number} [idEquals]
-     * @param {number} [idGreaterThan]
-     * @param {number} [idGreaterThanOrEqual]
-     * @param {Array&lt;number&gt;} [idIn]
-     * @param {number} [idLessThan]
-     * @param {number} [idLessThanOrEqual]
-     * @param {number} [idNotEquals]
-     * @param {Array&lt;number&gt;} [idNotIn]
-     * @param {boolean} [idSpecified]
-     * @param {string} [ownerContains]
-     * @param {string} [ownerDoesNotContain]
-     * @param {string} [ownerEquals]
-     * @param {Array&lt;string&gt;} [ownerIn]
-     * @param {string} [ownerNotEquals]
-     * @param {Array&lt;string&gt;} [ownerNotIn]
-     * @param {boolean} [ownerSpecified]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public countDevicesUsingGET(deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, options?: any) {
-        return DeviceResourceApiFp(this.configuration).countDevicesUsingGET(deviceIdContains, deviceIdDoesNotContain, deviceIdEquals, deviceIdIn, deviceIdNotEquals, deviceIdNotIn, deviceIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, ownerContains, ownerDoesNotContain, ownerEquals, ownerIn, ownerNotEquals, ownerNotIn, ownerSpecified, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary createDevice
-     * @param {Device} [body]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public createDeviceUsingPOST(body?: Device, options?: any) {
-        return DeviceResourceApiFp(this.configuration).createDeviceUsingPOST(body, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary deleteDevice
-     * @param {number} id id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public deleteDeviceUsingDELETE(id: number, options?: any) {
-        return DeviceResourceApiFp(this.configuration).deleteDeviceUsingDELETE(id, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary getAllDevices
-     * @param {string} [deviceIdContains]
-     * @param {string} [deviceIdDoesNotContain]
-     * @param {string} [deviceIdEquals]
-     * @param {Array&lt;string&gt;} [deviceIdIn]
-     * @param {string} [deviceIdNotEquals]
-     * @param {Array&lt;string&gt;} [deviceIdNotIn]
-     * @param {boolean} [deviceIdSpecified]
-     * @param {number} [idEquals]
-     * @param {number} [idGreaterThan]
-     * @param {number} [idGreaterThanOrEqual]
-     * @param {Array&lt;number&gt;} [idIn]
-     * @param {number} [idLessThan]
-     * @param {number} [idLessThanOrEqual]
-     * @param {number} [idNotEquals]
-     * @param {Array&lt;number&gt;} [idNotIn]
-     * @param {boolean} [idSpecified]
-     * @param {string} [ownerContains]
-     * @param {string} [ownerDoesNotContain]
-     * @param {string} [ownerEquals]
-     * @param {Array&lt;string&gt;} [ownerIn]
-     * @param {string} [ownerNotEquals]
-     * @param {Array&lt;string&gt;} [ownerNotIn]
-     * @param {boolean} [ownerSpecified]
-     * @param {number} [page] Page number of the requested page
-     * @param {number} [size] Size of a page
-     * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public getAllDevicesUsingGET(deviceIdContains?: string, deviceIdDoesNotContain?: string, deviceIdEquals?: string, deviceIdIn?: Array<string>, deviceIdNotEquals?: string, deviceIdNotIn?: Array<string>, deviceIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, ownerContains?: string, ownerDoesNotContain?: string, ownerEquals?: string, ownerIn?: Array<string>, ownerNotEquals?: string, ownerNotIn?: Array<string>, ownerSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, options?: any) {
-        return DeviceResourceApiFp(this.configuration).getAllDevicesUsingGET(deviceIdContains, deviceIdDoesNotContain, deviceIdEquals, deviceIdIn, deviceIdNotEquals, deviceIdNotIn, deviceIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, ownerContains, ownerDoesNotContain, ownerEquals, ownerIn, ownerNotEquals, ownerNotIn, ownerSpecified, page, size, sort, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary getDevice
-     * @param {number} id id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public getDeviceUsingGET(id: number, options?: any) {
-        return DeviceResourceApiFp(this.configuration).getDeviceUsingGET(id, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary partialUpdateDevice
-     * @param {Device} [body]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public partialUpdateDeviceUsingPATCH(body?: Device, options?: any) {
-        return DeviceResourceApiFp(this.configuration).partialUpdateDeviceUsingPATCH(body, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary updateDevice
-     * @param {Device} [body]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DeviceResourceApi
-     */
-    public updateDeviceUsingPUT(body?: Device, options?: any) {
-        return DeviceResourceApiFp(this.configuration).updateDeviceUsingPUT(body, options).then((request) => request(this.axios, this.basePath));
-    }
+
+
+  /**
+   *
+   * @summary createDevice
+   * @param {Device} [body]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DeviceResourceApi
+   */
+  public createDeviceUsingPOST(body?: Device, options?: any) {
+    return DeviceResourceApiFp(this.configuration).createDeviceUsingPOST(body, options).then((request) => request(this.axios, this.basePath));
+  }
 }

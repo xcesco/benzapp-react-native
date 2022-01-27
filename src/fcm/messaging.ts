@@ -11,7 +11,6 @@ export async function registryMessageHandler(homeStore: HomeStore): Promise<bool
       'fcm > notification caused app to open from background state:',
       remoteMessage.notification,
     );
-    //navigation.navigate(remoteMessage.data.type);
   });
 
   messaging().onMessage((remoteMessage) => {

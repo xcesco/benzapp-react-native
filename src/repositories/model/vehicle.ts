@@ -16,27 +16,27 @@ export interface Vehicle {
 export function fromDelega(delega: Delega): Vehicle {
   return {
     carburante: delega.tessera?.carburante ?? TesseraCarburanteEnum.BENZINA,
-    cittadino: delega.cittadino!,
+    cittadino: delega.cittadino,
     codice: delega.tessera?.codice ?? '',
     dataEmissione: delega.tessera?.dataEmissione ?? Date.now(),
     immagine: delega.tessera?.immagine ?? '',
     immagineContentType: delega.tessera?.immagineContentType ?? '',
     targa: delega.tessera?.targa ?? '',
     veicolo: delega.tessera?.veicolo ?? TesseraVeicoloEnum.AUTOVEICOLO,
-    delega: 1
+    delega: 1,
   };
 }
 
 export function fromTessera(tessera: Tessera): Vehicle {
   return {
     carburante: tessera.carburante ?? TesseraCarburanteEnum.BENZINA,
-    cittadino: tessera.cittadino!,
+    cittadino: tessera.cittadino,
     codice: tessera.codice ?? '',
     dataEmissione: tessera.dataEmissione ?? Date.now(),
     immagine: tessera.immagine ?? '',
     immagineContentType: tessera.immagineContentType ?? '',
     targa: tessera.targa ?? '',
     veicolo: tessera.veicolo ?? TesseraVeicoloEnum.AUTOVEICOLO,
-    delega: 0
+    delega: 0,
   };
 }

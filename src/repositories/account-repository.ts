@@ -20,11 +20,11 @@ export default class AccountRepository {
   private _apiClient: ApiClient;
 
   async getAccount(): Promise<AdminUserDTO | null> {
-    return await AppPreferencesInstance.getAccount();
+    return AppPreferencesInstance.getAccount();
   }
 
   async getJWTToken(): Promise<string> {
-    return await AppPreferencesInstance.getJWToken();
+    return AppPreferencesInstance.getJWToken();
   }
 
   async hasAccount(): Promise<boolean> {
@@ -36,7 +36,7 @@ export default class AccountRepository {
     try {
       let response = await this._apiClient.userJwtControllerApi.authorizeUsingPOST({
         username: username,
-        password: password
+        password: password,
       });
 
       const jwtToken = response.data.id_token;
@@ -87,12 +87,12 @@ export default class AccountRepository {
     await remoteConfig()
       .setDefaults({
         BACKEND_URL_PARAMETER_NAME: '10.0.0.2',
-        MAINTENANCE_MODE: '8'
+        MAINTENANCE_MODE: '8',
       });
 
     await remoteConfig().setConfigSettings({
       fetchTimeMillis: 60000,
-      minimumFetchIntervalMillis: 3000000
+      minimumFetchIntervalMillis: 3000000,
     });
 
     try {
