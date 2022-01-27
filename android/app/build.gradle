@@ -85,6 +85,10 @@ project.ext.react = [
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -132,12 +136,16 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    lintOptions {
+      checkReleaseBuilds false
+    }
+
     defaultConfig {
         applicationId "it.insiel.innovazione.benzapp.reactnative"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 10000
+        versionName "1.0.0"
     }
     splits {
         abi {
@@ -154,6 +162,13 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+
+       release {
+          storeFile file(keystoreProperties['GRADLE_KEYSTORE_FILE'])
+          storePassword keystoreProperties['GRADLE_KEYSTORE_PASSWORD']
+          keyAlias keystoreProperties['GRADLE_KEYSTORE_ALIAS']
+          keyPassword keystoreProperties['GRADLE_KEYSTORE_ALIAS_PASSWORD']
+      }
     }
     buildTypes {
         debug {
@@ -167,7 +182,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

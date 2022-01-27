@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {Dimensions, Image, Platform, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import {Station} from '../../repositories/model/station';
 import MapView from 'react-native-map-clustering';
-import {Callout, CalloutSubview, Marker} from 'react-native-maps';
-import {Colors} from 'react-native-paper';
+import {Callout, Marker} from 'react-native-maps';
 import StationItem from './station-item';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 import {openGoogleMaps} from '../../utils/helper';
-import {getMarchioImage} from '../../repositories/model/marchio';
 
 const INITIAL_REGION = {
   latitude: 45.796044,

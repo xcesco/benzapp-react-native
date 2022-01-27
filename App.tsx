@@ -7,7 +7,7 @@ import {Provider} from 'mobx-react';
 import LockScreen from './src/ui/lock/lock-screen';
 import {MainScreen} from './src/ui/main/main-screen';
 import LoginScreen from './src/ui/login/login-screen';
-import {AppDebugLog} from './src/utils/AppDebug';
+import {AppDebugLog} from './src/utils/app-debug';
 import AccountRepository from './src/repositories/account-repository';
 import SplashScreen from './src/ui/splash/splash-screen';
 import {configure} from 'mobx';
@@ -46,6 +46,7 @@ const theme = {
   },
 };
 
+// configurazione mobx
 configure({
   //enforceActions: 'never',
   enforceActions: 'observed',
@@ -131,12 +132,7 @@ function App() {
                     title: 'Dettaglio tessera',
                   }}/>
                   <Stack.Screen name="VehicleQRCodeDetail" component={QRCodeScreen} options={{
-                    title: 'QRCode', headerRight: () => (
-                            <Button
-                                    onPress={() => alert('This is a button!')}
-                                    color="#fff"
-                            >ss</Button>
-                    )
+                    title: 'QRCode',
                   }}/>
                   <Stack.Screen name="RefuelingList" component={RefuelingListScreen} options={{
                     title: 'Lista rifornimenti',
@@ -152,8 +148,4 @@ function App() {
 }
 
 export default App;
-
-function alert(arg0: string): void {
-  throw new Error('Function not implemented.');
-}
 

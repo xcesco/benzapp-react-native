@@ -17,7 +17,7 @@ import {Configuration} from '../configuration';
 // @ts-ignore
 import {BASE_PATH, BaseAPI, COLLECTION_FORMATS, RequestArgs, RequiredError} from '../base';
 import {AdminUserDTO, KeyAndPasswordVM, ManagedUserVM, PasswordChangeDTO} from '../models';
-import {AppDebugLog} from '../../../utils/AppDebug';
+import {AppDebugLog} from '../../../utils/app-debug';
 
 /**
  * AccountResourceApi - axios parameter creator

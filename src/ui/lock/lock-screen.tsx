@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/root-stack-param-list';
-import {AppDebugLog} from '../../utils/AppDebug';
+import {AppDebugLog} from '../../utils/app-debug';
 import {inject, observer} from 'mobx-react';
 import {Pin} from '../../components/pin';
 import LockStore from './lock-store';

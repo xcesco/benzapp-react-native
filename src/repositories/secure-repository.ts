@@ -1,7 +1,5 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-import {AppDebugLog} from '../utils/AppDebug';
-
 export class SecureRepository {
   async write(key: string, value: string): Promise<void> {
     console.log(`@SecureRepository > write (${key}, ${value})`);

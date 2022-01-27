@@ -20,10 +20,8 @@ export const initAndPopulateDb = async () => {
   const primoAccesso = await AppPreferencesInstance.isPrimoAccesso();
 
   if (!primoAccesso) {
-    console.log('db-avvio - skipped');
     return;
   }
-  console.log('db-avvio');
   await dbConnection.beginTransaction();
 
   await dbConnection.execute(NotificationDao.SQL_TABLE_CREATION);
@@ -33,27 +31,10 @@ export const initAndPopulateDb = async () => {
 
   let value = await stationDao.selectAll();
   if (value.length === 0) {
-    console.log('sono qui');
     for (const item of stations) {
-      console.log('leggo', item);
       await stationDao.insert(item);
     }
-    console.log('INSERITIO qui');
-  } else {
-    console.log('alaredy donecaricato');
   }
   await dbConnection.commitTransaction();
-  console.log('db-finito');
 };
-
-
-export function queryOne(database: WebSQLDatabase, sql: string, args?: (number | string)[]): Promise<SQLResultSet> {
-  return new Promise<SQLResultSet>((resolve, _) => {
-    database.transaction((tx) =>
-      tx.executeSql(sql, args, (transaction, resultSet) => {
-        resolve(resultSet);
-      })
-    );
-  });
-}
 

@@ -1,5 +1,5 @@
 import remoteConfig from '@react-native-firebase/remote-config';
-import {AppDebugLog} from '../utils/AppDebug';
+import {AppDebugLog} from '../utils/app-debug';
 import {ApiClient} from './network';
 import {AdminUserDTO} from './network/models';
 import AppPreferencesInstance from './persistence/app-preferences';
@@ -87,12 +87,12 @@ export default class AccountRepository {
     await remoteConfig()
       .setDefaults({
         BACKEND_URL_PARAMETER_NAME: '10.0.0.2',
-        MAINTENANCE_MODE: '8',
+        MAINTENANCE_MODE: '8'
       });
 
     await remoteConfig().setConfigSettings({
       fetchTimeMillis: 60000,
-      minimumFetchIntervalMillis: 3000000,
+      minimumFetchIntervalMillis: 3000000
     });
 
     try {

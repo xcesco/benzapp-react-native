@@ -65,3 +65,4 @@ buck-out/
 /ios/ReactNativeBenzapp/Secrets.h
 /ios/ReactNativeBenzapp/Secrets.m
 /android/app/src/main/res/values/secrets.xml
+/android/keystore.properties

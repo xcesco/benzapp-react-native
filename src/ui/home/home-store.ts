@@ -120,8 +120,6 @@ export default class HomeStore {
     const loginResult = await this._accountRepository.login(username, password);
 
     if (loginResult !== 'INVALID') {
-      const token = await messaging().getToken();
-      //TODO registrare deviceToken e account su remoto
       await this.updateData();
       return true;
     } else {

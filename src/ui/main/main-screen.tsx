@@ -95,10 +95,10 @@ export const MainScreen = inject('homeStore', 'stationListStore')(observer((prop
   });
 
   return (
-  <BottomNavigation navigationState={{index, routes}} onIndexChange={setIndex}
-                    renderScene={renderScene} barStyle={{backgroundColor: Colors.white}}
-                    activeColor={assets.colors.primaryColor}
-  />);
+          <BottomNavigation navigationState={{index, routes}} onIndexChange={setIndex}
+                            renderScene={renderScene} barStyle={{backgroundColor: Colors.white}}
+                            activeColor={assets.colors.primaryColor}
+          />);
 }));
 
 const style = StyleSheet.create({

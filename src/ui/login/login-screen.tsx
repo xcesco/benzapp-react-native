@@ -10,7 +10,7 @@ import {inject, observer} from 'mobx-react';
 import * as Progress from 'react-native-progress';
 import I18n from 'react-native-i18n';
 import HomeStore from '../home/home-store';
-import {AppDebugLog} from '../../utils/AppDebug';
+import {AppDebugLog} from '../../utils/app-debug';
 import {action} from 'mobx';
 import {showSnackbar} from '../../utils/helper';
 // import NoteListPage from '../../stores/NoteListPage';

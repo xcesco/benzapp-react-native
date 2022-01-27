@@ -26,11 +26,6 @@ export class Connection {
           return reject(err);
         }
 
-        // if (!(res) || !this.isResultSet(res[0])) {
-        //   // @ts-ignore
-        //   return reject(<ResultSetError>res[0].error);
-        // }
-
         // @ts-ignore
         return resolve(res[0]);
       });
@@ -40,7 +35,6 @@ export class Connection {
   isResultSet(result: ResultSet | ResultSetError): result is ResultSetError {
     return (<ResultSetError>result).error !== undefined;
   }
-
 
   async beginTransaction() {
     await this.execute('begin transaction');

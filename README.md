@@ -111,17 +111,17 @@ https://www.freecodecamp.org/news/how-to-integrate-maps-in-react-native-using-re
 https://developers.google.com/maps/documentation/javascript/react-map
 https://developers.google.com/maps/documentation/javascript/overview
 
-come impostare le coordinate da emulatore (ios)
+## come impostare le coordinate da emulatore (ios)
 https://medium.com/@oleary.audio/xcode-simulating-gps-coordinates-b4ab51f0119c
 
-Clustering
+## Clustering
 https://www.npmjs.com/package/react-native-map-clustering
 
-react-native-maps
+## react-native-maps
 https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md
 https://stackoverflow.com/questions/39654594/marker-click-event-on-react-native-maps-not-working-in-react-ios
 
-bug
+## bug
 https://stackoverflow.com/questions/51915353/react-native-maps-markers-image-doesnt-show-using-custom-marker-in-react-nativ
 https://github.com/react-native-maps/react-native-maps/issues/1870
 
@@ -131,3 +131,8 @@ https://github.com/react-native-maps/react-native-maps/issues/1870
 ### Share
 https://github.com/react-native-share/react-native-share
 https://stackoverflow.com/questions/51269475/how-to-share-generated-qr-code-in-react-native
+
+## Build su ios
+https://stackoverflow.com/questions/42110496/how-to-build-ipa-application-for-react-native-ios
+
+react-native run-ios --configuration=release
