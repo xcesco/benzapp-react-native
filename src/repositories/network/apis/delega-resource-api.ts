@@ -187,49 +187,6 @@ export const DelegaResourceApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
-        /**
-         *
-         * @summary getDelega
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDelegaUsingGET: async (id: number, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getDelegaUsingGET.');
-            }
-            const localVarPath = `/api/delegas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -284,20 +241,7 @@ export const DelegaResourceApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
-        /**
-         *
-         * @summary getDelega
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getDelegaUsingGET(id: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Delega>> {
-            const localVarAxiosArgs = await DelegaResourceApiAxiosParamCreator(configuration).getDelegaUsingGET(id, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
+
     }
 };
 
@@ -347,16 +291,7 @@ export const DelegaResourceApiFactory = function (configuration?: Configuration,
         getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any): AxiosPromise<Array<Delega>> {
             return DelegaResourceApiFp(configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options).then((request) => request(axios, basePath));
         },
-        /**
-         *
-         * @summary getDelega
-         * @param {number} id id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDelegaUsingGET(id: number, options?: any): AxiosPromise<Delega> {
-            return DelegaResourceApiFp(configuration).getDelegaUsingGET(id, options).then((request) => request(axios, basePath));
-        },
+
     };
 };
 
@@ -407,16 +342,5 @@ export class DelegaResourceApi extends BaseAPI {
      */
     public getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any) {
         return DelegaResourceApiFp(this.configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     *
-     * @summary getDelega
-     * @param {number} id id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DelegaResourceApi
-     */
-    public getDelegaUsingGET(id: number, options?: any) {
-        return DelegaResourceApiFp(this.configuration).getDelegaUsingGET(id, options).then((request) => request(this.axios, this.basePath));
     }
 }

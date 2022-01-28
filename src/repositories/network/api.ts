@@ -18,5 +18,4 @@ export * from './apis/public-user-resource-api';
 export * from './apis/rifornimento-resource-api';
 export * from './apis/tessera-resource-api';
 export * from './apis/user-jwt-controller-api';
-export * from './apis/user-resource-api';
 
