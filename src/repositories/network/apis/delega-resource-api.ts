@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * benzapp API
  * benzapp API documentation
@@ -11,297 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { AxiosPromise, AxiosInstance } from 'axios';
-import { Configuration } from '../configuration';
+import globalAxios, {AxiosPromise, AxiosInstance} from 'axios';
+import {Configuration} from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { Delega } from '../models';
+import {BASE_PATH, RequestArgs, BaseAPI} from '../base';
+import {Delega} from '../models';
+
 /**
  * DelegaResourceApi - axios parameter creator
  * @export
  */
 export const DelegaResourceApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-
-        /**
-         *
-         * @summary getAllDelegas
-         * @param {number} [cittadinoIdEquals]
-         * @param {number} [cittadinoIdGreaterThan]
-         * @param {number} [cittadinoIdGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [cittadinoIdIn]
-         * @param {number} [cittadinoIdLessThan]
-         * @param {number} [cittadinoIdLessThanOrEqual]
-         * @param {number} [cittadinoIdNotEquals]
-         * @param {Array&lt;number&gt;} [cittadinoIdNotIn]
-         * @param {boolean} [cittadinoIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {number} [tesseraIdEquals]
-         * @param {number} [tesseraIdGreaterThan]
-         * @param {number} [tesseraIdGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [tesseraIdIn]
-         * @param {number} [tesseraIdLessThan]
-         * @param {number} [tesseraIdLessThanOrEqual]
-         * @param {number} [tesseraIdNotEquals]
-         * @param {Array&lt;number&gt;} [tesseraIdNotIn]
-         * @param {boolean} [tesseraIdSpecified]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllDelegasUsingGET: async (cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/delegas`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication benzappAuth required
-          const authHeader = {'Authorization':  `Bearer ${configuration!.accessToken}`};
-
-            if (cittadinoIdEquals !== undefined) {
-                localVarQueryParameter['cittadinoId.equals'] = cittadinoIdEquals;
-            }
-
-            if (cittadinoIdGreaterThan !== undefined) {
-                localVarQueryParameter['cittadinoId.greaterThan'] = cittadinoIdGreaterThan;
-            }
-
-            if (cittadinoIdGreaterThanOrEqual !== undefined) {
-                localVarQueryParameter['cittadinoId.greaterThanOrEqual'] = cittadinoIdGreaterThanOrEqual;
-            }
-
-            if (cittadinoIdLessThan !== undefined) {
-                localVarQueryParameter['cittadinoId.lessThan'] = cittadinoIdLessThan;
-            }
-
-            if (cittadinoIdLessThanOrEqual !== undefined) {
-                localVarQueryParameter['cittadinoId.lessThanOrEqual'] = cittadinoIdLessThanOrEqual;
-            }
-
-            if (cittadinoIdNotEquals !== undefined) {
-                localVarQueryParameter['cittadinoId.notEquals'] = cittadinoIdNotEquals;
-            }
-
-            if (cittadinoIdSpecified !== undefined) {
-                localVarQueryParameter['cittadinoId.specified'] = cittadinoIdSpecified;
-            }
-
-            if (idEquals !== undefined) {
-                localVarQueryParameter['id.equals'] = idEquals;
-            }
-
-            if (idGreaterThan !== undefined) {
-                localVarQueryParameter['id.greaterThan'] = idGreaterThan;
-            }
-
-            if (idGreaterThanOrEqual !== undefined) {
-                localVarQueryParameter['id.greaterThanOrEqual'] = idGreaterThanOrEqual;
-            }
-
-            if (idLessThan !== undefined) {
-                localVarQueryParameter['id.lessThan'] = idLessThan;
-            }
-
-            if (idLessThanOrEqual !== undefined) {
-                localVarQueryParameter['id.lessThanOrEqual'] = idLessThanOrEqual;
-            }
-
-            if (idNotEquals !== undefined) {
-                localVarQueryParameter['id.notEquals'] = idNotEquals;
-            }
-
-            if (idSpecified !== undefined) {
-                localVarQueryParameter['id.specified'] = idSpecified;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
-
-            if (sort) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-            if (tesseraIdEquals !== undefined) {
-                localVarQueryParameter['tesseraId.equals'] = tesseraIdEquals;
-            }
-
-            if (tesseraIdGreaterThan !== undefined) {
-                localVarQueryParameter['tesseraId.greaterThan'] = tesseraIdGreaterThan;
-            }
-
-            if (tesseraIdGreaterThanOrEqual !== undefined) {
-                localVarQueryParameter['tesseraId.greaterThanOrEqual'] = tesseraIdGreaterThanOrEqual;
-            }
-
-            if (tesseraIdLessThan !== undefined) {
-                localVarQueryParameter['tesseraId.lessThan'] = tesseraIdLessThan;
-            }
-
-            if (tesseraIdLessThanOrEqual !== undefined) {
-                localVarQueryParameter['tesseraId.lessThanOrEqual'] = tesseraIdLessThanOrEqual;
-            }
-
-            if (tesseraIdNotEquals !== undefined) {
-                localVarQueryParameter['tesseraId.notEquals'] = tesseraIdNotEquals;
-            }
-
-            if (tesseraIdSpecified !== undefined) {
-                localVarQueryParameter['tesseraId.specified'] = tesseraIdSpecified;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * DelegaResourceApi - functional programming interface
- * @export
- */
-export const DelegaResourceApiFp = function(configuration?: Configuration) {
-    return {
-
-
-        /**
-         *
-         * @summary getAllDelegas
-         * @param {number} [cittadinoIdEquals]
-         * @param {number} [cittadinoIdGreaterThan]
-         * @param {number} [cittadinoIdGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [cittadinoIdIn]
-         * @param {number} [cittadinoIdLessThan]
-         * @param {number} [cittadinoIdLessThanOrEqual]
-         * @param {number} [cittadinoIdNotEquals]
-         * @param {Array&lt;number&gt;} [cittadinoIdNotIn]
-         * @param {boolean} [cittadinoIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {number} [tesseraIdEquals]
-         * @param {number} [tesseraIdGreaterThan]
-         * @param {number} [tesseraIdGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [tesseraIdIn]
-         * @param {number} [tesseraIdLessThan]
-         * @param {number} [tesseraIdLessThanOrEqual]
-         * @param {number} [tesseraIdNotEquals]
-         * @param {Array&lt;number&gt;} [tesseraIdNotIn]
-         * @param {boolean} [tesseraIdSpecified]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Delega>>> {
-            const localVarAxiosArgs = await DelegaResourceApiAxiosParamCreator(configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-
-    }
-};
-
-/**
- * DelegaResourceApi - factory interface
- * @export
- */
-export const DelegaResourceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    return {
-
-        /**
-         *
-         * @summary getAllDelegas
-         * @param {number} [cittadinoIdEquals]
-         * @param {number} [cittadinoIdGreaterThan]
-         * @param {number} [cittadinoIdGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [cittadinoIdIn]
-         * @param {number} [cittadinoIdLessThan]
-         * @param {number} [cittadinoIdLessThanOrEqual]
-         * @param {number} [cittadinoIdNotEquals]
-         * @param {Array&lt;number&gt;} [cittadinoIdNotIn]
-         * @param {boolean} [cittadinoIdSpecified]
-         * @param {number} [idEquals]
-         * @param {number} [idGreaterThan]
-         * @param {number} [idGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [idIn]
-         * @param {number} [idLessThan]
-         * @param {number} [idLessThanOrEqual]
-         * @param {number} [idNotEquals]
-         * @param {Array&lt;number&gt;} [idNotIn]
-         * @param {boolean} [idSpecified]
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {number} [tesseraIdEquals]
-         * @param {number} [tesseraIdGreaterThan]
-         * @param {number} [tesseraIdGreaterThanOrEqual]
-         * @param {Array&lt;number&gt;} [tesseraIdIn]
-         * @param {number} [tesseraIdLessThan]
-         * @param {number} [tesseraIdLessThanOrEqual]
-         * @param {number} [tesseraIdNotEquals]
-         * @param {Array&lt;number&gt;} [tesseraIdNotIn]
-         * @param {boolean} [tesseraIdSpecified]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any): AxiosPromise<Array<Delega>> {
-            return DelegaResourceApiFp(configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options).then((request) => request(axios, basePath));
-        },
-
-    };
-};
-
-/**
- * DelegaResourceApi - object-oriented interface
- * @export
- * @class DelegaResourceApi
- * @extends {BaseAPI}
- */
-export class DelegaResourceApi extends BaseAPI {
+  return {
 
     /**
      *
@@ -338,9 +58,238 @@ export class DelegaResourceApi extends BaseAPI {
      * @param {boolean} [tesseraIdSpecified]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DelegaResourceApi
      */
-    public getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any) {
-        return DelegaResourceApiFp(this.configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options).then((request) => request(this.axios, this.basePath));
-    }
+    getAllDelegasUsingGET: async (cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options: any = {}): Promise<RequestArgs> => {
+      const localVarPath = '/api/delegas';
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+      const localVarRequestOptions = {method: 'GET', ...baseOptions, ...options};
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication benzappAuth required
+      const authHeader = {'Authorization': `Bearer ${configuration!.accessToken}`};
+
+      if (cittadinoIdEquals !== undefined) {
+        localVarQueryParameter['cittadinoId.equals'] = cittadinoIdEquals;
+      }
+
+      if (cittadinoIdGreaterThan !== undefined) {
+        localVarQueryParameter['cittadinoId.greaterThan'] = cittadinoIdGreaterThan;
+      }
+
+      if (cittadinoIdGreaterThanOrEqual !== undefined) {
+        localVarQueryParameter['cittadinoId.greaterThanOrEqual'] = cittadinoIdGreaterThanOrEqual;
+      }
+
+      if (cittadinoIdLessThan !== undefined) {
+        localVarQueryParameter['cittadinoId.lessThan'] = cittadinoIdLessThan;
+      }
+
+      if (cittadinoIdLessThanOrEqual !== undefined) {
+        localVarQueryParameter['cittadinoId.lessThanOrEqual'] = cittadinoIdLessThanOrEqual;
+      }
+
+      if (cittadinoIdNotEquals !== undefined) {
+        localVarQueryParameter['cittadinoId.notEquals'] = cittadinoIdNotEquals;
+      }
+
+      if (cittadinoIdSpecified !== undefined) {
+        localVarQueryParameter['cittadinoId.specified'] = cittadinoIdSpecified;
+      }
+
+      if (idEquals !== undefined) {
+        localVarQueryParameter['id.equals'] = idEquals;
+      }
+
+      if (idGreaterThan !== undefined) {
+        localVarQueryParameter['id.greaterThan'] = idGreaterThan;
+      }
+
+      if (idGreaterThanOrEqual !== undefined) {
+        localVarQueryParameter['id.greaterThanOrEqual'] = idGreaterThanOrEqual;
+      }
+
+      if (idLessThan !== undefined) {
+        localVarQueryParameter['id.lessThan'] = idLessThan;
+      }
+
+      if (idLessThanOrEqual !== undefined) {
+        localVarQueryParameter['id.lessThanOrEqual'] = idLessThanOrEqual;
+      }
+
+      if (idNotEquals !== undefined) {
+        localVarQueryParameter['id.notEquals'] = idNotEquals;
+      }
+
+      if (idSpecified !== undefined) {
+        localVarQueryParameter['id.specified'] = idSpecified;
+      }
+
+      if (page !== undefined) {
+        localVarQueryParameter.page = page;
+      }
+
+      if (size !== undefined) {
+        localVarQueryParameter.size = size;
+      }
+
+      if (sort) {
+        localVarQueryParameter.sort = sort;
+      }
+
+      if (tesseraIdEquals !== undefined) {
+        localVarQueryParameter['tesseraId.equals'] = tesseraIdEquals;
+      }
+
+      if (tesseraIdGreaterThan !== undefined) {
+        localVarQueryParameter['tesseraId.greaterThan'] = tesseraIdGreaterThan;
+      }
+
+      if (tesseraIdGreaterThanOrEqual !== undefined) {
+        localVarQueryParameter['tesseraId.greaterThanOrEqual'] = tesseraIdGreaterThanOrEqual;
+      }
+
+      if (tesseraIdLessThan !== undefined) {
+        localVarQueryParameter['tesseraId.lessThan'] = tesseraIdLessThan;
+      }
+
+      if (tesseraIdLessThanOrEqual !== undefined) {
+        localVarQueryParameter['tesseraId.lessThanOrEqual'] = tesseraIdLessThanOrEqual;
+      }
+
+      if (tesseraIdNotEquals !== undefined) {
+        localVarQueryParameter['tesseraId.notEquals'] = tesseraIdNotEquals;
+      }
+
+      if (tesseraIdSpecified !== undefined) {
+        localVarQueryParameter['tesseraId.specified'] = tesseraIdSpecified;
+      }
+
+      const query = new URLSearchParams(localVarUrlObj.search);
+      for (const key in localVarQueryParameter) {
+        query.set(key, localVarQueryParameter[key]);
+      }
+      for (const key in options.query) {
+        query.set(key, options.query[key]);
+      }
+      localVarUrlObj.search = (new URLSearchParams(query)).toString();
+      let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
+
+      return {
+        url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+        options: localVarRequestOptions,
+      };
+    },
+  }
+};
+
+/**
+ * DelegaResourceApi - functional programming interface
+ * @export
+ */
+export const DelegaResourceApiFp = function (configuration?: Configuration) {
+  return {
+
+
+    /**
+     *
+     * @summary getAllDelegas
+     * @param {number} [cittadinoIdEquals]
+     * @param {number} [cittadinoIdGreaterThan]
+     * @param {number} [cittadinoIdGreaterThanOrEqual]
+     * @param {Array&lt;number&gt;} [cittadinoIdIn]
+     * @param {number} [cittadinoIdLessThan]
+     * @param {number} [cittadinoIdLessThanOrEqual]
+     * @param {number} [cittadinoIdNotEquals]
+     * @param {Array&lt;number&gt;} [cittadinoIdNotIn]
+     * @param {boolean} [cittadinoIdSpecified]
+     * @param {number} [idEquals]
+     * @param {number} [idGreaterThan]
+     * @param {number} [idGreaterThanOrEqual]
+     * @param {Array&lt;number&gt;} [idIn]
+     * @param {number} [idLessThan]
+     * @param {number} [idLessThanOrEqual]
+     * @param {number} [idNotEquals]
+     * @param {Array&lt;number&gt;} [idNotIn]
+     * @param {boolean} [idSpecified]
+     * @param {number} [page] Page number of the requested page
+     * @param {number} [size] Size of a page
+     * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+     * @param {number} [tesseraIdEquals]
+     * @param {number} [tesseraIdGreaterThan]
+     * @param {number} [tesseraIdGreaterThanOrEqual]
+     * @param {Array&lt;number&gt;} [tesseraIdIn]
+     * @param {number} [tesseraIdLessThan]
+     * @param {number} [tesseraIdLessThanOrEqual]
+     * @param {number} [tesseraIdNotEquals]
+     * @param {Array&lt;number&gt;} [tesseraIdNotIn]
+     * @param {boolean} [tesseraIdSpecified]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Delega>>> {
+      const localVarAxiosArgs = await DelegaResourceApiAxiosParamCreator(configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options);
+      return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+        const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+        return axios.request(axiosRequestArgs);
+      };
+    },
+
+  }
+};
+
+/**
+ * DelegaResourceApi - object-oriented interface
+ * @export
+ * @class DelegaResourceApi
+ * @extends {BaseAPI}
+ */
+export class DelegaResourceApi extends BaseAPI {
+
+  /**
+   *
+   * @summary getAllDelegas
+   * @param {number} [cittadinoIdEquals]
+   * @param {number} [cittadinoIdGreaterThan]
+   * @param {number} [cittadinoIdGreaterThanOrEqual]
+   * @param {Array&lt;number&gt;} [cittadinoIdIn]
+   * @param {number} [cittadinoIdLessThan]
+   * @param {number} [cittadinoIdLessThanOrEqual]
+   * @param {number} [cittadinoIdNotEquals]
+   * @param {Array&lt;number&gt;} [cittadinoIdNotIn]
+   * @param {boolean} [cittadinoIdSpecified]
+   * @param {number} [idEquals]
+   * @param {number} [idGreaterThan]
+   * @param {number} [idGreaterThanOrEqual]
+   * @param {Array&lt;number&gt;} [idIn]
+   * @param {number} [idLessThan]
+   * @param {number} [idLessThanOrEqual]
+   * @param {number} [idNotEquals]
+   * @param {Array&lt;number&gt;} [idNotIn]
+   * @param {boolean} [idSpecified]
+   * @param {number} [page] Page number of the requested page
+   * @param {number} [size] Size of a page
+   * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   * @param {number} [tesseraIdEquals]
+   * @param {number} [tesseraIdGreaterThan]
+   * @param {number} [tesseraIdGreaterThanOrEqual]
+   * @param {Array&lt;number&gt;} [tesseraIdIn]
+   * @param {number} [tesseraIdLessThan]
+   * @param {number} [tesseraIdLessThanOrEqual]
+   * @param {number} [tesseraIdNotEquals]
+   * @param {Array&lt;number&gt;} [tesseraIdNotIn]
+   * @param {boolean} [tesseraIdSpecified]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DelegaResourceApi
+   */
+  public getAllDelegasUsingGET(cittadinoIdEquals?: number, cittadinoIdGreaterThan?: number, cittadinoIdGreaterThanOrEqual?: number, cittadinoIdIn?: Array<number>, cittadinoIdLessThan?: number, cittadinoIdLessThanOrEqual?: number, cittadinoIdNotEquals?: number, cittadinoIdNotIn?: Array<number>, cittadinoIdSpecified?: boolean, idEquals?: number, idGreaterThan?: number, idGreaterThanOrEqual?: number, idIn?: Array<number>, idLessThan?: number, idLessThanOrEqual?: number, idNotEquals?: number, idNotIn?: Array<number>, idSpecified?: boolean, page?: number, size?: number, sort?: Array<string>, tesseraIdEquals?: number, tesseraIdGreaterThan?: number, tesseraIdGreaterThanOrEqual?: number, tesseraIdIn?: Array<number>, tesseraIdLessThan?: number, tesseraIdLessThanOrEqual?: number, tesseraIdNotEquals?: number, tesseraIdNotIn?: Array<number>, tesseraIdSpecified?: boolean, options?: any) {
+    return DelegaResourceApiFp(this.configuration).getAllDelegasUsingGET(cittadinoIdEquals, cittadinoIdGreaterThan, cittadinoIdGreaterThanOrEqual, cittadinoIdIn, cittadinoIdLessThan, cittadinoIdLessThanOrEqual, cittadinoIdNotEquals, cittadinoIdNotIn, cittadinoIdSpecified, idEquals, idGreaterThan, idGreaterThanOrEqual, idIn, idLessThan, idLessThanOrEqual, idNotEquals, idNotIn, idSpecified, page, size, sort, tesseraIdEquals, tesseraIdGreaterThan, tesseraIdGreaterThanOrEqual, tesseraIdIn, tesseraIdLessThan, tesseraIdLessThanOrEqual, tesseraIdNotEquals, tesseraIdNotIn, tesseraIdSpecified, options).then((request) => request(this.axios, this.basePath));
+  }
 }

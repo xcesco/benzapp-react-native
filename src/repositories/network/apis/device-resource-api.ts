@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * benzapp API
  * benzapp API documentation
@@ -15,7 +13,7 @@ import globalAxios, {AxiosPromise, AxiosInstance} from 'axios';
 import {Configuration} from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import {BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError} from '../base';
+import {BASE_PATH, RequestArgs, BaseAPI} from '../base';
 import {Device} from '../models';
 
 /**
@@ -58,7 +56,7 @@ export const DeviceResourceApiAxiosParamCreator = function (configuration?: Conf
       localVarUrlObj.search = (new URLSearchParams(query)).toString();
       let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
       localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers, ...authHeader};
-      const needsSerialization = (typeof body !== 'string') || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      const needsSerialization = true;
       localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || '');
 
       return {
@@ -91,26 +89,6 @@ export const DeviceResourceApiFp = function (configuration?: Configuration) {
       };
     },
   }
-};
-
-/**
- * DeviceResourceApi - factory interface
- * @export
- */
-export const DeviceResourceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-  return {
-
-    /**
-     *
-     * @summary createDevice
-     * @param {Device} [body]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    createDeviceUsingPOST(body?: Device, options?: any): AxiosPromise<Device> {
-      return DeviceResourceApiFp(configuration).createDeviceUsingPOST(body, options).then((request) => request(axios, basePath));
-    },
-  };
 };
 
 /**

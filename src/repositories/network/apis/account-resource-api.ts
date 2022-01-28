@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * benzapp API
  * benzapp API documentation
@@ -14,10 +12,8 @@
 import globalAxios, {AxiosInstance, AxiosPromise} from 'axios';
 import {Configuration} from '../configuration';
 // Some imports not used depending on template conditions
-// @ts-ignore
-import {BASE_PATH, BaseAPI, COLLECTION_FORMATS, RequestArgs, RequiredError} from '../base';
-import {AdminUserDTO, KeyAndPasswordVM, ManagedUserVM, PasswordChangeDTO} from '../models';
-import {AppDebugLog} from '../../../utils/app-debug';
+import {BASE_PATH, BaseAPI, RequestArgs} from '../base';
+import {AdminUserDTO} from '../models';
 
 /**
  * AccountResourceApi - axios parameter creator
@@ -33,7 +29,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
      * @throws {RequiredError}
      */
     getAccountUsingGET: async (options: any = {}): Promise<RequestArgs> => {
-      const localVarPath = `/api/account`;
+      const localVarPath = '/api/account';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, 'https://example.com');
       let baseOptions;
@@ -70,7 +66,7 @@ export const AccountResourceApiAxiosParamCreator = function (configuration?: Con
      * @throws {RequiredError}
      */
     isAuthenticatedUsingGET: async (options: any = {}): Promise<RequestArgs> => {
-      const localVarPath = `/api/authenticate`;
+      const localVarPath = '/api/authenticate';
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, 'https://example.com');
       let baseOptions;
@@ -133,34 +129,6 @@ export const AccountResourceApiFp = function (configuration?: Configuration) {
       };
     },
   }
-};
-
-/**
- * AccountResourceApi - factory interface
- * @export
- */
-export const AccountResourceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-  return {
-
-    /**
-     *
-     * @summary getAccount
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getAccountUsingGET(options?: any): AxiosPromise<AdminUserDTO> {
-      return AccountResourceApiFp(configuration).getAccountUsingGET(options).then((request) => request(axios, basePath));
-    },
-    /**
-     *
-     * @summary isAuthenticated
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    isAuthenticatedUsingGET(options?: any): AxiosPromise<string> {
-      return AccountResourceApiFp(configuration).isAuthenticatedUsingGET(options).then((request) => request(axios, basePath));
-    },
-  };
 };
 
 /**

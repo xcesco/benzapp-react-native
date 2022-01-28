@@ -154,36 +154,6 @@ export const PublicUserResourceApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * PublicUserResourceApi - factory interface
- * @export
- */
-export const PublicUserResourceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    return {
-        /**
-         *
-         * @summary getAllPublicUsers
-         * @param {number} [page] Page number of the requested page
-         * @param {number} [size] Size of a page
-         * @param {Array&lt;string&gt;} [sort] Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllPublicUsersUsingGET(page?: number, size?: number, sort?: Array<string>, options?: any): AxiosPromise<Array<UserDTO>> {
-            return PublicUserResourceApiFp(configuration).getAllPublicUsersUsingGET(page, size, sort, options).then((request) => request(axios, basePath));
-        },
-        /**
-         *
-         * @summary getAuthorities
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAuthoritiesUsingGET(options?: any): AxiosPromise<Array<string>> {
-            return PublicUserResourceApiFp(configuration).getAuthoritiesUsingGET(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
  * PublicUserResourceApi - object-oriented interface
  * @export
  * @class PublicUserResourceApi
